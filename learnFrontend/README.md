@@ -4,5 +4,4 @@
 *   [ООП](./04.oop.md)
 *   [Начинаем работать с DOM](./05.dom.md)
 *   [HTML/CSS](./06.html.css.md)
-
 *   [DOM](./07.dom.md)
