@@ -1,0 +1,25 @@
+{
+  "name": "zpawn.github.io",
+  "version": "1.0.0",
+  "description": "[Изучаем frontend](./learnFrontend/README.md)",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zpawn/zpawn.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zpawn/zpawn.github.io/issues"
+  },
+  "homepage": "https://github.com/zpawn/zpawn.github.io#readme",
+  "devDependencies": {
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-if": "2.0.2",
+    "gulp-postcss": "7.0.0",
+    "yargs": "8.0.2"
+  }
+}

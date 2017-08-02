@@ -1,0 +1,16 @@
+{
+  "name": "zpawn.github.io",
+  "homepage": "https://github.com/zpawn/zpawn.github.io",
+  "authors": [
+    "Ilia Makarov <ilia.makarov@me.com>"
+  ],
+  "description": "My portfolio",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "fullpage.js": "^2.9.4",
+    "jquery": "^3.2.1",
+    "bootstrap-sass": "^3.3.7"
+  }
+}
