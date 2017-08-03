@@ -18,13 +18,13 @@ var gulp = require('gulp'),
     config = {
         path: {
             sass: {
-                src: 'royalranger/src/scss/landing.scss',
-                dest: 'royalranger/dist/.',
-                watch: 'royalranger/src/scss/**/*.scss'
+                src: 'royalrangers/src/scss/landing.scss',
+                dest: 'royalrangers/dist/.',
+                watch: 'royalrangers/src/scss/**/*.scss'
             },
             js: {
-                src: ['royalranger/src/js/**/*.js'],
-                dest: 'royalranger/dist/.'
+                src: ['royalrangers/src/js/**/*.js'],
+                dest: 'royalrangers/dist/.'
             }
         },
         browser: ["last 2 versions"],
