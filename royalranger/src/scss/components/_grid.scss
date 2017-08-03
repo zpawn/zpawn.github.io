@@ -1,0 +1,52 @@
+:root {
+  --row-display: block;
+  --col-grow: 1;
+}
+
+@media screen and (min-width: $screen-sm-min) {
+  :root {
+    --row-display: flex;
+  }
+}
+
+.col-1 { --col-grow: 1; }
+.col-2 { --col-grow: 1.09; }
+.col-3 { --col-grow: 1.2; }
+.col-4 { --col-grow: 1.333; }
+.col-5 { --col-grow: 1.5; }
+.col-6 { --col-grow: 1.714; }
+.col-7 { --col-grow: 2; }
+.col-8 { --col-grow: 2.4; }
+.col-9 { --col-grow: 3; }
+.col-10 { --col-grow: 4; }
+.col-11 { --col-grow: 6; }
+.col-12 { --col-grow: 12; }
+
+// logic
+
+.row {
+  display: var(--row-display);
+}
+
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12,
+.col {
+  flex-basis: 100%;
+  flex-grow: var(--col-grow);
+}
+
+.container {
+  max-width: $container-desktop;
+  margin-left: auto;
+  margin-right: auto;
+}

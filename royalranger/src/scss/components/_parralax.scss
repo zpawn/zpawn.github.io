@@ -1,39 +1,40 @@
-#hero {
-    height: 800px;
+.parallax {
+    height: 850px;
     overflow: hidden;
     position: relative;
+
+    &__layer {
+        background-position: top center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 850px;
+        position: fixed;
+        z-index: -1;
+
+        &--0 { background-image: url("#{$img-src}/BG.png") }
+        &--1 { background-image: url("#{$img-src}/1.png") }
+        &--2 { background-image: url("#{$img-src}/2.png") }
+        &--3 { background-image: url("#{$img-src}/3.png") }
+        &--4 { background-image: url("#{$img-src}/4.png") }
+        &--5 { background-image: url("#{$img-src}/5.png") }
+        &--6 { background-image: url("#{$img-src}/6.png") }
+        &--7 { background-image: url("#{$img-src}/7.png") }
+    }
 }
 
-.layer {
-    background-position: bottom center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 800px;
-    position: fixed;
-    z-index: -1;
 
-    .layer-0 { background-image: url("#{$img-src}/BG.png") }
-    .layer-1 { background-image: url("#{$img-src}/1.png") }
-    .layer-2 { background-image: url("#{$img-src}/2.png") }
-    .layer-3 { background-image: url("#{$img-src}/3.png") }
-    .layer-4 { background-image: url("#{$img-src}/4.png") }
-    .layer-5 { background-image: url("#{$img-src}/5.png") }
-    .layer-6 { background-image: url("#{$img-src}/6.png") }
-    .layer-7 { background-image: url("#{$img-src}/7.png") }
-}
-
-#hero-mobile {
+.no-parallax {
     display: none;
-    background: url("#{$img-src}/full.bg.jpg") no-repeat center bottom / cover;
+    background: url("#{$img-src}/full.bg.jpg") no-repeat center top / cover;
     height: 320px;
 }
 
 @media all and (max-width: 640px) {
-    #hero {
+    .parallax {
         display: none;
     }
-    #hero-mobile {
+    .no-parallax {
         display: block;
     }
 }

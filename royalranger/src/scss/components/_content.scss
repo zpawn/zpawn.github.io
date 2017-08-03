@@ -1,0 +1,58 @@
+.main-content {
+  background-color: $color-dark;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.youtube-video {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+$map-height-lg: 470px;
+$map-height-sm: 350px;
+
+.google-map__wrapper {
+  max-width: $screen-lg;
+  padding: 30px 0;
+
+  .google-map {
+    width: 100%;
+    height: $map-height-lg;
+
+    @media (max-width: $screen-sm) {
+      height: $map-height-sm;
+    }
+  }
+}
+
+.gallery {
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .gallery__item {
+    padding: 25px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
