@@ -1,14 +1,27 @@
+:root {
+    --display-parallax: block;
+    --display-no-parallax: none;
+}
+
+@media screen and (max-width: $screen-sm-min) {
+    :root {
+        --display-parallax: none;
+        --display-no-parallax: block;
+    }
+}
+
 .parallax {
-    height: 850px;
-    overflow: hidden;
+    display: var(--display-parallax);
     position: relative;
+    height: 100vh;
+    overflow: hidden;
 
     &__layer {
         background-position: top center;
         background-size: cover;
         background-repeat: no-repeat;
         width: 100%;
-        height: 850px;
+        height: 100vh;
         position: fixed;
         z-index: -1;
 
@@ -23,18 +36,8 @@
     }
 }
 
-
 .no-parallax {
-    display: none;
+    display: var(--display-no-parallax);
     background: url("#{$img-src}/full.bg.jpg") no-repeat center top / cover;
-    height: 320px;
-}
-
-@media all and (max-width: 640px) {
-    .parallax {
-        display: none;
-    }
-    .no-parallax {
-        display: block;
-    }
+    height: 100vh;
 }
