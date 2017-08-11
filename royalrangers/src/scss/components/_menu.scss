@@ -1,0 +1,28 @@
+.menu {
+  position: fixed;
+  display: none;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #210002;
+  font-size: 50px;
+  text-transform: uppercase;
+  text-align: center;
+
+  &.open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: .8;
+
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    li {
+      padding: 15px;
+    }
+  }
+}
