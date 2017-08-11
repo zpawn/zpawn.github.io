@@ -1,4 +1,4 @@
-(function () {
+(function (window) {
     'use strict';
 
     var API_KEY = 'AIzaSyCWEmDm4GoFSV2sglSMsWRTVSU-wI_CPaQ',
@@ -101,4 +101,4 @@
     }
 
     window.initMap = initMap;
-}());
+}(window));

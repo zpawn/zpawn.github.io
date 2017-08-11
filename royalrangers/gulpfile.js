@@ -23,7 +23,10 @@ var gulp = require('gulp'),
                 watch: 'royalrangers/src/scss/**/*.scss'
             },
             js: {
-                src: ['royalrangers/src/js/**/*.js'],
+                src: [
+                    'bower_components/jquery/dist/jquery.min.js',
+                    'royalrangers/src/js/**/*.js'
+                ],
                 dest: 'royalrangers/dist/.'
             }
         },
@@ -67,4 +70,8 @@ exports.js = function () {
         .pipe(concat('landing.js'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.path.js.dest));
+};
+
+exports.jsWatch = function () {
+    gulp.watch(config.path.js.src, gulp.series('rr:js'));
 };

@@ -41,11 +41,3 @@
     background: url("#{$img-src}/full.bg.jpg") no-repeat 65% top / cover;
     height: 100vh;
 }
-
-.parallax {
-    &:before {
-        display: block;
-        content: '';
-        margin-top: $line-height-computed;
-    }
-}
