@@ -1,21 +1,31 @@
-.menu {
+.menu-content {
   position: fixed;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
-  background-color: #210002;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(#210002, .8);
   font-size: 50px;
   text-transform: uppercase;
   text-align: center;
+  transition: opacity .15s linear;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &__inner {
+    height: 100%;
+    width: 100%;
+  }
 
   &.open {
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: .8;
-
+    visibility: visible;
+    opacity: 1;
   }
 
   ul {
@@ -25,4 +35,9 @@
       padding: 15px;
     }
   }
+}
+
+//// Kill the scroll on the body
+.menu-content-open {
+  overflow: hidden;
 }
