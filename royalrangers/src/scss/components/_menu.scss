@@ -10,22 +10,22 @@
   font-size: 50px;
   text-transform: uppercase;
   text-align: center;
-  transition: opacity .15s linear;
+  transition: opacity .25s ease-in;
 
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
+
+  &.open {
+    visibility: visible;
+    opacity: 1;
+  }
 
   &__inner {
     height: 100%;
     width: 100%;
-  }
-
-  &.open {
     display: flex;
     justify-content: center;
     align-items: center;
-    visibility: visible;
-    opacity: 1;
   }
 
   ul {
@@ -35,6 +35,22 @@
       padding: 15px;
     }
   }
+
+  .menu-content__main,
+  .menu-content__signin,
+  .menu-content__signup {
+    display: none;
+    visibility: hidden;
+
+    &.active {
+      display: block;
+      visibility: visible;
+    }
+  }
+
+  .menu-content__main {}
+  .menu-content__signin {}
+  .menu-content__signup {}
 }
 
 //// Kill the scroll on the body

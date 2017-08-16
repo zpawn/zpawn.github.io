@@ -25,7 +25,8 @@ var gulp = require('gulp'),
             js: {
                 src: [
                     'bower_components/jquery/dist/jquery.min.js',
-                    'royalrangers/src/js/**/*.js'
+                    'royalrangers/src/js/instance/*.js',
+                    'royalrangers/src/js/*.js'
                 ],
                 dest: 'royalrangers/dist/.'
             }
