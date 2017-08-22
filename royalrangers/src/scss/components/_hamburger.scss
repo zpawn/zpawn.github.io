@@ -45,6 +45,18 @@
     &:nth-child(4) {
       top: calc(var(--hamburger-bar-height) * 4);
     }
+
+    // button back
+    &:nth-child(5) {
+      position: relative;
+      width: 0%;
+      border: solid transparent;
+      border-width: 0 var(--hamburger-bar-height) var(--hamburger-bar-height) 0;
+      display: inline-block;
+      transform: rotate(135deg);
+      background-color: transparent;
+      left: calc(var(--hamburger-bar-height) * 2);
+    }
   }
 
   &.open {
@@ -62,6 +74,25 @@
 
       &:nth-child(3) {
         transform: rotate(-45deg);
+      }
+    }
+  }
+
+  &.back {
+    span {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(4) {
+        top: calc(var(--hamburger-bar-height) * 2);
+        width: 0%;
+        left: 50%;
+      }
+
+      &:nth-child(5) {
+        width: calc(var(--hamburger-bar-height) * 3);
+        height: calc(var(--hamburger-bar-height) * 3);
+        border-color: #d3531a;
       }
     }
   }

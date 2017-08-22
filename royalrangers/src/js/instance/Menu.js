@@ -9,7 +9,8 @@
             $menu = $('#menu'),
             $body = $(document.body),
             _activeMenu = 'menu',
-            _prevActiveMenu;
+            _prevActiveMenu,
+            _isOpenMenu = false;
 
         return {
             init: function () {
@@ -19,6 +20,10 @@
             },
 
             _eventListeners: function () {
+
+                $btn.on('click', function (e) {
+                    _menu.showMenu();
+                });
 
                 $content.on('click', $menu, function (e) {
                     var active = $(e.target).data('target');
@@ -32,10 +37,6 @@
                         _menu.showMenu();
                     }
                 });
-
-                $btn.on('click', function (e) {
-                    _menu.showMenu();
-                });
             },
 
             setActiveMenu: function (active) {
@@ -45,14 +46,25 @@
             },
 
             showMenu: function () {
-                $btn.toggleClass('open');
-                $body.toggleClass('menu-content-open');
-                $content.toggleClass('open');
-                $content.find('#' + _prevActiveMenu).removeClass('active');
-                $content.find('#' + _activeMenu).addClass('active');
+
+                if (_activeMenu === 'menu') {
+                    $btn.toggleClass('open');
+                    $body.toggleClass('menu-content-open');
+                    $content.toggleClass('open');
+                } else {
+                    _menu.setActiveMenu('menu');
+                }
+
+                _menu.showMenuContent();
             },
 
             showMenuContent: function () {
+                if (_activeMenu !== 'menu') {
+                    $btn.addClass('back');
+                } else {
+                    $btn.removeClass('back');
+                }
+
                 $content.find('#' + _prevActiveMenu).removeClass('active');
                 $content.find('#' + _activeMenu).addClass('active');
             }
