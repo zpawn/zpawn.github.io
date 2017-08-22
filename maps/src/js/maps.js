@@ -14,6 +14,8 @@
 
     function setMapMarkers (map) {
 
+        var markers = [];
+
         var cities = [{
             coordinates: [22.6776965, 48.4408968],
             name: 'Мукачево'
@@ -25,14 +27,24 @@
             name: 'Лалово'
         }];
 
+        var infoWindow = new google.maps.InfoWindow();
+
         for (var i = 0; i < cities.length; i += 1) {
             var city = cities[i];
-            var marker = new google.maps.Marker({
+
+            markers[i] = new google.maps.Marker({
                 position: {lat: city.coordinates[1], lng: city.coordinates[0]},
                 map: map,
                 title: city.name,
                 zIndex: i
             });
+
+            google.maps.event.addListener(markers[i], 'click', (function(marker, i) {
+                return function() {
+                    infoWindow.setContent('thisIsInfoTooltip: ' + i);
+                    infoWindow.open(map, marker);
+                }
+            })(markers[i], i));
         }
     }
 
