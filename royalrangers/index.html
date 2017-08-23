@@ -80,13 +80,14 @@
                     <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
                         <p class="text-center">вхід</p>
 
-
-                        <div class="group" ng-class="{ 'has-error' : vm.form.email.$invalid && !vm.form.email.$pristine }">
-                            <input class="input" type="email" name="email" placeholder="E-mail" ng-model="vm.data.email" lazy-validation-on="vm.form.$submitted" ng-required="true">
+                        <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield" ng-class="{ 'has-error' : vm.form.email.$invalid && !vm.form.email.$pristine }">
+                            <input class="mdl-textfield__input" id="signInEmail" type="email" name="email" ng-model="vm.data.email" lazy-validation-on="vm.form.$submitted" ng-required="true">
+                            <label class="mdl-textfield__label" for="signInEmail">E-mail</label>
                         </div>
 
-                        <div class="form-group" ng-class="{ 'has-error' : vm.form.password.$dirty && (vm.form.password.$invalid || vm.form.password.$error.minlength || vm.form.password.$error.maxlength)}">
-                            <input class="form-control input" type="password" name="password" placeholder="Пароль" ng-model="vm.data.password" ng-minlength="3" ng-maxlength="25" lazy-validation-on="vm.form.$submitted" ng-required="true">
+                        <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield" ng-class="{ 'has-error' : vm.form.password.$dirty && (vm.form.password.$invalid || vm.form.password.$error.minlength || vm.form.password.$error.maxlength)}">
+                            <input class="mdl-textfield__input" id="signInPassword" type="password" name="password" ng-model="vm.data.password" ng-minlength="3" ng-maxlength="25" lazy-validation-on="vm.form.$submitted" ng-required="true">
+                            <label class="mdl-textfield__label" for="signInPassword">Password</label>
                         </div>
 
                         <div class="form-group text-center">

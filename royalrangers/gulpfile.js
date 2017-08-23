@@ -25,6 +25,8 @@ var gulp = require('gulp'),
             js: {
                 src: [
                     'bower_components/jquery/dist/jquery.min.js',
+                    'bower_components/material-design-lite/src/mdlComponentHandler.js',
+                    'bower_components/material-design-lite/src/textfield/textfield.js',
                     'royalrangers/src/js/instance/*.js',
                     'royalrangers/src/js/*.js'
                 ],
