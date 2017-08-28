@@ -49,8 +49,15 @@
     }
   }
 
+  .menu-content__main,
+
   .menu-content__signin {}
-  .menu-content__signup {}
+
+  .menu-content__signup {
+    align-self: flex-start;
+    padding-top: 9px * 5;
+  }
+
   .menu-content__subscribe {}
 }
 

@@ -17,6 +17,7 @@
 .hamburger {
   width: var(--hamburger-width);
   height: var(--hamburger-height);
+  top: var(--hamburger-height);
   position: absolute;
   transform: rotate(0deg);
   transition: .5s ease-in-out;
