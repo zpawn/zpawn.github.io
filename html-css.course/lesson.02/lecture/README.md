@@ -172,7 +172,7 @@ p { color: rgb(0, 255, 0) }
 
 ### Стилизация списков
 - `list-style-type: none, disc, circle, square` - для маркированного 
-- `list-style-type: none, decimal, lower-alpha, upper-alphalower-roman, upper-roman` - для нумерованного
+- `list-style-type: none, decimal, lower-alpha, upper-alpha, lower-roman, upper-roman` - для нумерованного
 - `list-style-image: url('sqpurple.gif')`
 - `list-style-position: inside, outside`
 
