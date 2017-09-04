@@ -3,6 +3,8 @@
 ### 12-ти колоночная сетка
 ![12 column grid](img/grid.png "12 column grid")
 
+![12 column markup](img/grid.example.dev.png)
+
 ![12 column grid example](img/grid.example.jpg)
 
 ### Сетка
