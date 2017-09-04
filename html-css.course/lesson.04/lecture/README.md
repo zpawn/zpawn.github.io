@@ -1,7 +1,9 @@
 ## [Twitter Bootstrap](https://getbootstrap.com/docs/3.3/css/)
 
-### Сетка
+### 12-ти колоночная сетка
+![12 column grid](img/grid.jpg "12 column grid")
 
+### Сетка
 | class        | размер | для экрана |
 |      ---     |  ---   | --- |
 | `.col-xs-xx` | 480px  | phone | 

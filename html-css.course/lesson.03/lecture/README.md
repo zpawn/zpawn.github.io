@@ -41,9 +41,6 @@ width = content + (padding-left + padding-right) + (border-left + border-right) 
 
 ![display: inline](img/display.inline.jpg "display: inline")
 
-### 12-ти колоночная сетка
-![12 column grid](img/grid.jpg "12 column grid")
-
 ---
 [Содержание](../../README.md)
 |
