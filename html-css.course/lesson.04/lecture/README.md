@@ -1,7 +1,9 @@
 ## [Twitter Bootstrap](https://getbootstrap.com/docs/3.3/css/)
 
 ### 12-ти колоночная сетка
-![12 column grid](img/grid.jpg "12 column grid")
+![12 column grid](img/grid.png "12 column grid")
+
+![12 column grid example](img/grid.example.jpg)
 
 ### Сетка
 | class        | размер | для экрана |
@@ -77,6 +79,10 @@
   <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
 </div>
 ```
+
+### Прячем и показываем элементы
+* `hidden-xs`, `hidden-sm`, `hidden-md`, `hidden-lg` - прячем элемент на определенном ширине экране
+* `visible-xs`, `visible-sm`, `visible-md`, `visible-lg` - показываем элемент на определенной ширине экрана
 
 ### Классы для работы с текстом
 * Центрирование

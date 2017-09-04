@@ -1,19 +1,18 @@
-### Блочная модель
-![box model](img/box.model.jpg "box model")
-
-|         |            |     |
-|   ---   |    ---     | --- |
-| content | содержимое | здесь располагается содержимое бокса: текст и другие вложенные в него боксы|
-| padding | отступы    | отступ от невидимых границ содержимого до рамки, на него, кстати, распространяется фон бокса, если он есть|
-| border  | рамка      | рамка вокруг содержимого, которая, помимо декоративного эффекта, тоже влияет на размер всего бокса из-за своей толщины |
-| margin  | границы    | отступы от рамки до других, внешних боксов|
-
-width = content + (padding-left + padding-right) + (border-left + border-right) + (margin-left + margin-right)
+Блочная модель
+--------------
 
 ### Поток
 ![box flow](img/flow.jpg "box flow")
 
 `float: left, right, none` - обтекание (выбиваем из потока)
+
+![img float](img/float.img.png)
+```html
+<p>
+    <img style="float: left;" src="..." alt="">
+    ...
+</p>
+```
 
 ![box flow float](img/float.jpg "box flow float")
 
