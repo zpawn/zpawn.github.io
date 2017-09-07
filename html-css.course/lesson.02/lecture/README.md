@@ -61,7 +61,7 @@ CSS
 ```
 
 ### Синтаксис
-![css syntax](syntax.jpg "css syntax")
+![css syntax](img/syntax.jpg "css syntax")
 
 `.selector { ... }` - класс
 
@@ -179,6 +179,9 @@ p { color: rgb(0, 255, 0) }
 ### Таблицы
 - `border-collapse: collapse, separate`
 - `vertical-align: top, middle, bottom`
+
+### Блочная модель
+![box model](img/box.model.jpg "box model")
 
 ---
 [Содержание](../../README.md)
