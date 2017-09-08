@@ -11,16 +11,13 @@
 ![12 column grid example](img/grid.example.jpg)
 
 ### Сетка
-#### на ZAZAmarket.com
+
 | class        | ZAZAmarket |   FF    | для экрана |
 |      ---     |    ---     |   ---   | --- |
 | `.col-xs-xx` |   480px    |  320px  | phone | 
 | `.col-sm-xx` |   768px    |  480px  | tablet |
 | `.col-md-xx` |   1010px   |  768px  | desktop |
 | `.col-lg-xx` |   1200px   |  1000px | large desktop |
-
-#### На FF.ua
-
 
 ![bootstrap grid](img/grid.01.jpg "bootstrap grid")
 ```html
