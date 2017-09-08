@@ -1,6 +1,13 @@
 ## [Twitter Bootstrap](https://getbootstrap.com/docs/3.3/css/)
 
 ### 12-ти колоночная сетка
+
+Сетка:
+* она нужна для создания удобной среды, которая позволит вам двигать 
+детали макета не задумываясь и не беспокоясь о том, чтобы все расстояния между элементами 
+были равны, единообразны.
+* схема расположения всех основных блоков и элементов
+
 ![12 column grid](img/grid.png "12 column grid")
 
 ![12 column markup](img/grid.example.dev.png)
@@ -8,12 +15,16 @@
 ![12 column grid example](img/grid.example.jpg)
 
 ### Сетка
-| class        | размер | для экрана |
-|      ---     |  ---   | --- |
-| `.col-xs-xx` | 480px  | phone | 
-| `.col-sm-xx` | 768px  | tablet |
-| `.col-md-xx` | 1010px | desktop |
-| `.col-lg-xx` | 1200px | large desktop |
+#### на ZAZAmarket.com
+| class        | ZAZAmarket |   FF    | для экрана |
+|      ---     |    ---     |   ---   | --- |
+| `.col-xs-xx` |   480px    |  320px  | phone | 
+| `.col-sm-xx` |   768px    |  480px  | tablet |
+| `.col-md-xx` |   1010px   |  768px  | desktop |
+| `.col-lg-xx` |   1200px   |  1000px | large desktop |
+
+#### На FF.ua
+
 
 ![bootstrap grid](img/grid.01.jpg "bootstrap grid")
 ```html

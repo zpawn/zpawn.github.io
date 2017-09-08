@@ -12,6 +12,6 @@
 [Лекция](lesson.03/lecture/README.md)
 [Задания](lesson.03/tasks/README.md)
 
-Урок 3: Twitter Bootstrap / Font Awesome - 
+Урок 4: Twitter Bootstrap / Font Awesome - 
 [Лекция](lesson.04/lecture/README.md)
 [Задания](lesson.04/tasks/README.md)
