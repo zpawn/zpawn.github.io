@@ -124,6 +124,10 @@
     * `.bg-info`
     * `.bg-warning`
     * `.bg-danger`
+* Обтекания
+    * `.pull-left` - слева
+    * `.pull-right` - справа
+    * `.clearfix` - отменить с обеих сторон
     
 ### Список
 
@@ -191,17 +195,7 @@
 <img src="..." alt="..." class="img-circle">
 <img src="..." alt="..." class="img-thumbnail">
 ```
-### Лэйбочки
 
-![bootstrap label](img/label.jpg "bootstrap label")
-```html
-<span class="label label-default">Default</span>
-<span class="label label-primary">Primary</span>
-<span class="label label-success">Success</span>
-<span class="label label-info">Info</span>
-<span class="label label-warning">Warning</span>
-<span class="label label-danger">Danger</span>
-```
 
 ## [FontAwesome](http://fontawesome.io/icons/)
 
