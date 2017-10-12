@@ -1,13 +1,10 @@
 ### Задание
 
-Скачивем стили [*Bootstrap*](bootstrap.css) и подключаем в `head` самымм первым
+Сверстать макет
 
-Подключаем FontAwesome перед закрывающимся тэгом `body`
-`<script src="https://use.fontawesome.com/67369f79f4.js"></script>`
+Цветовая схема: `#facc53`, `#e2641f`, `#ba3341`, `#6f2f1d`, `#222224`
 
-![desktop markup](descktop.jpg)
-
-![mobile markup](mobile.jpg)
+![markup](markup.jpg "markup")
 
 ---
 [Содержание](../../README.md)
