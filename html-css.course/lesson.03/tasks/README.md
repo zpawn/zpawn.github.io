@@ -18,6 +18,5 @@
 ![starwars table](task.02.jpg "starwars table")
 
 ---
-[Содержание](../../README.md)
-|
+[Содержание](../../README.md) |
 [Лекция](../lecture/README.md)

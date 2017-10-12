@@ -10,6 +10,5 @@
 ![mobile markup](mobile.jpg)
 
 ---
-[Содержание](../../README.md)
-|
+[Содержание](../../README.md) |
 [Лекция](../lecture/README.md)

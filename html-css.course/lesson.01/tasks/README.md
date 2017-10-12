@@ -13,6 +13,5 @@
 ![alt text](task.03/task.03.jpg)
 
 ---
-[Содержание](../../README.md)
-|
+[Содержание](../../README.md) |
 [Лекция](../lecture/README.md)

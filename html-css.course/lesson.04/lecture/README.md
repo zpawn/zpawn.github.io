@@ -45,6 +45,5 @@
 ![display: inline](img/display.inline.jpg "display: inline")
 
 ---
-[Содержание](../../README.md)
-|
+[Содержание](../../README.md) |
 [Задания](../tasks/README.md)

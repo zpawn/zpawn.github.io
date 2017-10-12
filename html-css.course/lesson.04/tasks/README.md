@@ -7,6 +7,5 @@
 ![markup](markup.jpg "markup")
 
 ---
-[Содержание](../../README.md)
-|
+[Содержание](../../README.md) |
 [Лекция](../lecture/README.md)
