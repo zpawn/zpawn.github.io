@@ -34,7 +34,6 @@
                 Mediator.publish('show', 'spinner');
 
                 req.open(method, url, true);
-                // req.withCredentials = true;
                 req.setRequestHeader("Content-Type", "application/json; charset=utf-8");
                 req.onload = () => {
                     if (req.status === 200) {
