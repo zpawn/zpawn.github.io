@@ -1,6 +1,7 @@
 'use strict';
 
-const gulp = require('gulp');
+const gulp = require('gulp'),
+    browserSync = require('browser-sync').create();
 
 gulp.task('sass', require('./gulpfiles/styles').sass);
 gulp.task('sass:watch', () => {
@@ -16,3 +17,4 @@ gulp.task('js:watch', () => {
     gulp.watch('./src/js/**/*.js', require('./gulpfiles/scripts').jsWatch);
 });
 gulp.task('watch', gulp.parallel('sass:watch', 'js:watch'));
+gulp.task('serv', require('./gulpfiles/browser.sync').serv);
