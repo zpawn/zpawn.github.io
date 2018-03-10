@@ -19,3 +19,5 @@
 Урок 5: Twitter Bootstrap / Font Awesome - 
 [Лекция](lesson.05/lecture/README.md) |
 [Задания](lesson.05/tasks/README.md)
+
+Финальное Задание: сверстать [эту](//zpawn.github.io/html-css.course/final.task.example/ff.html) страничку, использую Twitter Bootstrap и FontAwesome 
