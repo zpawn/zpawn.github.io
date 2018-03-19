@@ -1,5 +1,5 @@
 // Dependencies
-@import "./../../../bower_components/normalize-css/normalize";
+@import "./../../node_modules/normalize.css/normalize";
 
 /** Landing
 
@@ -15,7 +15,7 @@
 @import "components/scaffolding";
 @import "components/navbar";
 @import "components/hamburger";
-@import "components/parralax";
+@import "components/parallax";
 @import "components/content";
 @import "components/menu";
 @import "components/forms";
