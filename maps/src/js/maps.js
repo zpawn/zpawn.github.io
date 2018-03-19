@@ -4,17 +4,17 @@
 (function ($) {
     'use strict';
 
-    const API_KEY = 'AIzaSyBYGEtn-zAItcQi72nY7vD0mnLUTla4o-Y';
+    var API_KEY = 'AIzaSyBYGEtn-zAItcQi72nY7vD0mnLUTla4o-Y';
     var tag = document.createElement('script');
     var firstScriptTag = document.getElementsByTagName('script')[0];
+
+    var locationMarkerId = -1, markers = [];
 
 
     tag.src = 'https://maps.googleapis.com/maps/api/js?key='+ API_KEY +'&callback=initMap&libraries=places';
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     function setMapMarkers (map) {
-
-        var markers = [];
 
         var cities = [{
             coordinates: [22.6776965, 48.4408968],
@@ -64,12 +64,25 @@
         geoAutocomplete(map);
     }
 
-    function geoAutocomplete () {
+    function geoAutocomplete (map) {
         $('#geoSearch').placepicker({
             placeChanged: function(place) {
-                var map = this;
-                console.log(place.formatted_address);
-                console.log('location:', map.getLocation());
+                var location = this.getLocation(),
+                    coordinates = {lat: location.latitude, lng: location.longitude};
+                map.setCenter(coordinates);
+                map.setZoom(14);
+
+                if (locationMarkerId === -1) {
+                    locationMarkerId = markers.length;
+                    markers[locationMarkerId] = new google.maps.Marker({
+                        position: coordinates,
+                        map: map,
+                        draggable: true
+                    });
+
+                } else {
+                    markers[locationMarkerId].setPosition(coordinates);
+                }
             }
         });
     }
