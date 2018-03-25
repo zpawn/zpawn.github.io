@@ -7,3 +7,9 @@ $link-color: $text-color !default;
 $bg-color: #f5f5f5;
 
 $font-size-base: 18px !default;
+
+/** Screens */
+$screen-mobile: 456px !default;
+$screen-tablet: 870px !default;
+$screen-desktop: 1026px !default;
+$screen-wide: 1326px !default;

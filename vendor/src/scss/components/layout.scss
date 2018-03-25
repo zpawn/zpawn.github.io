@@ -14,4 +14,14 @@ html {
   }
 
   &__footer {}
+
+  @media all and (min-width: $screen-tablet) {
+    &__header {
+      padding-top: 20px;
+    }
+    &__footer {
+      padding-bottom: 15px;
+    }
+  }
 }
+
