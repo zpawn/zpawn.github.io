@@ -50,10 +50,11 @@
                             <button class="datetime-link js-datetime" type="button" data-timestamp="${task.deadline}">${task.deadline ? moment(task.deadline).format('DD.MM.YYYY HH:mm') : '---'}</button>
                         </td>
                         <td>
-                            <label class="js-done custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" ${task.done ? 'checked' : ''}>
-                                <span class="custom-control-indicator"></span>
-                            </label>
+                            <div class="custom-control custom-checkbox">
+                                <label class="js-done custom-control-label">
+                                    <input type="checkbox" class="custom-control-input" ${task.done ? 'checked' : ''}>
+                                </label>
+                            </div>
                         </td>
                     </tr>`);
                 });
