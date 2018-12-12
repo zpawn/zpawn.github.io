@@ -5,6 +5,8 @@
 Подключаем FontAwesome перед закрывающимся тэгом `body`
 `<script src="https://use.fontawesome.com/67369f79f4.js"></script>`
 
+Скачиваем картинки [отсюда](./img)
+
 ![desktop markup](descktop.jpg)
 
 ![mobile markup](mobile.jpg)

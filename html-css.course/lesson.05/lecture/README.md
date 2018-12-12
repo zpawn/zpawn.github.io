@@ -152,12 +152,16 @@
 </table>
 ```
 
+---
+
 ![bootstrap table striped"](img/table.striped.jpg "bootstrap table striped")
 ```html
 <table class="table table-striped">
     ...
 </table>
 ```
+
+---
 
 ![bootstrap table bordered](img/table.bordered.jpg "bootstrap table bordered")
 ```html
