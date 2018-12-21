@@ -5,8 +5,8 @@ import {
     Redirect
 } from 'react-router-dom';
 
-import Dashboard from './components/Dashboard';
-import Auth from './components/Auth';
+import Dashboard from './Dashboard';
+import Auth from './Auth';
 
 ////
 
