@@ -16,7 +16,13 @@
     "typeface-roboto": "0.0.54"
   },
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "gh-pages": "^2.0.1",
+    "husky": "^1.2.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,7 +30,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "lint": "eslint --debug src/",
+    "lint:fix": "eslint --debug src/ --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,5 +42,20 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --max-warnings=0",
+      "git add"
+    ],
+    "*.{html,js,json,scss}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
 }
