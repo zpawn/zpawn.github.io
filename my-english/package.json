@@ -32,7 +32,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "lint": "eslint --debug src/",
-    "lint:fix": "eslint --debug src/ --fix"
+    "lint:fix": "eslint --debug src/ --fix",
+    "prettier": "prettier --write 'src/**/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,5 +1,3 @@
-import TopAppBar from './TopAppBar';
+import TopAppBar from "./TopAppBar";
 
-export {
-    TopAppBar as default
-}
+export { TopAppBar as default };
