@@ -3,6 +3,6 @@ import Typography from "@material-ui/core/Typography";
 
 ////
 
-const dashboard = props => <Typography>dashboard</Typography>;
+const New = () => <Typography>New</Typography>;
 
-export default dashboard;
+export default New;

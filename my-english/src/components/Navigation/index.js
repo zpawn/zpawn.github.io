@@ -1,3 +1,4 @@
 import Navigation from "./Navigation";
+import NewWordButton from "./NewWordButton";
 
-export { Navigation as default };
+export { Navigation as default, NewWordButton };

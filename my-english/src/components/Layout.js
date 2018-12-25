@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import classes from "./Layout.module.css";
 import Router from "./Router";
-import Navigation from "./Navigation";
+import Navigation, { NewWordButton } from "./Navigation";
 
 ////
 
@@ -13,6 +13,7 @@ class Layout extends Component {
         <Navigation />
         <main className={classes.Content}>
           <Router />
+          <NewWordButton />
         </main>
       </div>
     );
