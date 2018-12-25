@@ -31,12 +31,9 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "lint": "eslint --debug src/",
+    "lint": "eslint src/",
     "lint:fix": "eslint --debug src/ --fix",
     "prettier": "prettier --write 'src/**/*.js'"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     ">0.2%",
