@@ -1,5 +1,5 @@
 import React from "react";
-import { compose, withHandlers, withStateHandlers } from "recompose";
+import { compose, withHandlers, withStateHandlers, lifecycle } from "recompose";
 
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -34,7 +34,13 @@ const New = compose(
     onSubmit: ({ newWord, newTranslate }) => () => {
       // ToDo: handle submit
     }
-  })
+  }),
+
+    lifecycle({
+        componentDidMount () {
+            // ...
+        }
+    })
 )(
   ({
     classes,

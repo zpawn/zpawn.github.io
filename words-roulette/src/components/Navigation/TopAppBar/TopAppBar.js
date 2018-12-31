@@ -13,7 +13,7 @@ const topAppBar = ({ onClick }) => (
       <MenuIcon />
     </IconButton>
     <Typography variant="h6" color="inherit">
-      MyEnglish
+        WordsRoulette
     </Typography>
   </Toolbar>
 );
