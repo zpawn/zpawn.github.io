@@ -1,5 +1,6 @@
 import React from "react";
-import { compose, withHandlers, withStateHandlers, lifecycle } from "recompose";
+import { compose, withHandlers, withState } from "recompose";
+import _cloneDeep from "lodash/cloneDeep";
 
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -8,96 +9,113 @@ import Fab from "@material-ui/core/Fab";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 
-import styles from "./styles";
+import { FirebaseService } from "../../services/FirebaseService";
+import { styles, initForm } from "./index";
 
 ////
 
 const New = compose(
   withStyles(styles),
 
-  withStateHandlers(
-    {
-      newWord: "",
-      newTranslate: "",
-      newTranslates: []
-    },
-    {
-      onNewWordHandler: () => ({ target: { value } }) => ({ newWord: value }),
-      onNewTranslateHandler: () => ({ target: { value } }) => ({
-        newTranslate: value
-      }),
-      onNewTranslatesHandler: []
-    }
-  ),
+  withState("form", "onChangeForm", _cloneDeep(initForm)),
 
   withHandlers({
-    onSubmit: ({ newWord, newTranslate }) => () => {
-      // ToDo: handle submit
-    }
+    onChange: ({ form, onChangeForm }) => ({ target: { name, value } }) => {
+      const updated = _cloneDeep(form);
+      updated[name] = value;
+      onChangeForm(updated);
+    },
+
+    onReset: ({ onChangeForm }) => () => onChangeForm(_cloneDeep(initForm))
   }),
 
-    lifecycle({
-        componentDidMount () {
-            // ...
-        }
-    })
-)(
-  ({
-    classes,
-    newWord,
-    onNewWordHandler,
-    newTranslate,
-    onNewTranslateHandler,
-    onSubmit
-  }) => (
-    <form noValidate autoComplete="off">
-      <TextField
-        autoFocus
-        fullWidth
-        id="addNewWord"
-        label="New Word"
-        margin="normal"
-        value={newWord}
-        onChange={onNewWordHandler}
-      />
+  withHandlers({
+    onSubmit: ({ form: { newWord, newTranslate }, onReset }) => e => {
+      e.preventDefault();
+      newWord = newWord.trim();
+      newTranslate = newTranslate.trim();
 
-      <Grid container spacing={8} alignItems="flex-end">
-        <Grid item xs>
-          <TextField
-            fullWidth
-            id="addNewTranslate"
-            margin="normal"
-            label="Translation"
-            value={newTranslate}
-            onChange={onNewTranslateHandler}
-          />
-        </Grid>
-        <Grid item>
-          <IconButton>
-            <AddIcon />
-          </IconButton>
-        </Grid>
+      FirebaseService.collection("words")
+        .add({
+          name: newWord,
+          createdAt: Date.now(),
+          updatedAt: Date.now()
+        })
+        .then(word => {
+          if (word.id) {
+            FirebaseService.collection("translations")
+              .add({
+                wordId: word.id,
+                translation: newTranslate,
+                labelId: ""
+              })
+              .then(translation => {
+                if (translation.id) {
+                  onReset();
+                }
+              })
+              .catch(err => {
+                /* ToDo: handle this error */
+              });
+          }
+        })
+        .catch(err => {
+          /* ToDo: handle this error */
+        });
+    }
+  })
+)(({ classes, onChange, onSubmit, form: { newWord, newTranslate } }) => (
+  <form noValidate autoComplete="off">
+    <TextField
+      autoFocus
+      fullWidth
+      id="addNewWord"
+      label="New Word"
+      margin="normal"
+      name="newWord"
+      value={newWord}
+      onChange={onChange}
+    />
+
+    <Grid container spacing={8} alignItems="flex-end">
+      <Grid item xs>
+        <TextField
+          fullWidth
+          id="addNewTranslate"
+          margin="normal"
+          label="Translation"
+          name="newTranslate"
+          value={newTranslate}
+          onChange={onChange}
+        />
       </Grid>
 
-      <Grid
-        container
-        spacing={8}
-        direction="row"
-        justify="center"
-        alignItems="center"
+      <Grid item>
+        <IconButton>
+          <AddIcon />
+        </IconButton>
+      </Grid>
+    </Grid>
+
+    <Grid
+      container
+      spacing={8}
+      direction="row"
+      justify="center"
+      alignItems="center"
+    >
+      <Fab
+        className={classes.button}
+        variant="extended"
+        aria-label="Submit"
+        color="primary"
+        onClick={onSubmit}
+        type="submit"
       >
-        <Fab
-          className={classes.button}
-          variant="extended"
-          aria-label="Submit"
-          color="primary"
-          onClick={onSubmit}
-        >
-          Submit
-        </Fab>
-      </Grid>
-    </form>
-  )
-);
+        Submit
+      </Fab>
+    </Grid>
+  </form>
+));
 
 export default New;

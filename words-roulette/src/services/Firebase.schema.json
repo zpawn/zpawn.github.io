@@ -1,0 +1,5 @@
+{
+  "words": ["id", "name", "createdAt", "updatedAt"],
+  "labels": ["id", "name", "color"],
+  "translations": ["id", "wordId", "labelId", "translation"]
+}
