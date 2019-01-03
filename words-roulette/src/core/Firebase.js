@@ -12,9 +12,9 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 };
 
-const FirebaseService = initializeApp(config).firestore();
-FirebaseService.settings({ timestampsInSnapshots: true });
+const Firebase = initializeApp(config).firestore();
+Firebase.settings({ timestampsInSnapshots: true });
 
 ////
 
-export { FirebaseService };
+export { Firebase };
