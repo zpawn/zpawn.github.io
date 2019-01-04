@@ -1,15 +1,33 @@
+import _isArray from "lodash/isArray";
+
 import { Firebase } from "../../core/Firebase";
 import { TranslateService } from "../translate";
 
 ////
 
+const parseResponse = res => {
+  let data = [];
+  res.forEach(item => {
+    data.push({
+      id: item.id,
+      ...item.data()
+    });
+  });
+
+  return data;
+};
+
 export class WordService {
   /**
    * @param {String} newWord
-   * @param {String} newTranslate
-   * @return {Promise<{word: *, translate: *}>}
+   * @param {Array} newTranslates
+   * @return {Promise<{word: {String}, translate: {Array}}>}
    */
-  static async create(newWord, newTranslate) {
+  static async create(newWord, newTranslates) {
+    if (!_isArray(newTranslates)) {
+      return Promise.reject("Empty translations");
+    }
+
     try {
       const createdWord = await Firebase.collection("words")
         .add({
@@ -19,15 +37,18 @@ export class WordService {
         })
         .catch(() => new Error("Could not create word"));
 
-      const createdTranslate = await TranslateService.create(
+      const createdTranslate = await TranslateService.createMultiple(
         createdWord.id,
-        newTranslate
+        newTranslates
       );
 
-      return {
-        word: createdWord.id,
-        translate: createdTranslate.id
-      };
+      return Promise.resolve({
+        word: {
+          id: createdWord.id,
+          name: newWord
+        },
+        translations: parseResponse(createdTranslate)
+      });
     } catch (e) {
       throw new Error("Could not create translate/word");
     }

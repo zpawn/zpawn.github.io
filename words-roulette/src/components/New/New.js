@@ -11,6 +11,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 import { WordService } from "../../store/word";
 import { styles, initForm } from "./index";
+import NewTranslates from "./NewTranslates";
 
 ////
 
@@ -18,6 +19,7 @@ const New = compose(
   withStyles(styles),
 
   withState("form", "onChangeForm", _cloneDeep(initForm)),
+  withState("disabled", "onDisabledHandler", false),
 
   withHandlers({
     onChange: ({ form, onChangeForm }) => ({ target: { name, value } }) => {
@@ -26,72 +28,112 @@ const New = compose(
       onChangeForm(updated);
     },
 
-    onReset: ({ onChangeForm }) => () => onChangeForm(_cloneDeep(initForm))
+    onAddTranslates: ({ form, onChangeForm }) => () => {
+      const updated = _cloneDeep(form);
+
+      if (!updated.newTranslate.length) {
+        return;
+      }
+
+      updated.newTranslates.push(updated.newTranslate);
+      updated.newTranslate = "";
+
+      onChangeForm(updated);
+    },
+
+    onReset: ({ onChangeForm }) => () => onChangeForm(_cloneDeep(initForm)),
+
+    onDisableForm: ({ onDisabledHandler }) => () => onDisabledHandler(true),
+
+    onEnableForm: ({ onDisabledHandler }) => () => onDisabledHandler(false)
   }),
 
   withHandlers({
-    onSubmit: ({ form: { newWord, newTranslate }, onReset }) => e => {
+    onSubmit: ({ form, onReset, onDisableForm }) => e => {
       e.preventDefault();
+      let { newWord, newTranslate, newTranslates } = _cloneDeep(form);
       newWord = newWord.trim();
       newTranslate = newTranslate.trim();
 
-      if (newWord.length && newTranslate.length) {
-        WordService.create(newWord, newTranslate).then(() => onReset());
+      if (newWord.length && (newTranslate.length || newTranslates.length)) {
+        if (newTranslate.length) {
+          newTranslates.push(newTranslate);
+        }
+        onDisableForm(true);
+
+        WordService.create(newWord, newTranslates).then(data => {
+          // ToDo: show notification if created translation success
+          onReset();
+        });
       }
     }
   })
-)(({ classes, onChange, onSubmit, form: { newWord, newTranslate } }) => (
-  <form noValidate autoComplete="off">
-    <TextField
-      autoFocus
-      fullWidth
-      id="addNewWord"
-      label="New Word"
-      margin="normal"
-      name="newWord"
-      value={newWord}
-      onChange={onChange}
-    />
+)(
+  ({
+    classes,
+    disabled,
+    onChange,
+    onSubmit,
+    onAddTranslates,
+    form: { newWord, newTranslate, newTranslates }
+  }) => (
+    <form noValidate autoComplete="off">
+      <TextField
+        autoFocus
+        fullWidth
+        id="addNewWord"
+        label="New Word"
+        margin="normal"
+        name="newWord"
+        value={newWord}
+        onChange={onChange}
+        disabled={disabled}
+      />
 
-    <Grid container spacing={8} alignItems="flex-end">
-      <Grid item xs>
-        <TextField
-          fullWidth
-          id="addNewTranslate"
-          margin="normal"
-          label="Translation"
-          name="newTranslate"
-          value={newTranslate}
-          onChange={onChange}
-        />
+      <NewTranslates translates={newTranslates} disabled={disabled} />
+
+      <Grid container spacing={8} alignItems="flex-end">
+        <Grid item xs>
+          <TextField
+            fullWidth
+            id="addNewTranslate"
+            margin="normal"
+            label="Translation"
+            name="newTranslate"
+            value={newTranslate}
+            onChange={onChange}
+            disabled={disabled}
+          />
+        </Grid>
+
+        <Grid item>
+          <IconButton onClick={onAddTranslates} disabled={disabled}>
+            <AddIcon />
+          </IconButton>
+        </Grid>
       </Grid>
 
-      <Grid item>
-        <IconButton>
-          <AddIcon />
-        </IconButton>
-      </Grid>
-    </Grid>
-
-    <Grid
-      container
-      spacing={8}
-      direction="row"
-      justify="center"
-      alignItems="center"
-    >
-      <Fab
-        className={classes.button}
-        variant="extended"
-        aria-label="Submit"
-        color="primary"
-        onClick={onSubmit}
-        type="submit"
+      <Grid
+        container
+        spacing={8}
+        direction="row"
+        justify="center"
+        alignItems="center"
       >
-        Submit
-      </Fab>
-    </Grid>
-  </form>
-));
+        <Fab
+          className={classes.button}
+          variant="extended"
+          aria-label="Submit"
+          color="primary"
+          onClick={onSubmit}
+          type="submit"
+          disabled={disabled}
+        >
+          Submit
+        </Fab>
+      </Grid>
+    </form>
+  )
+);
 
 export default New;
