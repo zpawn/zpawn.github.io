@@ -4,6 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Auth from "./Auth";
 import New from "./New";
+import Words from "./Words";
 
 ////
 
@@ -11,6 +12,7 @@ const router = () => (
   <Switch>
     <Route path="/auth" component={Auth} />
     <Route path="/new" component={New} />
+    <Route path="/words" component={Words} />
     <Route path="/" exact component={Dashboard} />
     <Redirect to="/" />
   </Switch>
