@@ -13,10 +13,12 @@ const rouletteInitialized = (state, { steps }) => ({
   steps
 });
 
-const rouletteChangeStep = (state, { step }) => ({
-  ...step,
-  activeStep: step
-});
+const rouletteChangeStep = (state, { step }) => {
+  return {
+    ...step,
+    activeStep: step
+  };
+};
 
 ////
 

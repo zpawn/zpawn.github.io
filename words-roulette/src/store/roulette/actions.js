@@ -9,7 +9,8 @@ const rouletteInitialized = ({ steps }) => ({
 });
 
 const rouletteChangeStep = step => ({
-  type: actionTypes.ROULETTE_CHANGE_STEP
+  type: actionTypes.ROULETTE_CHANGE_STEP,
+  step
 });
 
 ////

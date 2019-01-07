@@ -16,7 +16,8 @@ import { styles } from "./index";
 ////
 
 const mapStateToProps = state => ({
-  activeStep: state.roulette.activeStep
+  activeStep: state.roulette.activeStep,
+  count: state.rouletteSettings.count
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -38,13 +39,29 @@ const controls = compose(
   ),
 
   withHandlers({
-    onPrevStep: ({ activeStep, onChangeStep }) => () => {},
+    onPrevStep: ({ count, activeStep, onChangeStep }) => () => {
+      let update = activeStep - 1;
+      if (update >= 0) {
+        onChangeStep(update);
+      }
+    },
 
-    onNextStep: ({ activeStep, onChangeStep }) => () => {}
+    onNextStep: ({ count, activeStep, onChangeStep }) => () => {
+      let update = activeStep + 1;
+      if (update < count) {
+        onChangeStep(update);
+      }
+    }
   })
-)(({ classes }) => (
+)(({ classes, activeStep, onPrevStep, onNextStep }) => (
   <Typography align="center">
-    <Fab variant="extended" aria-label="Previous" color="default" type="button">
+    <Fab
+      variant="extended"
+      aria-label="Previous"
+      color="default"
+      type="button"
+      onClick={onPrevStep}
+    >
       <PrevIcon />
     </Fab>
 
@@ -59,7 +76,13 @@ const controls = compose(
       Finish
     </Fab>
 
-    <Fab variant="extended" aria-label="Next" color="default" type="submit">
+    <Fab
+      variant="extended"
+      aria-label="Next"
+      color="default"
+      type="submit"
+      onClick={onNextStep}
+    >
       <NextIcon />
     </Fab>
   </Typography>
