@@ -9,10 +9,10 @@ export class TranslateService {
    * @return {Promise<firebase.firestore.DocumentReference | Error>}
    */
   static async create(wordId, newTranslate) {
-    return Firebase.collection("translation")
+    return Firebase.collection("translations")
       .add({
         wordId: wordId,
-        translation: newTranslate,
+        translations: newTranslate,
         labelId: ""
       })
       .catch(() => new Error("Could not create translation"));
@@ -23,7 +23,7 @@ export class TranslateService {
       const batch = Firebase.batch();
 
       newTranslates.forEach(t => {
-        batch.set(Firebase.collection("translation").doc(), {
+        batch.set(Firebase.collection("translations").doc(), {
           wordId: wordId,
           translation: t,
           labelId: ""
@@ -31,7 +31,7 @@ export class TranslateService {
       });
 
       return batch.commit().then(() =>
-        Firebase.collection("translation")
+        Firebase.collection("translations")
           .where("wordId", "==", wordId)
           .get()
       );

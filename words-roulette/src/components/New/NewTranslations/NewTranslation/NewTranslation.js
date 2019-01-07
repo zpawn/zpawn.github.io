@@ -4,25 +4,25 @@ import TextField from "@material-ui/core/TextField";
 
 ////
 
-const newTranslate = ({ translate, disabled }) => (
+const newTranslation = ({ translation, disabled }) => (
   <TextField
     autoFocus
     fullWidth
     label="Translate"
     margin="normal"
-    value={translate}
+    value={translation}
     disabled={disabled}
     // onChange={onChange}
   />
 );
 
-newTranslate.defaultProps = {
+newTranslation.defaultProps = {
   disabled: false
 };
 
-newTranslate.propTypes = {
-  translate: PropTypes.string.isRequired,
+newTranslation.propTypes = {
+  translation: PropTypes.string.isRequired,
   disabled: PropTypes.bool
 };
 
-export default newTranslate;
+export default newTranslation;

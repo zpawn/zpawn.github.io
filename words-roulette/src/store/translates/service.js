@@ -8,7 +8,7 @@ class TranslatesService {
    */
   static async getAll() {
     try {
-      return Firebase.collection("translation")
+      return Firebase.collection("translations")
         .get()
         .then(res => parseResponseItems(res));
     } catch (e) {

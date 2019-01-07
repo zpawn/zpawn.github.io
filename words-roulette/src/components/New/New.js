@@ -11,7 +11,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 import { WordService } from "../../store/word";
 import { styles, initForm } from "./index";
-import NewTranslates from "./NewTranslates";
+import NewTranslations from "./NewTranslations";
 import Alert from "../UI/Alert";
 
 ////
@@ -41,15 +41,15 @@ const New = compose(
       onChangeForm(updated);
     },
 
-    onAddTranslates: ({ form, onChangeForm }) => () => {
+    onAddTranslations: ({ form, onChangeForm }) => () => {
       const updated = _cloneDeep(form);
 
-      if (!updated.newTranslate.length) {
+      if (!updated.newTranslation.length) {
         return;
       }
 
-      updated.newTranslates.push(updated.newTranslate);
-      updated.newTranslate = "";
+      updated.newTranslations.push(updated.newTranslation);
+      updated.newTranslation = "";
 
       onChangeForm(updated);
     },
@@ -80,17 +80,17 @@ const New = compose(
       onCreatedFail
     }) => e => {
       e.preventDefault();
-      let { newWord, newTranslate, newTranslates } = _cloneDeep(form);
+      let { newWord, newTranslation, newTranslations } = _cloneDeep(form);
       newWord = newWord.trim();
-      newTranslate = newTranslate.trim();
+      newTranslation = newTranslation.trim();
 
-      if (newWord.length && (newTranslate.length || newTranslates.length)) {
-        if (newTranslate.length) {
-          newTranslates.push(newTranslate);
+      if (newWord.length && (newTranslation.length || newTranslations.length)) {
+        if (newTranslation.length) {
+          newTranslations.push(newTranslation);
         }
         onDisableForm(true);
 
-        WordService.create(newWord, newTranslates)
+        WordService.create(newWord, newTranslations)
           .then(() => {
             onCreatedSuccess();
             onEnableForm();
@@ -114,8 +114,8 @@ const New = compose(
     isOpenAlert,
     onOpenAlert,
     onCloseAlert,
-    onAddTranslates,
-    form: { newWord, newTranslate, newTranslates }
+    onAddTranslations,
+    form: { newWord, newTranslation, newTranslations }
   }) => (
     <>
       <form noValidate autoComplete="off">
@@ -131,24 +131,24 @@ const New = compose(
           disabled={disabled}
         />
 
-        <NewTranslates translates={newTranslates} disabled={disabled} />
+        <NewTranslations translations={newTranslations} disabled={disabled} />
 
         <Grid container spacing={8} alignItems="flex-end">
           <Grid item xs>
             <TextField
               fullWidth
-              id="addNewTranslate"
+              id="addNewTranslations"
               margin="normal"
               label="Translation"
-              name="newTranslate"
-              value={newTranslate}
+              name="newTranslation"
+              value={newTranslation}
               onChange={onChange}
               disabled={disabled}
             />
           </Grid>
 
           <Grid item>
-            <IconButton onClick={onAddTranslates} disabled={disabled}>
+            <IconButton onClick={onAddTranslations} disabled={disabled}>
               <AddIcon />
             </IconButton>
           </Grid>
