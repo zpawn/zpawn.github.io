@@ -9,7 +9,7 @@ import Fab from "@material-ui/core/Fab";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 
-import { WordService } from "../../store/word";
+import { WordsService } from "../../store/words";
 import { styles, initForm } from "./index";
 import NewTranslations from "./NewTranslations";
 import Alert from "../UI/Alert";
@@ -90,7 +90,7 @@ const New = compose(
         }
         onDisableForm(true);
 
-        WordService.create(newWord, newTranslations)
+        WordsService.save(newWord, newTranslations)
           .then(() => {
             onCreatedSuccess();
             onEnableForm();

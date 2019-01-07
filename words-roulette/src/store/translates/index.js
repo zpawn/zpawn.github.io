@@ -1,1 +1,0 @@
-export { TranslatesService } from "./service";

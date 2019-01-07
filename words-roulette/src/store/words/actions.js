@@ -1,7 +1,7 @@
 import _has from "lodash/has";
 
 import { WordsService } from "./index";
-import { TranslatesService } from "../translates";
+import { TranslationsService } from "../translations";
 
 ////
 
@@ -29,18 +29,18 @@ const wordsFetchFail = () => ({
 const wordsFetch = () => async dispatch => {
   dispatch(wordsFetchStart());
 
-  const wordsPromise = await WordsService.getAll();
-  const translatesPromise = await TranslatesService.getAll();
+  const wordsPromise = await WordsService.findAll();
+  const translationsPromise = await TranslationsService.findAll();
 
-  Promise.all([wordsPromise, translatesPromise])
-    .then(([words, translates]) => {
+  Promise.all([wordsPromise, translationsPromise])
+    .then(([words, translations]) => {
       const data = {};
-      if (!words.length && !translates.length) {
+      if (!words.length && !translations.length) {
         return;
       }
 
       words.forEach(word => (data[word.id] = word));
-      translates.forEach(({ wordId, ...t }) => {
+      translations.forEach(({ wordId, ...t }) => {
         if (!_has(data, wordId)) {
           return;
         }

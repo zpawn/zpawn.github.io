@@ -1,14 +1,27 @@
-import { Firebase } from "../../core/Firebase";
+import { Firebase, parseResponseItems } from "../../core/Firebase";
 
 ////
 
-export class TranslateService {
+class TranslationsService {
+  /**
+   * @return {Promise<Array | never>}
+   */
+  static async findAll() {
+    try {
+      return Firebase.collection("translations")
+        .get()
+        .then(res => parseResponseItems(res));
+    } catch (e) {
+      throw new Error("Fetched translates fail");
+    }
+  }
+
   /**
    * @param {String} wordId
    * @param {String} newTranslate
    * @return {Promise<firebase.firestore.DocumentReference | Error>}
    */
-  static async create(wordId, newTranslate) {
+  static async save(wordId, newTranslate) {
     return Firebase.collection("translations")
       .add({
         wordId: wordId,
@@ -18,7 +31,7 @@ export class TranslateService {
       .catch(() => new Error("Could not create translation"));
   }
 
-  static async createMultiple(wordId, newTranslates) {
+  static async saveAll(wordId, newTranslates) {
     try {
       const batch = Firebase.batch();
 
@@ -40,3 +53,5 @@ export class TranslateService {
     }
   }
 }
+
+export { TranslationsService };
