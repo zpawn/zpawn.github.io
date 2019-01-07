@@ -6,6 +6,7 @@ import Auth from "./Auth";
 import New from "./New";
 import Words from "./Words";
 import RouletteSettings from "./RouletteSettings";
+import Roulette from "./Roulette";
 
 ////
 
@@ -15,6 +16,7 @@ const router = () => (
     <Route path="/new" component={New} />
     <Route path="/words" component={Words} />
     <Route path="/roulette/settings" component={RouletteSettings} />
+    <Route path="/roulette" component={Roulette} />
     <Route path="/" exact component={Dashboard} />
     <Redirect to="/" />
   </Switch>

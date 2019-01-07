@@ -1,0 +1,2 @@
+export const QUESTION_TYPE_WORD = 0;
+export const QUESTION_TYPE_TRANSLATION = 1;
