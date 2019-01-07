@@ -1,21 +1,9 @@
 import _isArray from "lodash/isArray";
 
-import { Firebase } from "../../core/Firebase";
+import { Firebase, parseResponseItems } from "../../core/Firebase";
 import { TranslateService } from "../translate";
 
 ////
-
-const parseResponse = res => {
-  let data = [];
-  res.forEach(item => {
-    data.push({
-      id: item.id,
-      ...item.data()
-    });
-  });
-
-  return data;
-};
 
 export class WordService {
   /**
@@ -47,7 +35,7 @@ export class WordService {
           id: createdWord.id,
           name: newWord
         },
-        translations: parseResponse(createdTranslate)
+        translations: parseResponseItems(createdTranslate)
       });
     } catch (e) {
       throw new Error("Could not create translate/word");
