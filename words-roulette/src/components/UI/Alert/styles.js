@@ -9,16 +9,16 @@ export const styles = theme => ({
   },
 
   success: {
-    backgroundColor: green[600]
+    border: `2px solid ${green[600]}`
   },
   error: {
-    backgroundColor: theme.palette.error.dark
+    border: `2px solid ${theme.palette.error.dark}`
   },
   info: {
-    backgroundColor: theme.palette.primary.dark
+    border: `2px solid ${theme.palette.primary.dark}`
   },
   warning: {
-    backgroundColor: amber[700]
+    border: `2px solid ${amber[700]}`
   },
   default: {}
 });

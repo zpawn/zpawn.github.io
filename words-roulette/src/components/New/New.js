@@ -1,23 +1,25 @@
 import React from "react";
-import { compose, withHandlers, withStateHandlers } from "recompose";
+import {
+  compose,
+  setDisplayName,
+  withHandlers,
+  withStateHandlers
+} from "recompose";
 import _cloneDeep from "lodash/cloneDeep";
 
-import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import Fab from "@material-ui/core/Fab";
-import IconButton from "@material-ui/core/IconButton";
-import AddIcon from "@material-ui/icons/Add";
 
 import { WordsService } from "../../store/words";
-import { styles, initForm } from "./index";
+import { initForm } from "./index";
 import NewTranslations from "./NewTranslations";
+import AddNewTranslation from "./AddNewTranslation";
+import Submit from "./Submit";
 import Alert from "../UI/Alert";
 
 ////
 
 const New = compose(
-  withStyles(styles),
+  setDisplayName("New"),
 
   withStateHandlers(
     {
@@ -133,46 +135,14 @@ const New = compose(
 
         <NewTranslations translations={newTranslations} disabled={disabled} />
 
-        <Grid container spacing={8} alignItems="flex-end">
-          <Grid item xs>
-            <TextField
-              fullWidth
-              id="addNewTranslations"
-              margin="normal"
-              label="Translation"
-              name="newTranslation"
-              value={newTranslation}
-              onChange={onChange}
-              disabled={disabled}
-            />
-          </Grid>
+        <AddNewTranslation
+          newTranslation={newTranslation}
+          onChange={onChange}
+          disabled={disabled}
+          onAddTranslations={onAddTranslations}
+        />
 
-          <Grid item>
-            <IconButton onClick={onAddTranslations} disabled={disabled}>
-              <AddIcon />
-            </IconButton>
-          </Grid>
-        </Grid>
-
-        <Grid
-          container
-          spacing={8}
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-          <Fab
-            className={classes.button}
-            variant="extended"
-            aria-label="Submit"
-            color="primary"
-            onClick={onSubmit}
-            type="submit"
-            disabled={disabled}
-          >
-            Submit
-          </Fab>
-        </Grid>
+        <Submit onSubmit={onSubmit} disabled={disabled} />
       </form>
 
       <Alert
@@ -183,6 +153,7 @@ const New = compose(
             ? "Translation Created Successfully"
             : "Translation Created Fail"
         }
+        variant={isSuccess ? "success" : "error"}
       />
     </>
   )
