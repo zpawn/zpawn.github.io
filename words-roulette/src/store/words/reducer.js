@@ -3,34 +3,30 @@ import { actionTypes } from "./index";
 ////
 
 const INIT_STATE = {
+  success: false,
+  loading: false,
+  items: {},
+  isReady: false
+};
+
+const wordsFetchStart = state => ({
+  ...state,
+  loading: true,
+  success: false
+});
+
+const wordsFetchSuccess = (state, { words }) => ({
+  ...state,
   success: true,
   loading: false,
-  items: {}
-};
+  items: words
+});
 
-const wordsFetchStart = state => {
-  return {
-    ...state,
-    loading: true
-  };
-};
-
-const wordsFetchSuccess = (state, { words }) => {
-  return {
-    ...state,
-    success: true,
-    loading: false,
-    items: words
-  };
-};
-
-const wordsFetchFail = state => {
-  return {
-    ...state,
-    loading: false,
-    success: false
-  };
-};
+const wordsFetchFail = state => ({
+  ...state,
+  loading: false,
+  success: false
+});
 
 ////
 
