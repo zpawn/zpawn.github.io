@@ -1,13 +1,14 @@
 import _merge from "lodash/merge";
 
-import { getRandomIds } from "./index";
+import { getSteps, getRandomWordIds } from "./index";
 import { rouletteSettingsChange } from "../rouletteSettings";
 
 ////
 
 const actionTypes = {
   ROULETTE_INIT: "ROULETTE_INIT",
-  ROULETTE_CHANGE_STEP: "ROULETTE_CHANGE_STEP"
+  ROULETTE_CHANGE_STEP: "ROULETTE_CHANGE_STEP",
+  ROULETTE_CHANGE_ANSWER: "ROULETTE_CHANGE_ANSWER"
 };
 
 const rouletteInitialized = ({ steps }) => ({
@@ -20,6 +21,12 @@ const rouletteChangeStep = step => ({
   step
 });
 
+const rouletteChangeAnswer = (key, answer) => ({
+  type: actionTypes.ROULETTE_CHANGE_ANSWER,
+  key,
+  answer
+});
+
 ////
 
 const rouletteInit = newSettings => (dispatch, getState) => {
@@ -30,15 +37,17 @@ const rouletteInit = newSettings => (dispatch, getState) => {
 
   const wordIds = Object.keys(items);
   const settings = _merge(defaultSettings, newSettings);
-  const words = getRandomIds(wordIds, settings);
+  const words = getRandomWordIds(wordIds, settings);
 
   if (words.length < settings.count) {
     dispatch(rouletteSettingsChange("count", words.length));
   }
 
-  dispatch(rouletteInitialized({}));
+  const steps = getSteps(words);
+
+  dispatch(rouletteInitialized({ steps }));
 };
 
 ////
 
-export { actionTypes, rouletteInit, rouletteChangeStep };
+export { actionTypes, rouletteInit, rouletteChangeStep, rouletteChangeAnswer };

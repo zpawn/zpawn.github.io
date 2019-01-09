@@ -14,7 +14,7 @@ export const initStateField = {
  * @param {Object} settings
  * @return {Array}
  */
-export const getRandomIds = (ids, settings) => {
+export const getRandomWordIds = (ids, settings) => {
   let result;
 
   if (settings.count >= ids.length) {
@@ -33,3 +33,13 @@ export const getRandomIds = (ids, settings) => {
 
   return Array.from(result);
 };
+
+/**
+ * @param {Array} wordIds
+ * @return {Array}
+ */
+export const getSteps = wordIds =>
+  wordIds.map(id => ({
+    ...initStateField,
+    wordId: id
+  }));

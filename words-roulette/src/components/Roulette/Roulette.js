@@ -9,12 +9,12 @@ import {
 } from "recompose";
 
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { rouletteInit } from "../../store/roulette";
 import { styles } from "./index";
+import QA from "./QA";
 import Controls from "./Controls";
 import Navigation from "./Navigation";
 
@@ -44,30 +44,17 @@ const roulette = compose(
     mapDispatchToProps
   ),
 
-  withPropsOnChange(["isSuccessWords"], ({ onInit }) => onInit())
+  withPropsOnChange(
+    ["isSuccessWords"],
+    ({ onInit, isSuccessWords }) => isSuccessWords && onInit()
+  )
 )(({ isSuccessWords }) => {
   return !isSuccessWords ? (
     <CircularProgress color="secondary" />
   ) : (
     <>
-      <Typography align="center" variant="h3">
-        roulette
-      </Typography>
-
-      <TextField
-        autoFocus
-        fullWidth
-        id="answer"
-        label="Your answer"
-        margin="normal"
-        name="answer"
-        // value={newWord}
-        // onChange={onChange}
-        // disabled={disabled}
-      />
-
+      <QA />
       <Navigation />
-
       <Controls />
     </>
   );
