@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { compose } from "recompose";
 
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepButton from "@material-ui/core/StepButton";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
-import { createArray } from "../../../core/Utilitiy";
-import { rouletteChangeStep } from "../../../store/roulette";
+import { styles } from "./index";
 
 ////
 
@@ -16,29 +16,25 @@ const mapStateToProps = state => ({
   count: state.rouletteSettings.count
 });
 
-const mapDispatchToProps = dispatch => ({
-  onChangeStep: step => dispatch(rouletteChangeStep(step))
-});
-
 ////
 
-const navigation = ({ activeStep, count, onChangeStep }) => (
-  <Stepper alternativeLabel nonLinear>
-    {createArray(count).map(step => (
-      <Step key={step} active={step === activeStep}>
-        <StepButton onClick={() => onChangeStep(step)} completed={false} />
-      </Step>
-    ))}
-  </Stepper>
+const navigation = ({ classes, activeStep, count }) => (
+  <Paper variant="progress" position="static" className={classes.root}>
+    <LinearProgress
+      className={classes.progress}
+      variant="determinate"
+      value={Math.ceil((activeStep / (count - 1)) * 100)}
+    />
+  </Paper>
 );
 
 navigation.propTypes = {
   count: PropTypes.number,
   activeStep: PropTypes.number,
-  onChangeStep: PropTypes.func
+  classes: PropTypes.object
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(mapStateToProps),
+  withStyles(styles)
 )(navigation);
