@@ -6,6 +6,7 @@ import Auth from "./Auth";
 import New from "./New";
 import Words from "./Words";
 import RouletteSettings from "./RouletteSettings";
+import RouletteResult from "./RouletteResult";
 import Roulette from "./Roulette";
 
 ////
@@ -16,6 +17,7 @@ const router = () => (
     <Route path="/new" component={New} />
     <Route path="/words" component={Words} />
     <Route path="/roulette/settings" component={RouletteSettings} />
+    <Route path="/roulette/result" component={RouletteResult} />
     <Route path="/roulette" component={Roulette} />
     <Route path="/" exact component={Dashboard} />
     <Redirect to="/" />

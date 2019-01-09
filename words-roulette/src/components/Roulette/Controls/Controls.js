@@ -10,6 +10,7 @@ import DoneIcon from "@material-ui/icons/Done";
 import PrevIcon from "@material-ui/icons/ChevronLeft";
 import NextIcon from "@material-ui/icons/ChevronRight";
 
+import history from "../../../history";
 import { rouletteChangeStep } from "../../../store/roulette";
 import { styles } from "./index";
 
@@ -51,9 +52,11 @@ const controls = compose(
       if (update < count) {
         onChangeStep(update);
       }
-    }
+    },
+
+    onFinish: () => () => history.push("/roulette/result")
   })
-)(({ classes, activeStep, onPrevStep, onNextStep }) => (
+)(({ classes, activeStep, onPrevStep, onNextStep, onFinish }) => (
   <Typography align="center">
     <Fab
       variant="extended"
@@ -71,6 +74,7 @@ const controls = compose(
       aria-label="Finish"
       color="primary"
       type="button"
+      onClick={onFinish}
     >
       <DoneIcon className={classes.iconAnswer} />
       Finish
