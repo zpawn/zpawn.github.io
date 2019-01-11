@@ -1,51 +1,19 @@
-import React from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import _isEmpty from "lodash/isEmpty";
-import _has from "lodash/has";
+import React, { Fragment } from "react";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import Table from "@material-ui/core/Table";
+
+import WordsHead from "./WordsHead";
+import WordsRow from "./WordsRow";
 
 ////
 
-const mapStateToProps = state => ({
-  words: state.words.items
-});
-
-////
-
-const words = ({ words }) => (
-  <List>
-    {_isEmpty(words) ? (
-      <ListItem>
-        <ListItemText primary="Empty" />
-      </ListItem>
-    ) : (
-      Object.keys(words).map(wordId => {
-        let t = [];
-        if (_has(words[wordId], "translations")) {
-          t = Object.keys(words[wordId].translations).map(
-            tId => words[wordId].translations[tId].translation
-          );
-        }
-
-        return (
-          <ListItem key={wordId}>
-            <ListItemText
-              primary={words[wordId].name}
-              secondary={t.join(", ")}
-            />
-          </ListItem>
-        );
-      })
-    )}
-  </List>
+const words = () => (
+  <Fragment>
+    <Table padding="none">
+      <WordsHead />
+      <WordsRow />
+    </Table>
+  </Fragment>
 );
 
-words.propTypes = {
-  words: PropTypes.object.isRequired
-};
-
-export default connect(mapStateToProps)(words);
+export default words;
