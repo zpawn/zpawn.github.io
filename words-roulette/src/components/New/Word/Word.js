@@ -9,10 +9,10 @@ const word = ({ word, onChange, disabled }) => (
   <TextField
     autoFocus
     fullWidth
-    id="addNewWord"
-    label="New Word"
+    id="Word"
+    label="Word"
     margin="normal"
-    name="newWord"
+    name="word"
     value={word}
     onChange={onChange}
     disabled={disabled}

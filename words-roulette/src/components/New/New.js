@@ -7,6 +7,8 @@ import {
 } from "recompose";
 import _cloneDeep from "lodash/cloneDeep";
 
+import Typography from "@material-ui/core/Typography";
+
 import { WordsService } from "../../store/words";
 import { initForm } from "./index";
 import Word from "./Word";
@@ -120,6 +122,10 @@ const New = compose(
   }) => (
     <>
       <form noValidate autoComplete="off">
+        <Typography align="center" variant="h4">
+          New Word
+        </Typography>
+
         <Word word={newWord} onChange={onChange} disabled={disabled} />
 
         <Translations translations={newTranslations} disabled={disabled} />
