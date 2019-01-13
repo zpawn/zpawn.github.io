@@ -4,6 +4,7 @@ import Table from "@material-ui/core/Table";
 
 import WordsHead from "./WordsHead";
 import WordsRow from "./WordsRow";
+import Pagination from "./Pagination";
 
 ////
 
@@ -12,6 +13,7 @@ const words = () => (
     <Table padding="none">
       <WordsHead />
       <WordsRow />
+      <Pagination />
     </Table>
   </Fragment>
 );
