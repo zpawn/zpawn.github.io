@@ -1,17 +1,16 @@
 import React from "react";
 import {
   compose,
-  setDisplayName,
   withHandlers,
+  setDisplayName,
   withStateHandlers
 } from "recompose";
 import _cloneDeep from "lodash/cloneDeep";
 
-import TextField from "@material-ui/core/TextField";
-
 import { WordsService } from "../../store/words";
 import { initForm } from "./index";
-import NewTranslations from "./NewTranslations";
+import Word from "./Word";
+import Translations from "./Translations";
 import AddNewTranslation from "./AddNewTranslation";
 import Submit from "./Submit";
 import Alert from "../UI/Alert";
@@ -121,19 +120,9 @@ const New = compose(
   }) => (
     <>
       <form noValidate autoComplete="off">
-        <TextField
-          autoFocus
-          fullWidth
-          id="addNewWord"
-          label="New Word"
-          margin="normal"
-          name="newWord"
-          value={newWord}
-          onChange={onChange}
-          disabled={disabled}
-        />
+        <Word word={newWord} onChange={onChange} disabled={disabled} />
 
-        <NewTranslations translations={newTranslations} disabled={disabled} />
+        <Translations translations={newTranslations} disabled={disabled} />
 
         <AddNewTranslation
           newTranslation={newTranslation}
