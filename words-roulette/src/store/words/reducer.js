@@ -1,4 +1,5 @@
 import _cloneDeep from "lodash/cloneDeep";
+import _omit from "lodash/omit";
 
 import { actionTypes } from "./index";
 
@@ -42,6 +43,12 @@ const wordSaveSuccess = (state, { word }) => {
   return updated;
 };
 
+const wordRemoveSuccess = (state, { wordId }) => {
+  const updated = _cloneDeep(state);
+  updated.items = _omit(updated.items, [wordId]);
+  return updated;
+};
+
 ////
 
 export const reducer = (state = INIT_STATE, action) => {
@@ -56,6 +63,8 @@ export const reducer = (state = INIT_STATE, action) => {
       return wordUpdateSuccess(state, action);
     case actionTypes.WORD_SAVE_SUCCESS:
       return wordSaveSuccess(state, action);
+    case actionTypes.WORD_REMOVE_SUCCESS:
+      return wordRemoveSuccess(state, action);
     default:
       return state;
   }

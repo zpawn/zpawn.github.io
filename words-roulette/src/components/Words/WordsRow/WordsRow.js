@@ -10,6 +10,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 
+import { wordRemove } from "../../../store/words";
 import { styles } from "./index";
 import DottedMenu from "./DottedMenu";
 
@@ -19,9 +20,13 @@ const mapStateToProps = state => ({
   words: state.words.items
 });
 
+const mapDispatchToProps = dispatch => ({
+  onWordRemove: id => dispatch(wordRemove(id))
+});
+
 ////
 
-const wordsRow = ({ words }) => (
+const wordsRow = ({ words, onWordRemove }) => (
   <TableBody>
     {_isEmpty(words) ? (
       <TableRow>
@@ -45,7 +50,7 @@ const wordsRow = ({ words }) => (
             <TableCell>{t.join(", ")}</TableCell>
 
             <TableCell>
-              <DottedMenu wordId={wordId} />
+              <DottedMenu wordId={wordId} onWordRemove={onWordRemove} />
             </TableCell>
           </TableRow>
         );
@@ -55,10 +60,14 @@ const wordsRow = ({ words }) => (
 );
 
 wordsRow.propTypes = {
-  words: PropTypes.object.isRequired
+  words: PropTypes.object.isRequired,
+  onWordRemove: PropTypes.func.isRequired
 };
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(wordsRow);

@@ -10,7 +10,8 @@ const actionTypes = {
   WORDS_FETCH_SUCCESS: "WORDS_FETCH_SUCCESS",
   WORDS_FETCH_FAIL: "WORDS_FETCH_FAIL",
   WORD_UPDATE_SUCCESS: "WORD_UPDATE_SUCCESS",
-  WORD_SAVE_SUCCESS: "WORD_SAVE_SUCCESS"
+  WORD_SAVE_SUCCESS: "WORD_SAVE_SUCCESS",
+  WORD_REMOVE_SUCCESS: "WORD_REMOVE_SUCCESS"
 };
 
 const wordsFetchStart = () => ({
@@ -34,6 +35,11 @@ const wordUpdateSuccess = word => ({
 const wordSaveSuccess = word => ({
   type: actionTypes.WORD_SAVE_SUCCESS,
   word
+});
+
+const wordRemoveSuccess = wordId => ({
+  type: actionTypes.WORD_REMOVE_SUCCESS,
+  wordId
 });
 
 ////
@@ -89,6 +95,31 @@ const wordSave = (newWord, newTranslations) => dispatch => {
     });
 };
 
+const wordRemove = wordId => (dispatch, getState) => {
+  const {
+    words: { items }
+  } = getState();
+
+  if (!_has(items, wordId)) {
+    // ToDo: show error Alert with message: Doesn't isset word
+    return;
+  }
+
+  const translationIds = Object.keys(items[wordId].translations);
+
+  const wordPromise = WordsService.remove(wordId);
+  const translationsPromise = TranslationsService.remove(translationIds);
+
+  Promise.all([wordPromise, translationsPromise])
+    .then(() => {
+      dispatch(wordRemoveSuccess(wordId));
+      // ToDo: show success Alert
+    })
+    .catch(err => {
+      // ToDo: show error Alert
+    });
+};
+
 ////
 
-export { wordSave, wordsFetch, wordUpdate, actionTypes };
+export { wordSave, wordsFetch, wordUpdate, wordRemove, actionTypes };

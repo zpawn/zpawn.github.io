@@ -1,3 +1,5 @@
+import _isString from "lodash/isString";
+
 import { Firebase, parseResponseItems } from "../../core/Firebase";
 
 ////
@@ -31,6 +33,11 @@ class TranslationsService {
       .catch(() => new Error("Could not create translation"));
   }
 
+  /**
+   * @param {String} wordId
+   * @param {Array} newTranslates
+   * @return {Promise<firebase.firestore.QuerySnapshot | never>}
+   */
   static async saveAll(wordId, newTranslates) {
     try {
       const batch = Firebase.batch();
@@ -50,6 +57,30 @@ class TranslationsService {
       );
     } catch (e) {
       throw new Error("Could not create translations");
+    }
+  }
+
+  /**
+   * @param {String|Array} id
+   * @return {Promise<void>}
+   */
+  static async remove(id) {
+    let ids = id;
+
+    if (_isString(id)) {
+      ids = [id];
+    }
+
+    try {
+      const batch = Firebase.batch();
+
+      ids.forEach(id => {
+        batch.delete(Firebase.collection("translations").doc(id));
+      });
+
+      return batch.commit();
+    } catch (e) {
+      throw new Error(e.message || "There are Translations remove failure");
     }
   }
 }

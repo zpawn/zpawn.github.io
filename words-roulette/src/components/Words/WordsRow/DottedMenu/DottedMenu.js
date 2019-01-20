@@ -20,7 +20,8 @@ const dottedMenu = compose(
   setDisplayName("WordsDottedMenu"),
 
   setPropTypes({
-    wordId: PropTypes.string.isRequired
+    wordId: PropTypes.string.isRequired,
+    onWordRemove: PropTypes.func.isRequired
   }),
 
   withState("anchorEl", "anchorElHandler", null),
@@ -29,8 +30,15 @@ const dottedMenu = compose(
     onClick: ({ anchorElHandler }) => e => anchorElHandler(e.currentTarget),
 
     onClose: ({ anchorElHandler }) => () => anchorElHandler(null)
+  }),
+
+  withHandlers({
+    onRemove: ({ wordId, onWordRemove, onClose }) => () => {
+      onWordRemove(wordId);
+      onClose();
+    }
   })
-)(({ wordId, anchorEl, onClick, onClose }) => (
+)(({ wordId, anchorEl, onClick, onClose, onRemove }) => (
   <>
     <IconButton
       aria-owns={anchorEl ? "dottedMenu" : undefined}
@@ -49,7 +57,7 @@ const dottedMenu = compose(
       <MenuItem onClick={onClose} component={NavLink} to={`/words/${wordId}`}>
         Edit
       </MenuItem>
-      <MenuItem onClick={onClose}>Remove</MenuItem>
+      <MenuItem onClick={onRemove}>Remove</MenuItem>
     </Menu>
   </>
 ));

@@ -92,6 +92,20 @@ class WordsService {
       throw new Error(e.message || "Firestore error");
     }
   }
+
+  /**
+   * @param {String} id
+   * @return {Promise<void>}
+   */
+  static async remove(id) {
+    try {
+      return Firebase.collection("words")
+        .doc(id)
+        .delete();
+    } catch (e) {
+      throw new Error(e.message || "There are Word remove failure");
+    }
+  }
 }
 
 export { WordsService };
