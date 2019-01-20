@@ -5,24 +5,29 @@ import TextField from "@material-ui/core/TextField";
 
 ////
 
-const word = ({ word, onChange, disabled }) => (
+const word = ({ name, word, onChange, disabled }) => (
   <TextField
     autoFocus
     fullWidth
     id="Word"
     label="Word"
     margin="normal"
-    name="word"
+    name={name}
     value={word}
     onChange={onChange}
     disabled={disabled}
   />
 );
 
+word.defaultProps = {
+  disabled: false
+};
+
 word.propTypes = {
+  name: PropTypes.string.isRequired,
   word: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired
+  disabled: PropTypes.bool
 };
 
 export default word;

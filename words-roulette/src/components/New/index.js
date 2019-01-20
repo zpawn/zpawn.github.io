@@ -9,9 +9,9 @@ import AddNewTranslation from "./AddNewTranslation";
 
 export {
   New as default,
+  Word,
   styles,
   initForm,
-  Word,
   Translations,
   AddNewTranslation
 };

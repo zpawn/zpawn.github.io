@@ -1,3 +1,5 @@
+import _cloneDeep from "lodash/cloneDeep";
+
 import { actionTypes } from "./index";
 
 ////
@@ -28,6 +30,12 @@ const wordsFetchFail = state => ({
   success: false
 });
 
+const wordUpdateSuccess = (state, { word }) => {
+  const updated = _cloneDeep(state);
+  updated.items[word.id] = word;
+  return updated;
+};
+
 ////
 
 export const reducer = (state = INIT_STATE, action) => {
@@ -38,6 +46,8 @@ export const reducer = (state = INIT_STATE, action) => {
       return wordsFetchSuccess(state, action);
     case actionTypes.WORDS_FETCH_FAIL:
       return wordsFetchFail(state, action);
+    case actionTypes.WORD_UPDATE_SUCCESS:
+      return wordUpdateSuccess(state, action);
     default:
       return state;
   }

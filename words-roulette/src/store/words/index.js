@@ -1,4 +1,4 @@
-export { wordsFetch, actionTypes } from "./actions";
+export { wordsFetch, wordUpdate, actionTypes } from "./actions";
 
 export { WordsService } from "./service";
 

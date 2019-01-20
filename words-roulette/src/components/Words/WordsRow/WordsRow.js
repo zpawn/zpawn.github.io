@@ -45,7 +45,7 @@ const wordsRow = ({ words }) => (
             <TableCell>{t.join(", ")}</TableCell>
 
             <TableCell>
-              <DottedMenu />
+              <DottedMenu wordId={wordId} />
             </TableCell>
           </TableRow>
         );

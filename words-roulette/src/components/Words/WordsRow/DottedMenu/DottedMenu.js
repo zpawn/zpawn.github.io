@@ -1,5 +1,13 @@
 import React from "react";
-import { compose, withState, withHandlers, setDisplayName } from "recompose";
+import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+import {
+  compose,
+  withState,
+  withHandlers,
+  setPropTypes,
+  setDisplayName
+} from "recompose";
 
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -9,7 +17,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 ////
 
 const dottedMenu = compose(
-  setDisplayName("Words/DottedMenu"),
+  setDisplayName("WordsDottedMenu"),
+
+  setPropTypes({
+    wordId: PropTypes.string.isRequired
+  }),
 
   withState("anchorEl", "anchorElHandler", null),
 
@@ -18,7 +30,7 @@ const dottedMenu = compose(
 
     onClose: ({ anchorElHandler }) => () => anchorElHandler(null)
   })
-)(({ anchorEl, onClick, onClose }) => (
+)(({ wordId, anchorEl, onClick, onClose }) => (
   <>
     <IconButton
       aria-owns={anchorEl ? "dottedMenu" : undefined}
@@ -34,7 +46,9 @@ const dottedMenu = compose(
       open={Boolean(anchorEl)}
       onClose={onClose}
     >
-      <MenuItem onClick={onClose}>Edit</MenuItem>
+      <MenuItem onClick={onClose} component={NavLink} to={`/words/${wordId}`}>
+        Edit
+      </MenuItem>
       <MenuItem onClick={onClose}>Remove</MenuItem>
     </Menu>
   </>

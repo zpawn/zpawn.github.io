@@ -8,7 +8,8 @@ import { TranslationsService } from "../translations";
 const actionTypes = {
   WORDS_FETCH_START: "WORDS_FETCH_START",
   WORDS_FETCH_SUCCESS: "WORDS_FETCH_SUCCESS",
-  WORDS_FETCH_FAIL: "WORDS_FETCH_FAIL"
+  WORDS_FETCH_FAIL: "WORDS_FETCH_FAIL",
+  WORD_UPDATE_SUCCESS: "WORD_UPDATE_SUCCESS"
 };
 
 const wordsFetchStart = () => ({
@@ -22,6 +23,11 @@ const wordsFetchSuccess = words => ({
 
 const wordsFetchFail = () => ({
   type: actionTypes.WORDS_FETCH_FAIL
+});
+
+const wordUpdateSuccess = word => ({
+  type: actionTypes.WORD_UPDATE_SUCCESS,
+  word
 });
 
 ////
@@ -57,6 +63,14 @@ const wordsFetch = () => async dispatch => {
     .catch(() => dispatch(wordsFetchFail()));
 };
 
+const wordUpdate = word => async dispatch => {
+  WordsService.update(word)
+    .then(() => dispatch(wordUpdateSuccess(word)))
+    .catch(err => {
+      // ToDo: handle this error (Show alert)
+    });
+};
+
 ////
 
-export { wordsFetch, actionTypes };
+export { wordsFetch, wordUpdate, actionTypes };

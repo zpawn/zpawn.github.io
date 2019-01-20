@@ -1,6 +1,7 @@
 import React from "react";
 import {
   compose,
+  withProps,
   withHandlers,
   setDisplayName,
   withStateHandlers
@@ -21,6 +22,10 @@ import Alert from "../UI/Alert";
 
 const New = compose(
   setDisplayName("New"),
+
+  withProps({
+    name: "newWord"
+  }),
 
   withStateHandlers(
     {
@@ -109,6 +114,7 @@ const New = compose(
   })
 )(
   ({
+    name,
     classes,
     disabled,
     onChange,
@@ -126,7 +132,12 @@ const New = compose(
           New Word
         </Typography>
 
-        <Word word={newWord} onChange={onChange} disabled={disabled} />
+        <Word
+          name={name}
+          word={newWord}
+          onChange={onChange}
+          disabled={disabled}
+        />
 
         <Translations translations={newTranslations} disabled={disabled} />
 
