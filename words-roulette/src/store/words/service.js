@@ -23,7 +23,7 @@ class WordsService {
   /**
    * @param {String} newWord
    * @param {Array} newTranslations
-   * @return {Promise<{word: {String}, translate: {Array}}>}
+   * @return {Promise<{Object}>}
    */
   static async save(newWord, newTranslations) {
     if (!_isArray(newTranslations)) {
@@ -49,9 +49,9 @@ class WordsService {
       return Promise.resolve({
         word: {
           id: createdWord.id,
-          name: newWord
-        },
-        translations: parseResponseItems(createdTranslations)
+          name: newWord,
+          translations: parseResponseItems(createdTranslations)
+        }
       });
     } catch (e) {
       throw new Error("Could not create translation/word");

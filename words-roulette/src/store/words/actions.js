@@ -9,7 +9,8 @@ const actionTypes = {
   WORDS_FETCH_START: "WORDS_FETCH_START",
   WORDS_FETCH_SUCCESS: "WORDS_FETCH_SUCCESS",
   WORDS_FETCH_FAIL: "WORDS_FETCH_FAIL",
-  WORD_UPDATE_SUCCESS: "WORD_UPDATE_SUCCESS"
+  WORD_UPDATE_SUCCESS: "WORD_UPDATE_SUCCESS",
+  WORD_SAVE_SUCCESS: "WORD_SAVE_SUCCESS"
 };
 
 const wordsFetchStart = () => ({
@@ -27,6 +28,11 @@ const wordsFetchFail = () => ({
 
 const wordUpdateSuccess = word => ({
   type: actionTypes.WORD_UPDATE_SUCCESS,
+  word
+});
+
+const wordSaveSuccess = word => ({
+  type: actionTypes.WORD_SAVE_SUCCESS,
   word
 });
 
@@ -71,6 +77,18 @@ const wordUpdate = word => async dispatch => {
     });
 };
 
+const wordSave = (newWord, newTranslations) => dispatch => {
+  return WordsService.save(newWord, newTranslations)
+    .then(({ word }) => {
+      dispatch(wordSaveSuccess(word));
+      // ToDo: show success Alert
+    })
+    .catch(err => {
+      // ToDo: show error Alert
+      throw new Error(err.message || "Word created failure");
+    });
+};
+
 ////
 
-export { wordsFetch, wordUpdate, actionTypes };
+export { wordSave, wordsFetch, wordUpdate, actionTypes };
