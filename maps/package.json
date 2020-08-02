@@ -22,7 +22,7 @@
     "yargs": "^11.0.0"
   },
   "dependencies": {
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "jquery-placepicker": "github:benignware/jquery-placepicker",
     "normalize.css": "^8.0.0"
   }
