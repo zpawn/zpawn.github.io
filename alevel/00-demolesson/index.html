@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>A-level. Демо-урок.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+            font-size: 20px;
+        }
+        .shower pre,
+        .shower code {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level</h1>
+        <p>Тема: Область видимости и замыкания.</p>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2 class="next">Замыкания</h2>
+        <img class="cover w" src="./assets/cover-01.jpg" alt="cover closure">
+        <style>
+            #cover h2 {
+                color: var(--color-red);
+                font-size: 70px;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Задача: что выведет <i>console.log</i></h2>
+        <pre>
+            <code>let name = 'John';</code>
+            <code>&nbsp;</code>
+            <code>function sayHi() {</code>
+            <code>    console.log('Hi, ' + name);</code>
+            <code>}</code>
+            <code>&nbsp;</code>
+            <code>name = 'Pete';</code>
+            <code>&nbsp;</code>
+            <code>sayHi(); <span style="color: #4caf50"><-----</span></code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Задача: что выведет <i>console.log</i></h2>
+        <pre>
+            <code>function makeWorker() {</code>
+            <code>    let name = 'Pete';</code>
+            <code>&nbsp;</code>
+            <code>    return function() {</code>
+            <code>        console.log(name);</code>
+            <code>    };</code>
+            <code>}</code>
+            <code>&nbsp;</code>
+            <code>let name = 'John';</code>
+            <code>&nbsp;</code>
+            <code>let work = makeWorker();</code>
+            <code>&nbsp;</code>
+            <code>work(); // <span style="color: #4caf50"><-----</span></code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Лексическое Окружение</h2>
+        <p>
+            В JavaScript у каждой выполняемой функции, блока кода и скрипта есть связанный с ними внутренний (скрытый)
+            объект, называемый <i>лексическим окружением</i> LexicalEnvironment.
+        </p>
+        <p>Объект лексического окружения состоит из двух частей:</p>
+        <ol>
+            <li>
+                Environment Record – объект, в котором хранятся все локальные переменные.
+            </li>
+            <li>
+                Ссылка на <i>внешнее лексическое окружение</i> – т.е. то, которое соответствует коду снаружи (снаружи от
+                текущих фигурных скобок).
+            </li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Пример:</h2>
+        <img src="./assets/01-lexical-environment-global.svg" alt="Глобальное лексическое окружение">
+        <p>
+            В этом коде только одно лексическое окружение - это, так называемое, <i>глобальное лексическое окружение</i>,
+            связанное со всем скриптом.
+        </p>
+        <p>
+            На картинке выше прямоугольник означает Environment Record (хранилище переменных), а стрелка означает
+            ссылку на внешнее окружение. У глобального лексического окружения нет внешнего окружения, так что она
+            указывает на <code>null</code>.
+        </p>
+    </section>
+
+    <section class="slide">
+        <img src="./assets/02-lexical-environment-global.svg" alt="Переменная в лексическом окружении">
+        <p>
+            Прямоугольники с правой стороны демонстрируют, как глобальное лексическое окружение изменяется в процессе
+            выполнения кода:
+        </p>
+        <ol>
+            <li>В начале скрипта лексическое окружение пустое.</li>
+            <li>
+                Появляется определение переменной <code>let phrase</code>. У неё нет присвоенного значения, поэтому
+                присваивается <code>undefined</code>.
+            </li>
+            <li>Переменной <code>phrase</code> присваивается значение.</li>
+            <li>Переменная <code>phrase</code> меняет значение.</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Function Declaration</h2>
+        <p>
+            В отличие от переменных, объявленных с помощью <code>let</code>, они полностью инициализируются не тогда,
+            когда выполнение доходит до них, а раньше, когда создаётся лексическое окружение.
+        </p>
+    </section>
+
+    <section class="slide">
+        <img src="./assets/03-lexical-environment-function-declaration.svg" alt="Function Declaration, дексическая область видимости">
+        <p>
+            Когда мы хотим получить доступ к переменной – сначала происходит поиск во внутреннем лексическом окружении,
+            затем во внешнем, затем в следующем и так далее, до глобального.
+        </p>
+        <p>
+            Функция получает текущее значение внешних переменных, то есть, их последнее значение
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Вложенные функции</h2>
+        <p>
+            Функция называется <i>вложенной</i>, когда она создаётся внутри другой функции.
+        </p>
+
+        <pre>
+            <code>function sayHiBye(firstName, lastName) {</code>
+            <code>&nbsp;</code>
+            <code>    function getFullName() {</code>
+            <code>        return firstName + ' ' + lastName;</code>
+            <code>    }</code>
+            <code>&nbsp;</code>
+            <code>    console.log( 'Hello, ' + getFullName() );</code>
+            <code>    console.log( 'Bye, ' + getFullName() );</code>
+            <code>}</code>
+            <code>&nbsp;</code>
+            <code>sayHiBye('Jon', 'Snow')</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Пример: Счетчик</h2>
+        <div class="columns two">
+            <pre>
+               <code>function makeCounter() {</code>
+               <code>   let count = 0;</code>
+               <code>&nbsp;</code>
+               <code>   return function() {</code>
+               <code>       return count++;</code>
+               <code>   };</code>
+               <code>}</code>
+               <code>&nbsp;</code>
+               <code>let counter = makeCounter();</code>
+               <code>&nbsp;</code>
+               <code>console.log( counter() ); // 0</code>
+               <code>console.log( counter() ); // 1</code>
+               <code>console.log( counter() ); // 2</code>
+            </pre>
+            <p class="next">
+                <code>count</code> будет найден в лексическом окружении ф-ции <code>makeCounter</code>. Когда внешняя
+                переменная модифицируется, она изменится там, где была найдена. Значит, <code>count++</code> найдёт
+                внешнюю переменную и увеличит её значение в лексическом окружении, которому она принадлежит.
+            </p>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Блоки кода и циклы, IIFE</h2>
+        <p>
+            Лексическое окружение создаётся при выполнении блока кода и содержит локальные переменные для этого блока <code>{...}</code>
+        </p>
+        <pre>
+            <code>let phrase = 'Hello';</code>
+            <code>if (true) {</code>
+            <code>    let name = 'John';</code>
+            <code>&nbsp;</code>
+            <code>    console.log(`${phrase}, ${name}`)</code>
+            <code>}</code>
+            <code>&nbsp;</code>
+            <code>console.log(name)</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Циклы for, while</h2>
+        <p>
+            Для <i>цикла</i> у каждой итерации своё отдельное лексическое окружение. Если переменная объявлена в
+            <code>for(let ...)</code>, то она также в нём:
+        </p>
+        <pre>
+            <code>for (let i = 0; i < 10; i++) {</code>
+            <code>    console.log(i);</code>
+            <code>}</code>
+            <code>&nbsp;</code>
+            <code>console.log(i); // Ошибка, нет такой переменной</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Блоки кода</h2>
+        <p>
+            Мы также можем использовать <i>простые</i> блоки кода <code>{...}</code>, чтобы изолировать переменные
+            в <i>локальной области видимости</i>.
+        </p>
+        <pre>
+            <code>{</code>
+            <code>    let message = 'Hello';</code>
+            <code>    console.log(message);</code>
+            <code>}</code>
+            <code>console.log(message); // Ошибка: переменная message не определена</code>
+        </pre>
+        <p>
+            Из-за того, что у блока есть собственное лексическое окружение, код снаружи него (или в другом скрипте)
+            не видит переменные этого блока.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>IIFE (immediately-invoked function expressions)</h2>
+        <pre>
+            <code>(function() {</code>
+            <code>    var message = 'Hello';</code>
+            <code>    console.log(message);</code>
+            <code>})();</code>
+        </pre>
+        <p>В прошлом в JavaScript не было лексического окружения на уровне блоков кода.</p>
+        <p>Здесь создаётся и немедленно вызывается Function Expression. Так что код выполняется сразу же и у него есть свои локальные переменные.</p>
+    </section>
+
+    <section class="slide">
+        <h2>Итого</h2>
+        <p><b>Замыкание</b> – это блок кодаили функция, которые запоминают свои внешние переменные и может получить к ним доступ</p>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+
+    <script>
+        {
+            let message = 'Hello';
+            console.log(message);
+        }
+        console.log(message);
+    </script>
+</body>
+</html>
