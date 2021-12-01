@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A-Level. React.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>React. Intro</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <a href="https://reactjs.org/">
+                <img src="./assets/react.png" alt="React Logo" style="height: auto; width: 50px">
+                <span>React</span>
+            </a>
+        </h2>
+        <style>
+            #cover h2 {
+                color: #61dafb;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+            }
+
+            #cover a {
+                color: inherit;
+                text-decoration: none;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li>Что такое React</li>
+            <li>Научимся создавать приложения</li>
+            <li>Компоненты</li>
+            <li>JSX</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>React</h2>
+        <p>JavaScript-библиотека для создания пользовательских интерфейсов.</p>
+        <p>
+            Реакт позволяет построить абсракцию вокруг верстки. Т.е. вы вместо того чтоб работать примитивами уровня
+            HTML, вы оперируете отдельными частями приложения и говорите что вы хотите видеть, а не пошагово описываете
+            как должно выглядеть.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Компоненты</h2>
+        <p>
+            Компоненты позволяют разбить интерфейс на независимые части, про которые легко думать в отдельности.
+            Их можно складывать вместе и использовать несколько раз.
+        </p>
+        <p>
+            Во многом компоненты ведут себя как обычные функции JavaScript. Они принимают произвольные входные данные
+            (так называемые «пропсы») и возвращают React-элементы, описывающие, что мы хотим увидеть на экране.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Создаем приложение.</h2>
+        <p>
+            <a href="https://create-react-app.dev/docs/getting-started"><i>Create React App</i></a> is an officially
+            supported way to create single-page React applications. It offers a modern build setup with no configuration.
+        </p>
+        <pre>
+            <code>npx create-react-app my-app</code>
+            <code>cd my-app</code>
+            <code>npm start</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Структура проекта:</h2>
+        <ul>
+            <li>
+                <code>src</code> - в этой папке будут все наши компоненты
+            </li>
+            <li>
+                <code>public</code> - в этой папке хранится наш шаблон html странички.
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Как отрендерить компонент</h2>
+        <pre>
+            <code>ReactDOM.render(</code>
+            <code>  <mark>&lt;h1&gt;Hello, World!&lt;/h1&gt;,</mark> <span class="next comment">// react-элемент</span></code>
+            <code>  document.getElementById('root')</code>
+            <code>);</code>
+            <code>&nbsp;</code>
+            <code>ReactDOM.render(</code>
+            <code>  <mark>createElement('h1', {}, 'Hello, World!'),</mark> <span class="next comment">// react-элемент</span></code>
+            <code>  document.getElementById('root')</code>
+            <code>);</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <p>
+            <code>const element = &lt;h1&gt;Hello, World&lt;/h1&gt;</code> - react-элемент. В отличие от DOM-элементов,
+            элементы React — это простые объекты, не отнимающие много ресурсов. React DOM обновляет DOM, чтобы он
+            соответствовал переданным React-элементам.
+        </p>
+        <pre>
+            <code>{</code>
+            <code>  type: 'h1',</code>
+            <code>  props: {</code>
+            <code>    children: 'Hello, World!'</code>
+            <code>  }</code>
+            <code>};</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Функциональные компоненты</h2>
+        <pre>
+            <code>function Welcome(props) {</code>
+            <code>  return &lt;h1&gt;Привет, {props.name}&lt;/h1&gt;</code>
+            <code>}</code>
+        </pre>
+        <p>
+            Эта функция — компонент, потому что она получает данные в одном объекте («пропсы») в качестве параметра
+            и возвращает React-элемент. Мы будем называть такие компоненты «функциональными», так как они буквально
+            являются функциями.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Классовые компоненты</h2>
+        <p>
+            Ещё компоненты можно определять как
+            <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes">классы ES6</a>:
+        </p>
+        <pre>
+            <code>class Welcome extends React.Component {</code>
+            <code>  render() {</code>
+            <code>    return &lt;h1&gt;Привет, {this.props.name}&lt;/h1&gt;</code>
+            <code>  }</code>
+            <code>}</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Как создать собственный компонент</h2>
+        <p>Пока что мы только встречали React-элементы, представляющие собой DOM-теги:</p>
+        <p><code>const element = &lt;div /&gt;</code></p>
+        <p>Но элементы могут описывать и наши собственные компоненты:</p>
+        <p><code>const element = &lt;Welcome name="Тарас" /&gt;</code></p>
+    </section>
+
+    <section class="slide">
+        <h2>Пропсы</h2>
+        <p>
+            Когда React встречает подобный элемент, он собирает все JSX-атрибуты и дочерние элементы в один объект
+            (props) и передаёт их нашему компоненту.
+        </p>
+        <pre>
+            <code>function Welcome(props) {</code>
+            <code>  return &lt;h1&gt;Привет, {props.name}&lt;/h1&gt;</code>
+            <code>}</code>
+            <code>ReactDOM.render(&lt;Welcome name="Тарас" /&gt;, ...)</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Ньюансы</h2>
+        <ul>
+            <li>
+                Т.к. JSX компилируется в вызовы функции React.createElement, библиотека React всегда должна находиться
+                в области видимости вашего кода JSX.
+                <code>import React from 'react';</code>
+            </li>
+            <li>
+                <div><i>Большая буква</i> - значит компоненьт и React будет в текущей области видимости искать эту ф-цию</div>
+                <div><i>Маленькая буква</i> - dom-элемент</div>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <ul>
+            <li>
+                Использование записи через точку "."
+                <pre>
+                    <code>const MyComponents = {</code>
+                    <code>  DatePicker: (props) => &lt;div&gt; ... &lt;/div&gt;</code>
+                    <code>}</code>
+                    <code>const BlueDatePicker = () => {</code>
+                    <code>  return &lt;MyComponents.DatePicker color="blue" /&gt;</code>
+                    <code>}</code>
+                </pre>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Свойства props в JSX</h2>
+        <ul>
+            <li>
+                <b>JavaScript выражения как свойства.</b>
+                <div><code>&lt;MyComponent foo={1 + 2 + 3 + 4} /&gt;</code></div>
+            </li>
+            <li>
+                <b>Строковые литералы</b>
+                <div><code>&lt;MyComponent message="Привет мир!" /&gt;</code></div>
+                <div><code>&lt;MyComponent message={'Привет мир!'} /&gt;</code></div>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <ul>
+            <li>
+                Инструкции <i>if</i> или циклы <i>for</i> не являются выражениями в JavaScript, поэтому они не могут
+                использоваться непосредственно в JSX.
+                <pre>
+                    <code>function NumberDescriber(props) {</code>
+                    <code>  let description;</code>
+                    <code>  if (props.number % 2 == 0) {</code>
+                    <code>    description = &lt;strong&gt;even&lt;/strong&gt;</code>
+                    <code>  } else {</code>
+                    <code>    description = &lt;i&gt;odd&lt;/i&gt;</code>
+                    <code>  }</code>
+                    <code>  return &lt;div&gt;{props.number} - это {description} число&lt;/div&gt;</code>
+                    <code>}</code>
+                </pre>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <ul>
+            <li>
+                <b>Установка свойств по умолчанию в true</b>
+                <div><code>&lt;button disabled /&gt;</code></div>
+                <div><code>&lt;button disabled={true} /&gt;</code></div>
+            </li>
+            <li>
+                <b>Spread – атрибуты</b>
+                <pre>
+                    <code>const Button = props => {</code>
+                    <code>  const { type, ...other } = props;</code>
+                    <code>  const className = type === "primary" ? "PrimaryBtn" : "SecondaryBtn";</code>
+                    <code>  return &lt;button className={className} {...other} /&gt;</code>
+                    <code>};</code>
+                </pre>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <ul>
+            <li>
+                <div><b>Booleans, Null и Undefined игнорируются</b></div>
+                <pre>
+                    <code>&lt;div /&gt;</code>
+                    <code>&lt;div&gt;&lt;/div&gt;</code>
+                    <code>&lt;div&gt;{null}&lt;/div&gt;</code>
+                    <code>&lt;div&gt;{undefined}&lt;/div&gt;</code>
+                    <code>&lt;div&gt;{false}&lt;/div&gt;</code>
+                    <code>&lt;div&gt;{true}&lt;/div&gt;</code>
+                </pre>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Children (потомки)</h2>
+        <ul>
+            <li>
+                <div>Несколько Компонентов</div>
+                <pre>
+                    <code>&lt;MyContainer /&gt;</code>
+                    <code>  &lt;MyFirstComponent /&gt;</code>
+                    <code>  &lt;MySecondComponent /&gt;</code>
+                    <code>&lt;/MyContainer&gt;</code>
+                </pre>
+            </li>
+            <li>
+                JavaScript выражения как потомки
+                <div><code>&lt;MyComponent&gt;{'Привет!'}&lt;/MyComponent&gt;</code></div>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <ul>
+            <li>
+                <b>Функции как потомки</b>
+                <pre>
+                    <code>function UserList(props) {</code>
+                    <code>  return &lt;ul&gt;{props.users.map((user) => props.children(user))}&lt;/ul&gt;</code>
+                    <code>}</code>
+                    <code>function UserPage() {</code>
+                    <code>  const users = [{id: 1, name: 'Вася'}, {id: 2, name: 'Петя'}];</code>
+                    <code>  return (</code>
+                    <code>    &lt;UserList users={users}&gt;</code>
+                    <code>      {(user) => &lt;li key={user.id}&gt;Пользователь: {user.name}&lt;/li&gt;}</code>
+                    <code>    &lt;/UserList&gt;</code>
+                    <code>  );</code>
+                    <code>}</code>
+                </pre>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Задача:</h2>
+        <ol>
+            <li>Сделайте маркерованный список: 1 2 3</li>
+            <li>Разделить на разные компоненты</li>
+            <li>Вынести компоненты в разные файлы</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Как использовать стили</h2>
+        <div class="columns two">
+            <pre>
+                <code><span class="comment">/** ./style.css */</span></code>
+                <code>&nbsp;</code>
+                <code>.blockElem {</code>
+                <code>  margin-left: 100px;</code>
+                <code>}</code>
+            </pre>
+            <pre>
+                <code><span class="comment">/** ./App.js */</span></code>
+                <code>&nbsp;</code>
+                <code>function App() {</code>
+                <code>  return (</code>
+                <code>    &lt;div <mark>className='blockElem'</mark>&gt;</code>
+                <code>      &lt;List /&gt;</code>
+                <code>    &lt;/div&gt;</code>
+                <code>  )</code>
+                <code>}</code>
+            </pre>
+        </div>
+    </section>
+
+    <section class="slide homework">
+        <h2>HomeWork:</h2>
+        <div>Сверстать страничку (Стили не важны, можно испоьзовать любую css либу)</div>
+        <img src="./assets/homework.png" alt="react task">
+
+        <style>
+            .homework img {
+                height: 70%;
+                width: auto;
+                display: block;
+                margin: 0 auto;
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Links:</h2>
+        <ul>
+            <li>
+                <a href="https://create-react-app.dev/docs/getting-started">
+                    Create React App
+                </a>
+            </li>
+            <li>
+                <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes">
+                    Классы в JavaScript
+                </a>
+            </li>
+            <li>
+                JSX
+                <ul>
+                    <li>
+                        <a href="https://ru.reactjs.org/docs/introducing-jsx.html">
+                            Знакомство с JSX
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://ru.reactjs.org/docs/rendering-elements.html">
+                            Рендеринг элементов
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://ru.reactjs.org/docs/components-and-props.html">
+                            Компоненты и пропсы
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>

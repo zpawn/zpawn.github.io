@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/font/bootstrap-icons.css">
+    <title>React. Intro.</title>
+</head>
+<body>
+
+<div class="container-xl">
+    <h1>Заметки.</h1>
+
+    <h2 class="text-danger">Intro</h2>
+    <ol>
+        <li>Рассказать о себе</li>
+        <li>Отметить в журнале и познакомится с группой</li>
+        <li>Рассказать, что будет на курсе</li>
+    </ol>
+
+    <h2 class="text-danger">Slide 4. Компоненты</h2>
+    <p>Большая буква - значит Компоненьт и React будет в текущей области видимости будет искать эту ф-цию (и её запускать, чтоб получить из нее верстку)</p>
+    <p>Маленькая буква - значит dom-элемент</p>
+
+    <h2 class="text-danger">Slide 7.</h2>
+    <p>
+        <code>&lt;div id="root"&gt;&lt;/div&gt;</code> «корневой» узел DOM и React DOM будет управлять его содержимым.
+    </p>
+    <p>
+        Для рендеринга React-элемента в корневой узел DOM вызовите ReactDOM.render() с React-элементом и корневым
+        DOM-узлом в качестве аргументов:
+    </p>
+    <pre>
+        const element = &lt;h1&gt;Hello, world&lt;/h1&gt;
+        ReactDOM.render(element, document.getElementById('root'));
+    </pre>
+
+    <h2 class="text-danger">Slide 12.</h2>
+    <p><b>Примечание: Всегда называйте компоненты с заглавной буквы.</b></p>
+    <p>
+        Если компонент начинается с маленькой буквы, React принимает его за DOM-тег.
+        Например, &lt;div /&gt; это div-тег из HTML, а &lt;Welcome /&gt; это уже наш компонент Welcome.
+    </p>
+
+    <h2 class="text-danger">Slide 18.</h2>
+    <pre>
+        Math.random() > 0.5 && 'Больше'
+    </pre>
+</div>
+
+</body>
+</html>
