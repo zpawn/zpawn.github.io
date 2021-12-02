@@ -282,6 +282,30 @@
                     <code>&lt;div&gt;{true}&lt;/div&gt;</code>
                 </pre>
             </li>
+            <li>
+                <b>Комментарии</b>
+                <pre>
+                    <code>&lt;p&gt;{/* Это комментарий */}&lt;/p&gt;</code>
+                </pre>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <ul>
+            <li>
+                <b>Картинки</b>
+                <p>Вариант 1:</p>
+                <pre>
+                    <code>import img from './picture.png';</code>
+                    <code>&lt;img src={img} alt=""/&gt;</code>
+                </pre>
+
+                <p>Вариант 2:</p>
+                <pre>
+                    <code>&lt;img src="https://some/url/to/picture.png" alt=""/&gt;</code>
+                </pre>
+            </li>
         </ul>
     </section>
 
@@ -307,19 +331,15 @@
     <section class="slide">
         <ul>
             <li>
-                <b>Функции как потомки</b>
+                <b>Динамическое создание потомков</b>
                 <pre>
-                    <code>function UserList(props) {</code>
-                    <code>  return &lt;ul&gt;{props.users.map((user) => props.children(user))}&lt;/ul&gt;</code>
-                    <code>}</code>
-                    <code>function UserPage() {</code>
-                    <code>  const users = [{id: 1, name: 'Вася'}, {id: 2, name: 'Петя'}];</code>
-                    <code>  return (</code>
-                    <code>    &lt;UserList users={users}&gt;</code>
-                    <code>      {(user) => &lt;li key={user.id}&gt;Пользователь: {user.name}&lt;/li&gt;}</code>
-                    <code>    &lt;/UserList&gt;</code>
-                    <code>  );</code>
-                    <code>}</code>
+                    <code>const users = [{ id: '1', name: 'Valia' }, { id: '2', name: 'Petia' }];</code>
+                    <code>&nbsp;</code>
+                    <code>&lt;List&gt;</code>
+                    <code>  users.map((user) => {</code>
+                    <code>    return &lt;ListItem key={user.id} {...user}&gt;{user.name}&lt;/ListItem&gt;</code>
+                    <code>  })</code>
+                    <code>&lt;/List&gt;</code>
                 </pre>
             </li>
         </ul>
