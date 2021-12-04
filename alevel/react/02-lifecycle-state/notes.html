@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/notes.css">
+    <title>React. Intro.</title>
+</head>
+<body>
+
+<div class="container-xl">
+    <h1>Заметки.</h1>
+
+    <h2 class="text-danger">Slide 5. Clock</h2>
+    <ol>
+        <li>
+            <p><b>Создадим часы</b></p>
+            <pre class="code">
+const Clock = ({ date }) => (&lt;h1&gt;{date.toLocaleTimeString()}&lt;/h1&gt;)
+
+function tick() {
+    const element = &lt;Clock date={new Date()} /&gt;
+    ReactDOM.render(element, document.getElementById('root'));
+}
+
+setInterval(tick, 1000);</pre>
+        </li>
+        <li>
+            <p><b>Перепишем на классовый компонент</b></p>
+            <pre class="code">
+class Clock extends Component {
+    render() {
+        return (&lt;h1&gt;{this.props.date.toLocaleTimeString()}&lt;/h1&gt;)
+    }
+}</pre>
+        </li>
+        <li>
+            <p><b>Добавим внутреннее состояние в класс</b></p>
+            <pre class="code">
+constructor(props) {
+    super(props);
+
+    this.state = {date: new Date()};
+}</pre>
+        </li>
+        <li>
+            <p><b>Добавим методы жизненного цикла в класс</b></p>
+            <pre class="code">
+componentDidMount() {
+  this.timerID = setInterval(
+    () => this.tick(),
+      1000
+  );
+}
+
+componentWillUnmount() {
+  clearInterval(this.timerID);
+}</pre>
+        </li>
+        <li>
+            <p><b>реализуем метод tick()</b></p>
+            <pre class="code">
+tick() {
+  this.setState({
+    date: new Date()
+  });
+}</pre>
+        </li>
+    </ol>
+
+    <h2 class="text-danger">Lifecycle methods</h2>
+    <ul>
+        <li>
+            <p><code>constructor()</code> - Конструктор компонента React вызывается до того, как компонент будет примонтирован</p>
+            <p>Конструкторы в React обычно используют для двух целей:</p>
+            <ul>
+                <li>
+                    Инициализация внутреннего состояния через присвоение объекта this.state.
+                    <code>this.state = { counter: 0 };</code>
+                </li>
+                <li>
+                    Привязка обработчиков событий к экземпляру.
+                    <code>this.handleClick = this.handleClick.bind(this);</code>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <code>render()</code> - при вызове он проверяет this.props и this.state и возвращает один из следующих вариантов:
+            <ul>
+                <li>Элемент React</li>
+                <li>Массивы и фрагменты</li>
+                <li>Порталы</li>
+                <li>Строки и числа</li>
+                <li>Booleans или null</li>
+            </ul>
+        </li>
+        <li>
+            <p>
+                <code>componentDidMount()</code> - вызывается сразу после монтирования (то есть, вставки компонента в DOM)
+            </p>
+            <p>Это место для:</p>
+            <ul>
+                <li>Создания сетевых запросов.</li>
+                <li>Настройка подписок. Но не забудьте отписаться от них в componentWillUnmount().</li>
+            </ul>
+        </li>
+        <li>
+            <p>
+                <code>static getDerivedStateFromProps(props, state)</code> - getDerivedStateFromProps вызывается
+                непосредственно перед вызовом метода render, как при начальном монтировании, так и при последующих
+                обновлениях. Он должен <b>вернуть объект</b> для обновления состояния или <b>null</b>,
+                чтобы ничего не обновлять.
+            </p>
+            <p>
+                Этот метод существует для редких случаев, когда <b>state</b> зависит от изменений в <b>props</b>. Например, это
+                подойдёт для реализации компонента &lt;Transition&gt;, который сравнивает свои предыдущие и следующие дочерние компоненты, чтобы решить, какой из них нужно анимировать.
+            </p>
+
+        </li>
+        <li>
+            <p>
+                <code>shouldComponentUpdate(nextProps, nextState)</code> - используйте shouldComponentUpdate(), чтобы
+                указать необходимость следующего рендера на основе изменений состояния и пропсов.
+            </p>
+            <p>
+                Вызывается перед рендером, когда получает новые пропсы или состояние.
+                Значение по умолчанию равно <code>true</code>
+            </p>
+            <p>
+
+            </p>
+        </li>
+        <li>
+            <p>
+                <code>getSnapshotBeforeUpdate(prevProps, prevState)</code> - вызывается прямо перед этапом
+                «фиксирования» (например, перед добавлением в DOM). Он позволяет вашему компоненту брать некоторую
+                информацию из DOM (например, положение прокрутки) перед её возможным изменением. Любое значение,
+                возвращаемое этим методом жизненного цикла, будет передано как параметр componentDidUpdate()
+            </p>
+        </li>
+        <li>
+            <p>
+                <code>componentDidUpdate(prevProps, prevState, snapshot)</code> - вызывается сразу после обновления.
+                Не вызывается при первом рендере.
+            </p>
+            <p>
+                Метод позволяет работать с DOM при обновлении компонента. Также он подходит для выполнения таких сетевых
+                запросов, которые выполняются на основании результата сравнения текущих пропсов с предыдущими. Если
+                пропсы не изменились, новый запрос может и не требоваться.
+            </p>
+            <pre class="code">
+componentDidUpdate(prevProps) {
+  // Популярный пример (не забудьте сравнить пропсы):
+  if (this.props.userID !== prevProps.userID) {
+    this.fetchData(this.props.userID);
+  }
+}</pre>
+        </li>
+        <li>
+            <code>componentWillUnmount()</code> - вызывается непосредственно перед размонтированием и удалением компонента.
+            В этом методе выполняется необходимый сброс: отмена таймеров, сетевых запросов и подписок, созданных
+            в componentDidMount()
+        </li>
+    </ul>
+
+    <h2 class="text-danger">Slide: Events</h2>
+    <pre class="code">
+class Toggle extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { isToggleOn: true };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick = () => {
+    this.setState((prevState) => ({ isToggleOn: !prevState.isToggleOn }));
+  }
+
+  render() {
+    return (
+      &lt;button onClick={this.handleClick}&gt;
+        {this.state.isToggleOn ? 'Включено' : 'Выключено'}
+      &lt;/button&gt;
+    );
+  }
+}</pre>
+</div>
+
+</body>
+</html>
