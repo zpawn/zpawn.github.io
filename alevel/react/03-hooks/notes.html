@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>03. Hooks. Notes</title>
+    <link rel="stylesheet" href="./assets/bootstrap.css">
+    <link rel="stylesheet" href="./assets/bootstrap-icons.scss">
+    <link rel="stylesheet" href="./assets/notes.css">
+</head>
+<body>
+
+<div class="container-xl">
+    <h1>React Hooks. Notes.</h1>
+
+    <h2 class="text-danger">Slide 2.</h2>
+
+    <h2 class="text-danger">useState</h2>
+    <pre class="code">
+function Example() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Счетчик: ${count}`;
+  });
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Вы нажали {count} раз&lt;/p&gt;
+      &lt;button onClick={() => setCount(count + 1)}&gt;
+        Нажми на меня
+      &lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</pre>
+</div>
+
+</body>
+</html>

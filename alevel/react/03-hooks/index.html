@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A-Level. React. Hooks.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre code {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level. React. Hooks.</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <img
+                src="./assets/react-logo.svg"
+                alt="React Logo"
+                style="height: auto; width: 100px; margin-bottom: -10px"
+            ><span>Hooks</span>
+        </h2>
+        <style>
+            #cover h2 {
+                color: #61dafb;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li>State</li>
+            <li>Hooks</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>State. Частичное слияние.</h2>
+        <p>Когда мы вызываем setState(), React объединит новое состояние c текущим.</p>
+        <pre>
+            <code>state = {</code>
+            <code>  firstname: '',</code>
+            <code>  lastname: '',</code>
+            <code>}</code>
+            <code>...</code>
+            <code>this.setState({ lastname: 'Petia' })</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>State. Подъём состояния.</h2>
+        <p>Для любых изменяемых данных в React-приложении должен быть один "источник истины".</p>
+        <p>
+            Т.е. если несколько компонентов должны отражать одни и те же изменяющиеся данные. В таком случае поднимаем
+            общее состояние до ближайшего общего предка
+        </p>
+    </section>
+
+    <section class="slide state-hoisting">
+        <pre>
+            <code>class App extends Component {</code>
+            <code>  state = { firstName: '', lastName: '' };</code>
+            <code>&nbsp;</code>
+            <code>  onChange = (e) => { ... };</code>
+            <code>&nbsp;</code>
+            <code>  render() {</code>
+            <code>    const { firstName, lastName } = this.state;</code>
+            <code>    return (</code>
+            <code>      &lt;Fragment&gt;</code>
+            <code>        &lt;Form firstName={firstName} lastName={lastName} onChange={this.onChange} /&gt;</code>
+            <code>        &lt;Greeting firstName={firstName} lastName={lastName} /&gt;</code>
+            <code>        &lt;/Fragment&gt</code>
+            <code>     )</code>
+            <code>  }</code>
+            <code>}</code>
+        </pre>
+        <style>
+            .state-hoisting pre code {
+                font-size: 16px;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Hooks (Хуки)</h2>
+        <p>Хуки — позволяют использовать состояние и другие возможности React без написания классов (в функциональных компонентах).</p>
+        <div><b>Правила:</b></div>
+        <ul style="flex-grow: 1">
+            <li>Хуки не работают внутри классов.</li>
+            <li>Не вызывайте хуки внутри циклов, условий или вложенных функций.</li>
+            <li>
+                Вызывать хуки только из функциональных компонентов. Не вызывайте из обычных
+                функций. Исключение — это <i>пользовательские хуки</i>.
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Hooks</h2>
+        <div>Самые популярные:</div>
+        <ul>
+            <li><i>useState</i> - наделяем наш функциональный компонент внутренним состоянием</li>
+            <li>
+                <i>useEffect</i> - можем использовать методы жизненного цикла. Аналог для
+                <code>componentDidMount</code>, <code>componentDidUpdate</code> и <code>componentWillUnmount</code>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>useState</h2>
+        <p>
+            Наделяет наш функциональный компонент внутренним состоянием.
+            React будет хранить это состояние между рендерами.
+        </p>
+        <div><code>const [state, setState] = useState(initialState);</code></div>
+        <ul>
+            <li><i>state</i> - состояние</li>
+            <li><i>setState</i> - функция для обновления состояния</li>
+            <li><i>initialState</i> - дефолтное значение</li>
+        </ul>
+
+    </section>
+
+    <section class="slide">
+        <h2>useState</h2>
+        <pre>
+            <code>function Counter() {</code>
+            <code>  const [count, setCount] = useState(0);</code>
+            <code>  return (</code>
+            <code>    &lt;div&gt;</code>
+            <code>      &lt;p&gt;Вы нажали {count} раз&lt;/p&gt;</code>
+            <code>      &lt;button onClick={() => setCount(count + 1)}&gt;Жми&lt;/button&gt;</code>
+            <code>    &lt;/div&gt;</code>
+            <code>  );</code>
+            <code>}</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>useEffect</h2>
+        <p>
+            Хук useEffect представляет собой совокупность методов <code>componentDidMount</code>,
+            <code>componentDidUpdate</code> и <code>componentWillUnmount</code>.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>useEffect</h2>
+        <ul>
+            <li>
+                Эффект запустит нашу функцию после того, как React отправил изменения в DOM
+                (т.е. эффект не выполняется, пока браузер не отрисует все изменения)
+            </li>
+            <li>По умолчанию, React запускает эффекты после каждого рендера, включая первый рендер.</li>
+            <li>С помощью хуков, мы можем разделить наш код основываясь на том, что он делает, а не по принципам методов жизненного цикла.</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>useEffect.</h2>
+        <ul>
+            <li><code>useEffect(callback)</code> - запускать всегда</li>
+            <li>
+                <code>useEffect(callback, [])</code> - запускать только при mount и unmount (т.е. эффект не зависит ни от одного
+                параметра, а раз не зависит, значит его не надо перезапускать)
+            </li>
+            <li>
+                <code>useEffect(callback, [arg1, ...])</code> - не запускать этот эффект если не изменились параметры в массиве
+                (т.е. из замыкания он берет текущие, а из массива предыдущие и сравнивает).
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <pre>
+            <code>const Counter = () => {</code>
+            <code>  const [count, setCount] = useState(0);</code>
+            <code>&nbsp;</code>
+            <code>  useEffect(() => {</code>
+            <code>    document.title = `click: ${count}`;</code>
+            <code>  })</code>
+            <code>&nbsp;</code>
+            <code>  return (</code>
+            <code>    &lt;button onClick={() => setCount(count + 1)}&gt;Click&lt;/button&gt;</code>
+            <code>  );</code>
+            <code>};</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+        <ul>
+            <li>
+                <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">Деструктуризация</a>
+            </li>
+            <li>
+                <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi">
+                    React Developer Tools
+                </a>
+            </li>
+            <li>
+                <a href="https://ru.reactjs.org/docs/forms.html">Работа с формами</a>
+            </li>
+            <li>
+                <a href="https://ru.reactjs.org/docs/lifting-state-up.html">Подъём состояния</a>
+            </li>
+            <li>
+                <a href="https://ru.reactjs.org/docs/hooks-state.html">useState</a>
+            </li>
+            <li>
+                <a href="https://ru.reactjs.org/docs/hooks-effect.html">useEffect</a>
+            </li>
+        </ul>
+    </section>
+
+    <footer class="badge">
+        <a href="https://github.com/shower/shower">Fork me on GitHub</a>
+    </footer>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
