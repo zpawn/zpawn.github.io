@@ -22,10 +22,6 @@
 function Example() {
   const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    document.title = `Счетчик: ${count}`;
-  });
-
   return (
     &lt;div&gt;
       &lt;p&gt;Вы нажали {count} раз&lt;/p&gt;
@@ -35,6 +31,34 @@ function Example() {
     &lt;/div&gt;
   );
 }</pre>
+
+    <h2 class="text-danger">useEffect</h2>
+
+    <pre class="code">
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log('>>> didMount')
+    return () => {
+      console.log('>>> willUnmount')
+      document.title = `click: ${count}`;
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('>>> didUpdate')
+    document.title = `click: ${count}`;
+  }, [count])
+
+
+  return (
+    &lt;button type='button' onClick={() => setCount(count + 1)}&gt;
+      {`Clicked: ${count}`}
+    &lt;/button&gt;
+  );
+};
+    </pre>
 </div>
 
 </body>
