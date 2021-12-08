@@ -1,9 +1,8 @@
-[HTML/CSS с использованием Bootstrap и FontAwesome для контент-менеджеров](./html-css.course/README.md)
+* [A-Level. React.](./alevel/react)
 
-[Изучаем frontend](./learnFrontend/README.md)
+* [HTML/CSS с использованием Bootstrap и FontAwesome для контент-менеджеров](./html-css.course/README.md)
 
-[RoyalRanger Landing](//zpawn.github.io/royalrangers/)
+* [Изучаем frontend](./learnFrontend/README.md)
 
-[Google Maps with autoComplete](//zpawn.github.io/maps/)
+* [RoyalRanger Landing](//zpawn.github.io/royalrangers/)
 
-[ToDo Manager](//zpawn.github.io/todomanager/)
