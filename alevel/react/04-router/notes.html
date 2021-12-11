@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap-icons.css">
+    <title>A-Level. React. Router.</title>
+    <style>
+        pre.code {
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--bs-gray-300);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-xl">
+    <h1>React. Router.</h1>
+
+    <h2 class="text-danger">Install</h2>
+    <pre class="code"><code>npm install react-router-dom</code></pre>
+
+    <h2 class="text-danger">Route</h2>
+
+    <h2 class="text-danger">Slide: Link.</h2>
+    <pre class="code">
+&lt;header&gt;
+  &lt;nav&gt;
+    &lt;ul className="list-inline"&gt;
+      &lt;li&gt;
+        &lt;Link to='/home'&gt;Home&lt;/Link&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;Link to='/products'&gt;Products&lt;/Link&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</pre>
+
+    <h2 class="text-danger">Slide: NavLink</h2>
+    <p>меняем на NavLink</p>
+
+    <h2 class="text-danger">Slide. Dynamic Routes</h2>
+    <pre class="code">
+// App.js
+&lt;Route path='/product-details/:productId' element={&lt;ProductDetails/&gt;} /&gt;
+
+// Our component
+const params = useParams();</pre>
+
+    <h2 class="text-danger">Slide. Edit Page</h2>
+    <p>Роутер ищет точные совпадения.</p>
+    <pre class="code">
+&lt;Routes&gt;
+    &lt;Route path='/home' element={&lt;Home /&gt;} /&gt;
+    &lt;Route path='/products' element={&lt;Products /&gt;} /&gt;
+    &lt;Route path='/products/:productId' element={&lt;ProductDetails /&gt;} /&gt;
+    &lt;Route path='/products/edit' element={&lt;ProductEdit /&gt;} /&gt;
+&lt;/Routes&gt;</pre>
+
+    <p>Линкуем товары</p>
+
+    <!--    -->
+    <h2 class="text-danger">Navigate</h2>
+    <pre class="code">&lt;Route path='/' element={&lt;Navigate to='/home' /&gt;} /&gt;</pre>
+
+    <!--    -->
+    <h2 class="text-danger">Slide. Дополнительный контент</h2>
+    <pre class="code">
+<span class="text-success">// App.js</span>
+&lt;Route path='/home/*' element={&lt;Home /&gt;} /&gt;
+
+<span class="text-success">// Home.js</span>
+const Home = () => (
+    &lt;&gt;
+        &lt;h2&gt;Home Page&lt;/h2&gt;
+        &lt;Routes&gt;
+            &lt;Route path='new-user' element={&lt;p&gt;Welcome, New User!&lt;/p&gt;} /&gt;
+        &lt;/Routes&gt;
+    &lt;/&gt;
+);</pre>
+
+    <p>Перепишем на:</p>
+    <pre class="code">
+<span class="text-success">// App.js</span>
+&lt;Route path='/home/*' element={&lt;Home /&gt;}&gt;
+  &lt;Route path='new-user' element={&lt;p&gt;Welcome, New User!&lt;/p$gt;} /&gt;
+&lt;/Route&gt;
+
+<span class="text-success">// Home.js</span>
+const Home = () => (
+    &lt;&gt;
+        &lt;h2&gt;Home Page&lt;/h2&gt;
+        &lt;Link to='new-user'&gt;New User&lt;/Link&gt;
+        &lt;Outlet /&gt;
+    &lt;/&gt;
+);</pre>
+
+    <h2 class="text-danger">useNavigate</h2>
+    <pre class="code">
+const navigate = useNavigate();
+
+navigate('/products');
+navigate('/products', { replace: true });
+navigate(-1);
+navigate(-2);
+navigate(1);
+
+navigate(location.pathname, {
+    search: `?sort=${isSortingAsc ? 'desc' : 'asc'}`,
+});</pre>
+
+    <h2 class="text-danger">useLocation</h2>
+    <pre class="code">
+const queryParams = new URLSearchParams(location.search);
+const isSortingAscending = queryParams.get('sort') === 'asc';</pre>
+
+    <h2 class="text-danger">Draft</h2>
+    <ul>
+        <li>Роутинг - переключение между витруальными страницами spa приложения.</li>
+        <li>Роутинг нужен, чтобы упростить структуру приложения и организовать навигацию.</li>
+        <li>В SPA страница, на самом деле, одна и она не перезагружается.</li>
+    </ul>
+</div>
+
+</body>
+</html>

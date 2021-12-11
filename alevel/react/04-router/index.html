@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shower Presentation Engine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre code {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level. React. Router.</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <img class="logo" src="./assets/react-router-logo.png" alt="React Router Logo">
+            <span>React Router</span>
+        </h2>
+        <style>
+            #cover h2 {
+                color: #252525;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+                border-radius: 50%;
+            }
+            #cover .logo {
+                width: auto;
+                height: 75px;
+                transform: translateY(12.5%);
+                border-radius: 50%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li>Виртуальный DOM</li>
+            <li>SPA</li>
+            <li>React Router .v6</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Проблема DOM</h2>
+        <p>
+            Главная проблема DOM — он никогда не был рассчитан для создания динамического пользовательского интерфейса (UI)
+        </p>
+        <p>
+            Многие библиотеки упрощали работу с DOM, но е решали проблему с производительностью.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Виртуальный DOM</h2>
+        <p>
+            Мы можем вносить изменения в копию, исходя из наших потребностей, а после этого применять изменения к
+            реальному DOM. При этом происходит сравнение DOM-дерева с его виртуальной копией, определяется разница и
+            запускается перерисовка того, что было изменено.
+        </p>
+        <p></p>
+    </section>
+
+    <section class="slide">
+        <h2>SPA</h2>
+        <p>
+            Это одна страница, c которой взаимодействует пользователь, страница динамически
+            перерисовывается, а не загружает целые страницы с сервера
+        </p>
+        <table>
+            <tr>
+                <th>SPA</th>
+                <th>Многостраничный сайт</th>
+            </tr>
+            <tr>
+                <td>Один HTML файл</td>
+                <td>На каждую страницу отдельный HTML файл</td>
+            </tr>
+            <tr>
+                <td>Переход между страницами без перезагрузки</td>
+                <td>На каждую страницу отдельное приложение</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://reactrouter.com/">React Router</a></h2>
+        <ul>
+            <li>Механизм переключения страниц</li>
+            <li>Считывание данных с URL строки</li>
+            <li>Работа с историей переходов по сайту</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>BrowserRouter</h2>
+        <p>Подключаем Router к нашему приложению.</p>
+        <pre>
+            <code>import { BrowserRouter } from 'react-router-dom'</code>
+
+            <code>ReactDOM.render(</code>
+            <code>  &lt;BrowserRouter&gt;</code>
+            <code>    &lt;App /&gt;</code>
+            <code>  &lt;/BrowserRouter&gt;,</code>
+            <code>  document.getElementById('root')</code>
+            <code>);</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Route</h2>
+        <div>Описываем соответствие роутов и подключяемых компонентов.</div>
+        <ul>
+            <li><code>path</code> - шаблон, по которому будем сравнивать запрошенный URL (точное совпадение)</li>
+            <li><code>element</code> - компонент, который будет отрендерен по этому роуту</li>
+        </ul>
+        <pre>
+            <code>&lt;Routes&gt;</code>
+            <code>  &lt;Route path='/home/*' element={&lt;Home /&gt;}&gt;</code>
+            <code>  &lt;Route path='/products' element={&lt;Products /&gt;} /&gt;</code>
+            <code>&lt;/Routes&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Link</h2>
+        <p>Позволяют изменить отображаемую в данный момент страницу (компонент) и изменив текущее url.</p>
+        <code>&lt;Link to='/home'&gt;Home&lt;Link&gt;</code>
+    </section>
+
+    <section class="slide">
+        <h2>NavLink</h2>
+        <p>Аналог &lt;Link&gt;, но который знает, является ли ссылка активной.</p>
+        <code>&lt;NavLink to='/home'&gt;Home&lt;/NavLink&gt;</code>
+    </section>
+
+    <section class="slide">
+        <h2>Dynamic Routes, useParams</h2>
+        <code>&lt;Route path='/product/:id' element={&lt;Product/&gt;} /&gt;</code>
+        <p>
+            <code>:id</code> - динамический участок урла
+        </p>
+        <p>
+            <code>useParams</code> - возвразает объект с динамическими параметрами url которые сопоставил с &lt;Route path&gt;
+        </p>
+        <p>
+            <code>const params = useParams();</code>
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Navigate</h2>
+        <p>Элемент Navigate меняет текущий url, когда рендерится</p>
+        <code>&lt;Navigate to='/home' /&gt;</code>
+    </section>
+
+    <section class="slide">
+        <h2>useNavigate</h2>
+        <div>Хук с помощью которого мы можем програмно переадресовать на нужный роут.</div>
+        <pre>
+            <code>const navigate = useNavigate();</code>
+            <code>navigate('/products');</code>
+            <code>navigate('/products', { replace: true });</code>
+            <code>navigate(-2); <span class="comment">// navigate(-1), navigate(1)</span></code>
+            <code>navigate('/products', {</code>
+            <code>  search: `?sort=${isSortingAsc ? 'desc' : 'asc'}`,</code>
+            <code>});</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>useLocation</h2>
+        <p>
+            Возвращает объект с информацией о текущем url.
+        </p>
+        <code>const location = useLocation();</code>
+    </section>
+
+    <section class="slide">
+        <h2>Task 1.</h2>
+        <img src="./assets/task.jpg" alt="task react router">
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+        <ul>
+            <li>
+                <a href="https://reactrouter.com/docs/en/v6/api">React Router</a>
+            </li>
+            <li>
+                Browser API
+                <ul>
+                    <li>
+                        <a href="https://developer.mozilla.org/ru/docs/Web/API/History_API">History API</a>
+                    </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/ru/docs/Web/API/URL">URL</a>
+                    </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/URLSearchParams">URLSearchParams</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
