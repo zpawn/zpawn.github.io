@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shower Presentation Engine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre code {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level. React. Redux.</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <img class="logo" src="./assets/redux-logo.svg" alt="React Router Logo">
+            <span>Redux</span>
+        </h2>
+        <style>
+            #cover h2 {
+                color: #764fbc;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+                border-radius: 50%;
+            }
+            #cover .logo {
+                width: auto;
+                height: 75px;
+                transform: translateY(12.5%);
+                border-radius: 50%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li>Что такое Redux.</li>
+            <li>Почему он важен в экосистеме React.</li>
+            <li>Зачем нам его юзать?</li>
+            <li>Как нам его юзать?</li>
+            <li>Как нам его юзать в React приложениии?</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Проблемы</h2>
+        <ul>
+            <li>Распределение обязаностей между визуальными компонентами</li>
+            <li>Выделение логики приложения</li>
+            <li>Управление моделью данных</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://redux.js.org/">Redux</a></h2>
+        <ul>
+            <li>Redux решаем проблему управления состоянием в приложении</li>
+            <li>Redux предлагает храниить state в одном "глобальном объекте"</li>
+            <li>Фунуция Reducer обновляет глобальный state в ответ на actions</li>
+            <li>Обект Store оповещает об обновлениях</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>3 Принципа</h2>
+        <ul>
+            <li>Единственный источник правды.</li>
+            <li>Состояние только для чтения.</li>
+            <li>Мутации написаны как чистые ф-ции.</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <img src="./assets/redux.drawio.svg" alt="Redux diagram">
+        <ul>
+            <li>View - компоненты</li>
+            <li>Action - описывает, что происходит</li>
+            <li>Reducer - ф-ция которая меняет state</li>
+            <li>State - объект в котором хранятся данные приложения</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Install Redux</h2>
+        <p><code>npm install redux</code></p>
+        <h2>Создаем store</h2>
+        <p>Store будет управлять нашими данными.</p>
+        <pre>
+            <code>import { createStore } from 'redux';</code>
+            <code>&nbsp;</code>
+            <code>const store = createStore();</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Reducer</h2>
+        <p>Описываем ф-цию, которая будет менять state.</p>
+        <pre>
+            <code>const counterReducer = (state = { counter: 0 }, action) => {</code>
+            <code>  return {</code>
+            <code>    counter: state.counter + 1,</code>
+            <code>  };</code>
+            <code>};</code>
+            <code>const store = createStore(counterReducer);</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Опишем подписчика (subscriber)</h2>
+        <p>Который будет реагировать на изменения в State.</p>
+        <pre>
+            <code>store.subscribe(() => {</code>
+            <code>  const latestState = store.getState();</code>
+            <code>  console.log('>>>', latestState);</code>
+            <code>});</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Dispatch</h2>
+        <p>Меняем состояние.</p>
+        <pre>
+            <code>store.dispatch({ type: 'increment' });</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Reducer</h2>
+        <pre>
+            <code>const counterReducer = (state = initState, action) => {</code>
+            <code>  if (action.type === 'increment') {</code>
+            <code>    return { counter: state.counter + 1 }</code>
+            <code>  }</code>
+            <code>  if (action.type === 'decrement') {</code>
+            <code>    return { counter: state.counter - 1 }</code>
+            <code>  }</code>
+            <code>  return state;</code>
+            <code>}</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Multiply reducers</h2>
+        <p>Мы можем разделять редьюсеры на более мелкие ф-ции, каждая из которых будет управлять своим кусочком состояния.</p>
+        <pre>
+            <code>const store = createStore(combineReducers({</code>
+            <code>  counter: counterReducer,</code>
+            <code>  movies: moviesReducer,</code>
+            <code>}));</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>React Redux</h2>
+        <p><code>npm install react-redux</code> - устанавливаем пакет</p>
+        <h2>Connect Redux to React</h2>
+        <pre>
+            <code>import { Provider } from 'react-redux';</code>
+            <code>import { store } from './store';</code>
+            <code>&lt;Provider store={store}&gt;</code>
+            <code>  &lt;App/&gt;</code>
+            <code>&lt;/Provider&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>useSelector</h2>
+        <p>Подключаем наш компонент к стору.</p>
+        <p>Позволяет извлечь данные из redux стора с помощью селектора</p>
+        <pre>
+            <code>import { useSelector } from 'react-redux';</code>
+            <code>const counter = useSelector((state) => state.counter);</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>useDispatch</h2>
+        <p>Этот хук возвращает ссылку на функцию dispatch из Redux. Что позволяет нам инициировать изменения в сторе.</p>
+        <pre>
+            <code>const dispatch = useDispatch();</code>
+            <code>const onClickPlus = () => dispatch({ type: 'increment' });</code>
+            <code>const onClickMinus = () => dispatch({ type: 'decrement' });</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Class Component</h2>
+        <p>Функция <code>connect</code> подключает классовый компонент к стору и помещает их в пропсы.</p>
+        <pre>
+            <code>const mapStateToProps = (state) => ({ counter: state.counter });</code>
+            <code>const mapDispatchToProps = (dispatch) => ({</code>
+            <code>  increment: () => dispatch({ type: 'increment' }),</code>
+            <code>  decrement: () => dispatch({ type: 'decrement' }),</code>
+            <code>});</code>
+            <code>export default connect(mapStateToProps, mapDispatchToProps)(Counter)</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Task 1.</h2>
+        <ol>
+            <li>Продолжаем делать ToDo List</li>
+            <li>Прикручиваем Redux</li>
+            <li>Для хранения скиска задач используем либо localStorage либо Firebase</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+        <ul>
+            <li>
+                <a href="https://redux.js.org/">Redux</a>
+            </li>
+            <li><a href="https://react-redux.js.org/">React Redux</a></li>
+            <li>
+                <a href="https://www.youtube.com/watch?v=-m3evZuzXC8&list=PLqHlAwsJRxANFIgAf7BO8hNYdvipLERxQ&index=1">
+                    Видосик как создать собственный redux
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap-icons.css">
+    <title>A-Level. React. Redux.</title>
+    <style>
+        pre.code {
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--bs-gray-300);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-xl">
+    <article>
+        <h1>Redux.</h1>
+        <h2 class="text-danger">3 Принципа:</h2>
+        <ol>
+            <li>
+                <b>Единственный источник правды.</b><br>
+                Состояние всего приложения сохранено в дереве объектов внутри одного стора.
+            </li>
+            <li>
+                <b>Состояние только для чтения.</b><br>
+                Единственный способ изменить состтояние - это применить экшен - объект, который описывает, что произойдет.
+            </li>
+            <li>
+                <b>Мутации написаны как чистые ф-ции.</b><br>
+                Для определения того, как дерево состояния будет трансформировано экшенами, вы пишите чистые рельюсеры
+            </li>
+        </ol>
+
+        <h2 class="text-danger">Install Redux</h2>
+
+        <h2 class="text-danger">Create store</h2>
+        <pre class="code">const store = createStore();</pre>
+        <p>И что нам делать дальше с этим стором?</p>
+        <p>
+            that store should manage some data. And the data which it manages is in the end determined by the reducer function.
+            Because it's the reducer func which will produce new state snapshots. The reducer has to go of spitting out
+            a new state snapshot whenever an action reaches it.
+        </p>
+
+        <h2 class="text-danger">Create reducer</h2>
+        Reducer - pure func!!!
+        <pre class="code">
+const counterReducer = (state, action) => {
+  return {
+    counter: state.counter + 1,
+  };
+};
+
+const store = redux.createStore(counterReducer);</pre>
+
+        <h2 class="text-danger">Create subscriber</h2>
+        <pre class="code">
+store.subscribe(() => {
+  const latestState = store.getState();
+  console.log('>>>', latestState);
+});</pre>
+
+        <h2 class="text-danger">Create init store</h2>
+        <pre class="code">
+const initState = { counter: 0 };
+
+const counterReducer = (state, action) => {
+  return {
+    counter: state.counter + 1,
+  };
+};</pre>
+
+        <h2 class="text-danger">Dispatch action</h2>
+        <pre class="code">store.dispatch({ type: 'increment' });</pre>
+
+        <h2 class="text-danger">Handling type in reducer</h2>
+        <pre class="code">
+const counterReducer = (state = initState, action) => {
+  if (action.type === 'increment') {
+    return { counter: state.counter + 1 }
+  }
+
+  if (action.type === 'decrement') {
+    return { counter: state.counter - 1 }
+  }
+
+  return state;
+};</pre>
+    </article>
+
+    <h1 class="text-danger">React & Redux</h1>
+    <h2 class="text-danger">Install react-redux</h2>
+    <p>this is a package which makes connecting React app to redux store and reducers</p>
+    <code>npm install react-redux</code>
+
+    <h2 class="text-danger">Create Store</h2>
+    <ul>
+        <li>create file <code>./store/index.js</code></li>
+        <li>copy <code>createStore</code> and <code>counterReducer</code></li>
+    </ul>
+
+    <h2 class="text-danger">Connect Redux to React</h2>
+    <pre class="code">
+import { Provider } from 'react-redux';
+import { store } from './store';
+
+ReactDOM.render((
+  &lt;Provider store={store}&gt;
+    &lt;App/&gt;
+  &lt;/Provider&gt;
+  ), document.getElementById('root')
+);</pre>
+
+    <h2 class="text-danger">Connect Component to store</h2>
+    <pre class="code">const counter = useSelector((state) => state.counter);</pre>
+
+    <h2 class="text-danger">Dispatch</h2>
+    <pre class="code">
+const dispatch = useDispatch();
+const onClickPlus = () => dispatch({ type: 'increment' });
+const onClickMinus = () => dispatch({ type: 'decrement' });</pre>
+
+    <h2 class="text-danger">transform to Class based Component</h2>
+    <pre class="code">
+class Counter extends Component {
+  onClickPlus = () => this.props.increment();
+
+  onClickMinus = () => this.props.decrement();
+
+  render() {
+    return (
+      &lt;div className={`input-group ${s.Counter}`}&gt;
+        &lt;Button onClick={this.onClickMinus}&lt;minus&gt;/Button&gt;
+        &lt;Input value={this.props.counter} disabled /&gt;
+        &lt;Button onClick={this.onClickPlus}&gt;plus&lt;/Button&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+
+const mapStateToProps = (state) => ({ counter: state.counter });
+
+const mapDispatchToProps = (dispatch) => ({
+  increment: () => dispatch({ type: 'increment' }),
+  decrement: () => dispatch({ type: 'decrement' }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)</pre>
+
+    <h2 class="text-danger">Attach payload to action</h2>
+    <pre class="code">
+<span class="text-success">// Counter.js</span>
+const onClickIncrease = () => dispatch({ type: 'increase', amount: 10 });
+
+<span class="text-success">// store.js</span>
+if (action.type === 'increase') {
+  return { counter: state.counter + action.amount }
+}</pre>
+
+    <h2 class="text-danger">Add some data in reducer</h2>
+    <pre class="code">
+<span class="text-success">// Counter.js</span>
+const onClickToggle = () => dispatch({ type: 'showCounter' })
+
+<span class="text-success">// store.js</span>
+if (action.type === 'showCounter') {
+  return {
+    counter: state.counter,
+    toggle: !state.toggle
+  }
+}</pre>
+
+    <h2 class="text-danger">Multiply reducers</h2>
+    <pre class="code">
+<span class="text-success">// store.js</span>
+const store = createStore(combineReducers({
+  counter: counterReducer,
+}));</pre>
+
+    <h2 class="text-danger">Refactoring</h2>
+    <pre class="code">
+<span class="text-success">// store/counter/actions.js</span>
+const actions = Object.freeze({
+  INCREMENT: 'counter/increment',
+  DECREMENT: 'counter/decrement',
+  INCREASE: 'counter/increase',
+  SHOW: 'counter/showCounter',
+});</pre>
+    <pre class="code">
+<span class="text-success">// store/counter/reducers.js</span>
+import { actions } from './actions';
+
+const initState = { counter: 0, toggle: true };
+
+const reducer = (state = initState, action) => {
+  switch (action.type) {
+    case actions.INCREMENT: return { ...state, counter: state.counter + 1 };
+    case actions.INCREASE: return { ...state, counter: state.counter + action.amount };
+    case actions.DECREMENT: return { ...state, counter: state.counter - 1 };
+    case actions.SHOW: return { ...state, toggle: !state.toggle };
+    default: return state;
+  }
+}</pre>
+    <pre class="code">
+<span class="text-success">// store/counter/actions.js</span>
+const increment = () => ({ type: actions.INCREMENT });
+const decrement = () => ({ type: actions.DECREMENT });
+const increase = (amount) => ({ type: actions.INCREASE, amount });
+const show = () => ({ type: actions.SHOW });</pre>
+
+</div>
+
+</body>
+</html>
