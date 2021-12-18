@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A-Level. React. Redux Thunk</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre code {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level. React. Redux Thunk.</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <img class="logo" src="./assets/redux-logo.svg" alt="React Router Logo">
+            <span>Redux Thunk</span>
+        </h2>
+        <style>
+            #cover h2 {
+                color: #252525;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+                border-radius: 50%;
+            }
+            #cover .logo {
+                width: auto;
+                height: 75px;
+                transform: translateY(12.5%);
+                border-radius: 50%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li>Action Creator</li>
+            <li>Middlewares</li>
+            <li>Асинхронные actions</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Action Creators</h2>
+        <p><i>Action Creators</i> - ф-ция которая создает объект action.</p>
+        <pre>
+            <code class="comment">// userActions.js</code>
+            <code>const userLogin = (login, password) => {</code>
+            <code>  return { type: 'USER_LOGIN', login, password }</code>
+            <code>}</code>
+            <code>&nbsp;</code>
+            <code class="comment">// SomeComponent.js</code>
+            <code>dispatch(userLogin('armen', '123'));</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Middleware</h2>
+        <img src="./assets/redux-middleware.drawio.svg" alt="redux middleware diagram">
+    </section>
+
+    <section class="slide">
+        <h2>Middleware</h2>
+        <p>
+            <i>Middleware</i> - это ф-ция, которая модифицирует ф-цию dispatch. И если у нас несколько middleware,
+            то они будут вызываться по цепочке.
+        </p>
+        <pre>
+            <code>const logMiddleware = (store) => (next) => (action) => {</code>
+            <code>  console.log('[LOG_MIDDLEWARE]');</code>
+            <code>  return next(action);</code>
+            <code>};</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://github.com/reduxjs/redux-thunk">Redux Thunk</a></h2>
+        <p><i>Thunk</i> - позволяет передавать в store ф-цию, как action.</p>
+        Устанавливаем: <code>npm install redux-thunk</code>
+        <div>Подключаем:</div>
+        <pre>
+            <code class="comment">// store/index.js</code>
+            <code>import thunk from 'redux-thunk'</code>
+            <code>&nbsp;</code>
+            <code>const store = createStore(reducers, applyMiddleware(thunk));</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Task 1.</h2>
+        <ol>
+            <li>Доделываем ToDo List.</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+        <ul>
+            <li><a href="https://github.com/reduxjs/redux-thunk">Redux Thunk</a></li>
+            <li>
+                <a href="https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en">
+                    React DevTools расширение для хрома
+                </a>
+            </li>
+            <li>
+                <a href="https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=ru">
+                    Redux DevTools расширение для хрома
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/zalmoxisus/redux-devtools-extension">
+                    Инструкция по подключению Redux DevTools в приложение
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>

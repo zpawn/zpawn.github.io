@@ -3,3 +3,4 @@
 * [Hooks](./03-hooks)
 * [Router](./04-router)
 * [Redux](./05-redux)
+* [Redux Thunk](./06-redux-thunk)

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap-icons.css">
+    <title>A-Level. React. Router.</title>
+    <style>
+        pre.code {
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--bs-gray-300);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-xl">
+    <h1>React. Redux Thunk.</h1>
+
+    <h2 class="text-danger">Middleware</h2>
+    <pre class="code">
+const stringMiddleware = (store) => (next) => (action) => {
+  console.log('[STRING_MIDDLEWARE]', { action });
+  if (typeof action === 'string') {
+    return next({ type: action })
+  }
+
+  return next(action);
+};
+
+const logMiddleware = (store) => (next) => (action) => {
+  console.log('[LOG_MIDDLEWARE]', { action, state: store.getState()} );
+  return next(action);
+};</pre>
+
+    <h2 class="text-danger">Redux Thunk</h2>
+
+    <h3 class="text-danger">Install</h3>
+    <code>npm install redux-thunk</code>
+
+    <h3 class="text-danger">Connect</h3>
+    <pre class="code">
+import thunk from 'redux-thunk'
+
+const store = createStore(rootReducer, applyMiddleware(thunk))</pre>
+
+    <h3 class="text-danger">Create action creator</h3>
+    <pre class="code">
+const loadMovies = () => (dispatch, state) => {
+  fetch('http://api.tvmaze.com/shows')
+    .then((res) => res.json())
+    .then(data => {
+      dispatch({
+        type: 'setMovies',
+        payload: normalizeMovies(data)
+      })
+    })
+    .catch(() => {});
+};</pre>
+
+    <h3 class="text-danger">Create actions type</h3>
+    <p>Меняем в экшенах и редьюсерах</p>
+    <pre class="code">
+const actions = Object.freeze({
+  SET_MOVIES: 'movies/setMovies',
+});</pre>
+
+    <h3 class="text-danger">Install ramda</h3>
+    <p>Юзаем готовые утилитки</p>
+    <pre class="code">import isEmpty from 'ramda/src/isEmpty';</pre>
+
+    <h3 class="text-danger">Counter</h3>
+    <ol>
+        <li>Создаем action</li>
+        <li>Меняем их в Сомпоненте</li>
+        <li>Выносим actions в ./store/counter/actions.js</li>
+        <li>Переписываем actions на actionCreators</li>
+        <li>Profit</li>
+        <li>Делаем еще одну кнопочку Random</li>
+    </ol>
+    <h3 class="text-danger">change to SwitchCase</h3>
+
+    <h3 class="text-danger">React.lazy</h3>
+    <pre class="code">
+const Movies = lazy(() => import('./pages/Movies'));
+
+&lt;Route path='/movies' element={&lt;Suspense fallback={&lt;Spinner/&gt;}>&lt;Movies /&gt;&lt;/Suspense&gt;}/&gt;</pre>
+
+    <h2 class="text-danger">ToDo</h2>
+    <ol>
+        <li>Прикручиваем роутер на демо данных в сторе</li>
+        <li>Добавление нового Листа</li>
+        <li>Загрузка todo при инициализации приложения</li>
+    </ol>
+</div>
+
+</body>
+</html>
