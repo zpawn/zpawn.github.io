@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap-icons.css">
+    <title>A-Level. React. Advanced.</title>
+    <style>
+        pre.code {
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--bs-gray-300);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-xl">
+    <h1>React. Advanced.</h1>
+
+    <h2 class="text-danger">Ключи и списки.</h2>
+    <pre class="code">
+const nums = [1, 2, 3, 4, 5];
+const smartNums = [ { id: '1', value: 'smart 1' }, { id: '2', value: 'smart 2' }, { id: '3', value: 'smart 3' }, { id: '4', value: 'smart 4' }, { id: '5', value: 'smart 5' } ];
+
+const ListItem = ({ value }) => (&lt;li&gt;{value}&lt;/li&gt;);
+
+const App = () => {
+  const [array, setArray] = useState(nums);
+  const [smartArray, setSmart] = useState(smartNums);
+
+  const onClickArr = () => {
+    const newArray = [...array];
+    newArray.shift();
+    setArray(newArray);
+  };
+
+  const onClickSmart = () => {
+    const newArray = [...smartArray];
+    newArray.shift();
+    setSmart(newArray);
+  };
+
+  return (
+    &lt;&gt;
+      &lt;button type='button' onClick={onClickArr}&gt;Remove Arr&lt;/button&gt;
+      &lt;ul>{array.map((num, index) => &lt;ListItem key={index} value={num}/&gt;)}&lt;/ul&gt;
+      &lt;button type='button' onClick={onClickSmart}&gt;Remove Smart&lt;/button&gt;
+      &lt;ul>{smartArray.map(({id, value}) => &lt;ListItem key={id} value={value}/&gt;)}&lt;/ul&gt;
+    &lt;/&gt;
+)
+}</pre>
+
+    <h2 class="text-danger">Функции как дочерние компоненты</h2>
+    <pre class="code">
+
+    </pre>
+
+    <h2 class="text-danger">Render Props</h2>
+    <pre class="code">
+<span class="text-success">// ./components/Counter.js</span>
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  const onClickPlus = () => setCount(count + 1);
+  const onClickMinus = () => setCount(count - 1);
+
+  return props.children({
+    count,
+    increment: onClickPlus,
+    decrement: onClickMinus,
+  });
+};
+
+<span class="text-success">// App.js</span>
+&lt;RenderPropCounter&gt;
+  {({ count, increment, decrement }) => (
+    &lt;div className='d-inline-flex'&gt;
+      &lt;Button onClick={decrement}&gt;minus&lt;/Button&gt;
+      &lt;Input value={count} disabled/&gt;
+      &lt;Button onClick={increment}&lt;plus&gt;/Button&gt;
+    &lt;/div&gt;
+  )}
+&lt;/RenderPropCounter&gt;</pre>
+</div>
+
+</body>
+</html>

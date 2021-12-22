@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A-Level. React. Advanced.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre code {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level. React. Advanced.</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <img class="logo" src="./assets/react-logo.svg" alt="React Router Logo">
+            <span>React. Advanced.</span>
+        </h2>
+        <style>
+            #cover h2 {
+                color: #61dafb;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+                border-radius: 50%;
+            }
+            #cover .logo {
+                width: auto;
+                height: 75px;
+                transform: translateY(12.5%);
+                border-radius: 50%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li>JSX</li>
+            <li>Router</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Условный рендеринг.</h2>
+        <p>Рендерим компонент по условию или не рендерим вообще.</p>
+        <div class="columns two">
+            <pre>
+                <code>const Greeting = ({ isAuth }) => {</code>
+                <code>  return isAuth</code>
+                <code>    ? &lt;UserGreeting /&gt;</code>
+                <code>    : &lt;GuestGreeting /&gt;</code>
+                <code>}</code>
+                <code>const Greeting = ({ isAuth }) =></code>
+                <code>  isAuth ? &lt;UserGreeting /&gt; : null;</code>
+            </pre>
+            <pre>
+                <code class="comment">// JSX</code>
+                <code>(</code>
+                <code>  ...</code>
+                <code>  {isAuth && &lt;UserGreeting /&gt;}</code>
+                <code>  ...</code>
+                <code>)</code>
+            </pre>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Списки и ключи.</h2>
+        <p>key помогает React определить, какие элементы были изменены, добавлены или удалены</p>
+        <pre>
+            <code>const content = tasks.map((task) =></code>
+            <code>  &lt;Task</code>
+            <code>    key={task.id}</code>
+            <code>    id={task.id}</code>
+            <code>    title={task.title} /&gt;</code>
+            <code>);</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Фрагменты</h2>
+        <p>
+            Возврат нескольких элементов из компонента является распространённой практикой в React.
+            Фрагменты позволяют формировать список дочерних элементов, не создавая лишних узлов в DOM.
+            <br>
+            <code>key</code> — это единственный атрибут, допустимый у Fragment
+        </p>
+        <div class="columns two">
+            <pre>
+                <code>&lt;React.Fragment&gt;</code>
+                <code>  &lt;ChildA /&gt;</code>
+                <code>  &lt;ChildB /&gt;</code>
+                <code>&lt;/React.Fragment&gt;</code>
+            </pre>
+            <pre>
+                <code>&lt;&gt;</code>
+                <code>  &lt;ChildA /&gt;</code>
+                <code>  &lt;ChildB /&gt;</code>
+                <code>&lt;/&gt;</code>
+            </pre>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>dangerouslySetInnerHTML</h2>
+        <p>
+            <i>dangerouslySetInnerHTML</i> соответствует свойству innerHTML в DOM браузера.
+            Как правило, вставка HTML из кода рискованна, так как можно случайно подвергнуть пользователей XSS атаке.
+            Но если очень надо и мы уверены, то можно так:
+        </p>
+        <pre>
+            <code>&lt;p dangerouslySetInnerHTML={{ __html: 'Первый &copy; Второй <' }}/&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Функции как дочерние компоненты</h2>
+        <p>
+            <i>props.children</i> работает так же, как и любой другой проп, поэтому в него можно передавать любые типы данных.
+        </p>
+        <p>
+            Мы можем передать колбэк в props.children, но с тем условием, что компонент преобразует их во что-то,
+            что React сможет понять и отрендерить.
+        </p>
+    </section>
+
+    <section class="slide">
+        <pre>
+            <code>const Repeat = ({ numTimes, children }) => {</code>
+            <code>  let items = [];</code>
+            <code>  for (let i = 0; i < numTimes; i++) {</code>
+            <code>    items.push(children(i));</code>
+            <code>  }</code>
+            <code>  return &lt;ul&gt;{items}&lt;/ul&gt;</code>
+            <code>}</code>
+            <code>const ListOfTenThings = () => (</code>
+            <code>  &lt;Repeat numTimes={10}&gt;</code>
+            <code>    {(index) => &lt;li key={index}&gt;Это элемент списка с ключом {index}&lt;/li&gt;}</code>
+            <code>  &lt;/Repeat&gt;</code>
+            <code>);</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Render Props</h2>
+        <div class="columns" style="grid-template-columns: 1fr 3fr;">
+            <div>Позволяет:</div>
+            <ol>
+                <li>Отделить представление от логики.</li>
+                <li>Достучаться до состояния дочернего компонента</li>
+            </ol>
+        </div>
+        <pre>
+            <code>const Child = (props) => {</code>
+            <code>  return props.children('Value from children');</code>
+            <code>};</code>
+            <code>const Parent = () => (</code>
+            <code>  &lt;Child&gt;{(item) => &lt;span&gt;{item}&lt;/span&gt;}&lt;/Child&gt;</code>
+            <code>);</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Разделение кода.</h2>
+        <p>
+            <i>React.lazy</i> - позволяет рендерить динамический импорт как обычный компонент.
+            Результатом является модуль, который экспортирует по умолчанию React-компонент
+            (export default).
+        </p>
+        <pre>
+            <code>const OtherComponent = React.lazy(() => import('./OtherComponent'));</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Suspense</h2>
+        <p>
+            Компонент с ленивой загрузкой (lazy) должен рендериться внутри компонента Suspense, который позволяет показать
+            запасное содержимое пока происходит загрузка ленивого компонента.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Suspense</h2>
+        <pre>
+            <code>const OtherComponent = React.lazy(() => import('./OtherComponent'));</code>
+            <code>&nbsp;</code>
+            <code>const MyComponent = () => {</code>
+            <code>  return (</code>
+            <code>    &lt;Suspense fallback={&lt;div&gt;Загрузка...&lt;/div&gt;}></code>
+            <code>      &lt;OtherComponent /&gt;</code>
+            <code>    &lt;/Suspense&gt;</code>
+            <code>  );</code>
+            <code>}</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Разделение кода и Router.</h2>
+        <pre>
+            <code>&lt;Suspense fallback={&lt;&gt;Loading...&lt:/&gt;}&gt;</code>
+            <code>  &lt;Routes&gt;</code>
+            <code>    ...</code>
+            <code>  &lt;Routes&gt;</code>
+            <code>&lt;Suspense&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Task 1.</h2>
+        <ol>
+            <li>Сделать route на который можно попасть только авторизованным пользователям</li>
+            <li>Доделываем ToDo.</li>
+            <li>Определяемся и приступаем к диплому</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+        <ul>
+            <li>
+                <a href="https://ru.reactjs.org/docs/conditional-rendering.html">Условный рендеринг</a>
+            </li>
+            <li>
+                <a href="https://ru.reactjs.org/docs/lists-and-keys.html">Списки и ключи</a>
+            </li>
+            <li>
+                <a href="https://ru.reactjs.org/docs/code-splitting.html">Разделение кода</a>
+            </li>
+            <li><a href="https://ru.reactjs.org/docs/fragments.html">Фрагменты</a></li>
+            <li><a href="https://ru.reactjs.org/docs/jsx-in-depth.html">JSX</a></li>
+            <li><a href="https://ru.reactjs.org/docs/render-props.html">Render Props</a></li>
+        </ul>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
