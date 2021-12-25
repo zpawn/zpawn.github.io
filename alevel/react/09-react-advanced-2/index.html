@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A_Level. React. Forms.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre code {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level. React. Forms.</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <img class="logo" src="./assets/react-logo.svg" alt="React Router Logo">
+            <span>Forms</span>
+        </h2>
+        <style>
+            #cover h2 {
+                color: #61dafb;;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+                border-radius: 50%;
+            }
+            #cover .logo {
+                width: auto;
+                height: 75px;
+                transform: translateY(12.5%);
+                border-radius: 50%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li>Работать с формами</li>
+            <li>Валидировать значения</li>
+            <li>Formik</li>
+            <li>Научитесь писать валидационные схемы</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://formik.org/">Formik.</a></h2>
+        <blockquote>
+            <p>Build forms in React, without the tears.</p>
+        </blockquote>
+    </section>
+
+    <section class="slide">
+        <h2>Install</h2>
+        <code>npm install formik</code>
+        <h2>Connect</h2>
+        <pre>
+            <code>import { useFormi, Formik } from 'formik';</code>
+            <code>&nbsp;</code>
+            <code>&lt;Formik&gt;</code>
+            <code>  {(formik) => (...)}</code>
+            <code>&lt;/Formik&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Обязательные props</h2>
+        <ul>
+            <li><i>initialValues</i> - стейт формы при инициализации.</li>
+            <li><i>onSubmit</i> - обработка сабмита формы.</li>
+        </ul>
+        <pre>
+            <code>const onSubmit = (values, actions) => { ... };</code>
+            <code>const initialValues = { email: '', password: '' };</code>
+            <code>&nbsp;</code>
+            <code>&lt;Formik initialValues={initValues} onSubmit={onSubmit}&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Подключаем инпут</h2>
+        <pre>
+            <code>&lt;Input</code>
+            <code>  name='email'</code>
+            <code>  placeholder='email'</code>
+            <code>  value={formik.values.email}</code>
+            <code>  onBlur={formik.handleBlur}</code>
+            <code>  onChange={formik.handleChange}</code>
+            <code>/&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Валидация</h2>
+        <p>Обрабатываем ошибки валидации данных и возвращаем объект со списком ошибок</p>
+        <pre>
+            <code>const onValidate = (values) => {</code>
+            <code>  const errors = {};</code>
+            <code>  if (!values.email) {</code>
+            <code>    errors.email = 'email require';</code>
+            <code>  }</code>
+            <code>  return errors;</code>
+            <code>}</code>
+            <code>&lt;Formik validate={onValidate}&gt;...&lt;/Formik&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Отображение ошибок</h2>
+        <pre>
+            <code>&lt;Formik ...&gt;</code>
+            <code>  {(formik) => (</code>
+            <code>    &lt;Input name='email' ... /&gt;</code>
+            <code>    {(formik.touched.email && formik.errors.email)</code>
+            <code>      && &lt;div type='danger'&gt;{errors.email}&lt;/div&gt;</code>
+            <code>    }</code>
+            <code>  )}</code>
+            <code>&lt;/Formik&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Валидация с <a href="https://github.com/jquense/yup">Yup</a></h2>
+        <p><code>npm install yup</code> - инсталим</p>
+        <div>Описываем схему валидации:</div>
+        <pre>
+            <code>const validationSchema = yup.object().shape({</code>
+            <code>  email: yup.string().required().email(),</code>
+            <code>});</code>
+            <code>&lt;Formik ... validationSchema={validationSchema}&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>useFormik</h2>
+        <pre>
+            <code>const formik = useFormik({ initialValues, onSubmit, validationSchema });</code>
+            <code>&lt;form onSubmit={formik.handleSubmit}&gt;</code>
+            <code>  &lt;Input</code>
+            <code>    name='email'</code>
+            <code>    placeholder='email'</code>
+            <code>    value={formik.values.email}</code>
+            <code>    onBlur={formik.handleBlur}</code>
+            <code>    onChange={formik.handleChange}</code>
+            <code>  /&gt;</code>
+            <code>  {formik.errors.email && &lt;div type='danger'&gt;{formik.errors.email}&lt;/div&gt;}</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Task 1.</h2>
+        <ol>
+            <li>
+                <div>Сделать форму регистрации:</div>
+                <ul>
+                    <li>поля: firstName, lastName, email, password, confirmPassword, agree</li>
+                    <li>все поля обязательные</li>
+                    <li>password - минимум 3 символа, максимум - 10</li>
+                    <li>agree - Соглашение, без чекбокса не пускаем дальше</li>
+                </ul>
+            </li>
+
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+        <ul>
+            <li><a href="https://formik.org/">Formik</a></li>
+            <li><a href="https://github.com/jquense/yup">Yup - валидация значений</a></li>
+        </ul>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
