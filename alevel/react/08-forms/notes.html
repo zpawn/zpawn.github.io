@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap-icons.css">
+    <title>A-Level. React. Form</title>
+    <style>
+        pre.code {
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--bs-gray-300);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-xl">
+    <h1 class="text-danger">Formik.</h1>
+    <h2 class="text-danger">Install</h2>
+    <code>npm install formik</code>
+    <h2 class="text-danger">Init form</h2>
+    <pre class="code">
+&lt;Formik&gt;
+  {(formikProp) => (
+        ...
+  )}
+&lt;/Formik&gt;</pre>
+
+    <h2 class="text-danger">Init and HandleSubmit (require props)</h2>
+    <pre class="code">
+const onSubmit = (values, actions) => { ... };
+const initValues = { email: '', password: '' };
+
+&lt;Formik initialValues={initValues} onSubmit={onSubmit}&gt;</pre>
+
+    <h2 class="text-danger">Handle change</h2>
+    <pre class="code">
+&lt;Input
+    name='email'
+    placeholder='email'
+    value={values.email}
+    onBlur={handleBlur}
+    onChange={handleChange}
+/&gt;</pre>
+
+    <h2 class="text-danger">Validation</h2>
+    <pre class="code">
+<span class="text-success">// Handler</span>
+const onValidate = (values, ...props) => {
+  const errors = {};
+
+  if (!values.password) {
+    errors.password = 'password require';
+  } else if (values.password.length <= 3) {
+    errors.password = 'password must be longer then 3 chars';
+  } else if (values.password.length > 16) {
+    errors.password = 'password to longer, must be lower then 16';
+  }
+}
+
+<span class="text-success">// JSX</span>
+{(touched.email && errors.email) && &lt;Text type='danger'&gt;{errors.email}&lt;/Text&gt;}</pre>
+
+    <h2 class="text-danger">Yup</h2>
+    <pre class="code">
+const validationSchema = yup.object().shape({
+  email: yup.string().required('email required').email('incorrect email'),
+  password: yup.string().required('email required').min(3, 'short password').max(16, 'long password'),
+  agree: yup.boolean().test('is-true', 'Must agree to term to continue', value => value === true),
+});</pre>
+
+    <h2 class="text-danger">useFormik</h2>
+    <pre class="code">const formik = useFormik({ initialValues, onSubmit, validationSchema });</pre>
+
+    <h2 class="text-danger">Equal password</h2>
+    <pre class="code">confirmPassword: yup.string().required().oneOf([yup.ref('password')], 'not equal'),</pre>
+
+    <h2 class="text-danger">Upload Images</h2>
+    <pre class="code">
+const IMAGE_BASE_URL = 'https://firebasestorage.googleapis.com/v0/b/[STORAGE_URL]/o';
+
+const Upload = () => {
+    const [image, setImage] = useState(null);
+    const [images, setImages] = useState([]);
+
+    const onImageChange = (e) => {
+        let file = e.target.files[0]; // get the supplied file
+        if (file) {
+            setImage(file)
+        } else {
+            setImage(null);
+        }
+    };
+
+    const uploadToFirebase = () => {
+        if (image) {
+            const formData = new FormData();
+            formData.append('File', image);
+            fetch(`${IMAGE_BASE_URL}?name=${image.name}`,
+                { method: 'POST', body: formData }
+            ).then((response) => response.json())
+                .then((result) => {
+                    console.log('Success:', result);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+    }
+
+    const onClickImagesList = () => {
+        fetch(IMAGE_BASE_URL)
+            .then(res => res.json())
+            .then((res) => {
+                console.log('>>> res:', res)
+                const images = res.items.map((item) => `${IMAGE_BASE_URL}/${item.name}?alt=media`);
+                setImages(images);
+            });
+    };
+
+    return (
+        &lt;&gt;
+            &lt;h1&gt;Upload Page&lt;/h1&gt;
+            &lt;input type='file' onChange={onImageChange}/&gt;
+            &lt;button type='button' onClick={uploadToFirebase}&gt;Upload to Firebase&lt;/button&gt;
+            &lt;button type='button' onClick={onClickImagesList}&gt;getImagesList&lt;/button&gt;
+            {images.length > 0 && images.map(image => &lt;img src={image} alt=""/&gt;)}
+        &lt;/&gt;
+    )
+}</pre>
+</div>
+
+</body>
+</html>

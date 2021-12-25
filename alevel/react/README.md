@@ -5,3 +5,4 @@
 * [Redux](./05-redux)
 * [Redux Thunk](./06-redux-thunk)
 * [React Advanced](./07-react-advanced) (dangerousHTML, Render Props, Lazy)
+* [Forms](./08-forms)
