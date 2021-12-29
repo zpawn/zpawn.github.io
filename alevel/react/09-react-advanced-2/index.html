@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>A_Level. React. Forms.</title>
+    <title>A_Level. React. Advanced.</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
@@ -17,17 +17,17 @@
 <body class="shower list">
 
     <header class="caption">
-        <h1>A-Level. React. Forms.</h1>
+        <h1>A-Level. React. Advanced.</h1>
     </header>
 
     <section class="slide" id="cover">
         <h2>
-            <img class="logo" src="./assets/react-logo.svg" alt="React Router Logo">
-            <span>Forms</span>
+            <img class="logo" src="./assets/react-logo.svg" alt="React Logo">
+            <span>React. Advanced.</span>
         </h2>
         <style>
             #cover h2 {
-                color: #61dafb;;
+                color: #61dafb;
                 text-align: center;
                 font-size: 70px;
                 position: relative;
@@ -47,138 +47,186 @@
     <section class="slide">
         <h2>Темы</h2>
         <ol>
-            <li>Работать с формами</li>
-            <li>Валидировать значения</li>
-            <li>Formik</li>
-            <li>Научитесь писать валидационные схемы</li>
+            <li>Ref, Forward ref</li>
+            <li>Portal</li>
+            <li>Context</li>
         </ol>
     </section>
 
     <section class="slide">
-        <h2><a href="https://formik.org/">Formik.</a></h2>
-        <blockquote>
-            <p>Build forms in React, without the tears.</p>
-        </blockquote>
-    </section>
+        <h2>Refs & DOM</h2>
+        <p>Рефы дают возможность получить доступ к DOM-узлам или React-элементам, созданным в рендер-методе.</p>
 
-    <section class="slide">
-        <h2>Install</h2>
-        <code>npm install formik</code>
-        <h2>Connect</h2>
-        <pre>
-            <code>import { useFormi, Formik } from 'formik';</code>
-            <code>&nbsp;</code>
-            <code>&lt;Formik&gt;</code>
-            <code>  {(formik) => (...)}</code>
-            <code>&lt;/Formik&gt;</code>
-        </pre>
-    </section>
-
-    <section class="slide">
-        <h2>Обязательные props</h2>
+        <div>Когда может понадобится:</div>
         <ul>
-            <li><i>initialValues</i> - стейт формы при инициализации.</li>
-            <li><i>onSubmit</i> - обработка сабмита формы.</li>
+            <li>Управление фокусом, выделение текста или воспроизведение медиа.</li>
+            <li>Анимаций.</li>
+            <li>Интеграция со сторонними DOM-библиотеками.</li>
         </ul>
+    </section>
+
+    <section class="slide">
+        <h2>useRef</h2>
         <pre>
-            <code>const onSubmit = (values, actions) => { ... };</code>
-            <code>const initialValues = { email: '', password: '' };</code>
+            <code>import React, { useRef } from 'react';</code>
             <code>&nbsp;</code>
-            <code>&lt;Formik initialValues={initValues} onSubmit={onSubmit}&gt;</code>
-        </pre>
-    </section>
-
-    <section class="slide">
-        <h2>Подключаем инпут</h2>
-        <pre>
-            <code>&lt;Input</code>
-            <code>  name='email'</code>
-            <code>  placeholder='email'</code>
-            <code>  value={formik.values.email}</code>
-            <code>  onBlur={formik.handleBlur}</code>
-            <code>  onChange={formik.handleChange}</code>
-            <code>/&gt;</code>
-        </pre>
-    </section>
-
-    <section class="slide">
-        <h2>Валидация</h2>
-        <p>Обрабатываем ошибки валидации данных и возвращаем объект со списком ошибок</p>
-        <pre>
-            <code>const onValidate = (values) => {</code>
-            <code>  const errors = {};</code>
-            <code>  if (!values.email) {</code>
-            <code>    errors.email = 'email require';</code>
-            <code>  }</code>
-            <code>  return errors;</code>
+            <code>const Component = () => {</code>
+            <code>  const newTaskRef = useRef(null);</code>
+            <code>  const someEventHandler = () => newTaskRef.current.focus()</code>
+            <code>&nbsp;</code>
+            <code>  return (</code>
+            <code>    &lt;input placeholder='new task' ref={newTaskRef}/&gt;</code>
+            <code>  )</code>
             <code>}</code>
-            <code>&lt;Formik validate={onValidate}&gt;...&lt;/Formik&gt;</code>
         </pre>
     </section>
 
     <section class="slide">
-        <h2>Отображение ошибок</h2>
+        <h2>forwardRef</h2>
+        <ul>
+            <li>Перенаправление рефов позволяет автоматически передавать реф компонента одному из его дочерних элементов.</li>
+            <li>Перенаправление рефов позволяет взять ref из атрибутов компонента, и передать («перенаправить») его одному из дочерних компонентов.</li>
+            <li>Второй аргумент ref существует только в том случае, если вы создаёте компонент через функцию React.forwardRef</li>
+            <li><mark>ref это не проп</mark> (как и key, React обрабатывает ref особым образом).</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>forwardRef</h2>
         <pre>
-            <code>&lt;Formik ...&gt;</code>
-            <code>  {(formik) => (</code>
-            <code>    &lt;Input name='email' ... /&gt;</code>
-            <code>    {(formik.touched.email && formik.errors.email)</code>
-            <code>      && &lt;div type='danger'&gt;{errors.email}&lt;/div&gt;</code>
-            <code>    }</code>
-            <code>  )}</code>
-            <code>&lt;/Formik&gt;</code>
+            <code class="comment">// some/path/to/OurComponents.js</code>
+            <code>const OurComponents.js = {</code>
+            <code>  const newTaskRef = <mark>React.useRef(null)</mark>;</code>
+            <code>  return (&lt;CustomInput placeholder='new task' <mark>ref={newTaskRef}</mark>/&gt;)</code>
+            <code>}</code>
+            <code>&nbsp;</code>
+            <code class="comment">// src/ui/Input.js</code>
+            <code>const Input = <mark>React.forwardRef</mark>((props, ref) => (</code>
+            <code>  &lt;input type="text" ref={ref} {...props} /&gt;</code>
+            <code>))</code>
         </pre>
     </section>
 
     <section class="slide">
-        <h2>Валидация с <a href="https://github.com/jquense/yup">Yup</a></h2>
-        <p><code>npm install yup</code> - инсталим</p>
-        <div>Описываем схему валидации:</div>
+        <h2>Portal</h2>
+        <p>Порталы позволяют рендерить дочерние элементы в DOM-узел, который находится вне DOM-иерархии родительского компонента.</p>
+        <p>
+            Применения порталов: диалоговые окна, всплывающие карточки и всплывающие подсказки
+            (т.е. когда в родительском компоненте заданы стили <mark>overflow: hidden</mark> или <mark>z-index</mark>,
+            но вам нужно чтобы дочерний элемент визуально выходил за рамки своего контейнера)
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Portal</h2>
         <pre>
-            <code>const validationSchema = yup.object().shape({</code>
-            <code>  email: yup.string().required().email(),</code>
-            <code>});</code>
-            <code>&lt;Formik ... validationSchema={validationSchema}&gt;</code>
+            <code>import ReactDOM from 'react-dom';</code>
+            <code>&nbsp;</code>
+            <code>{ReactDOM.createPortal(</code>
+            <code>  &lt;Modal {...{ onClose, onDone }}/&gt;,</code>
+            <code>  document.getElementById('modal-root')</code>
+            <code>)}</code>
         </pre>
     </section>
 
     <section class="slide">
-        <h2>useFormik</h2>
+        <h2>Context</h2>
+        <p>
+            Контекст позволяет передавать данные через дерево компонентов без необходимости передавать пропсы
+            на промежуточных уровнях (например: UI-тема или выбранный язык).
+        </p>
+        <p>
+            Обычно контекст используется, если необходимо обеспечить доступ данных во многих компонентах
+            на разных уровнях вложенности.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>createContext</h2>
         <pre>
-            <code>const formik = useFormik({ initialValues, onSubmit, validationSchema });</code>
-            <code>&lt;form onSubmit={formik.handleSubmit}&gt;</code>
-            <code>  &lt;Input</code>
-            <code>    name='email'</code>
-            <code>    placeholder='email'</code>
-            <code>    value={formik.values.email}</code>
-            <code>    onBlur={formik.handleBlur}</code>
-            <code>    onChange={formik.handleChange}</code>
-            <code>  /&gt;</code>
-            <code>  {formik.errors.email && &lt;div type='danger'&gt;{formik.errors.email}&lt;/div&gt;}</code>
+            <code>const ThemeContext = createContext('light');</code>
+        </pre>
+        <p>
+            Когда React рендерит компонент, который подписан на этот объект, React получит текущее значение контекста
+            из ближайшего подходящего Provider выше в дереве компонентов.
+        </p>
+        <p>
+            Еесли Provider не будет найден, то используется defaultValue.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Context.Provider</h2>
+        <p>
+            Context используется вместе с Provider компонентом, который позволяет дочерним компонентам,
+            использующим этот контекст, подписаться на его изменения.
+        </p>
+        <p>
+            <code>value</code> - обязательный проп, который будет передан во все компоненты, использующие контекст.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Context.Provider</h2>
+        <p>
+            Все потребители, которые являются потомками Provider, будут повторно рендериться, как только
+            проп value у Provider изменится
+        </p>
+        <pre>
+            <code>&lt;ThemeContext.Provider value='dark'&gt;</code>
+            <code>  &lt;App/&gt;</code>
+            <code>&lt;/ThemeContext.Provider&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Context.Consumer</h2>
+        <p>
+            <i>Consumer</i> - компонент, который подписывается на изменения контекста.
+        </p>
+        <p>
+            Эта функция принимает текущее значение контекста (т.е. проп value ближайшего компонента Provider
+            или defaultValue, если Provider не найден) и возвращает React-компонент.
+        </p>
+        <pre>
+            <code>&lt;ThemeContext.Consumer&gt;</code>
+            <code>  {(themeCtx) => { ... }}</code>
+            <code>&lt;/ThemeContext.Consumer&gt;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>useContext</h2>
+        <p>
+            <mark>useContext</mark> - Принимает объект контекста и возвращает текущее значение контекста
+            для этого контекста.
+        </p>
+        <pre>
+            <code>import React, { useContext } from 'react';</code>
+            <code>import ThemeContext from '../../context/theme';</code>
+            <code>&nbsp;</code>
+            <code>const themeCtx = useContext(ThemeContext);</code>
         </pre>
     </section>
 
     <section class="slide">
         <h2>Task 1.</h2>
         <ol>
-            <li>
-                <div>Сделать форму регистрации:</div>
-                <ul>
-                    <li>поля: firstName, lastName, email, password, confirmPassword, agree</li>
-                    <li>все поля обязательные</li>
-                    <li>password - минимум 3 символа, максимум - 10</li>
-                    <li>agree - Соглашение, без чекбокса не пускаем дальше</li>
-                </ul>
-            </li>
-
+            <li>Прикрутить к todo выбор темы.</li>
         </ol>
     </section>
 
     <section class="slide">
         <h2>Links</h2>
         <ul>
-            <li><a href="https://formik.org/">Formik</a></li>
-            <li><a href="https://github.com/jquense/yup">Yup - валидация значений</a></li>
+            <li><a href="https://ru.reactjs.org/docs/context.html">Контекст</a></li>
+            <li><a href="https://ru.reactjs.org/docs/hooks-reference.html#usecontext">useContext</a></li>
+            <li>
+                <a href="https://ru.reactjs.org/docs/refs-and-the-dom.html">Refs</a>,
+                <a href="https://ru.reactjs.org/docs/hooks-reference.html#useref">useRef</a>,
+                <a href="https://ru.reactjs.org/docs/forwarding-refs.html">перенаправление рефов</a>
+            </li>
+            <li><a href="https://ru.reactjs.org/docs/portals.html">Portals</a></li>
         </ul>
     </section>
 
