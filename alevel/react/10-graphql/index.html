@@ -50,9 +50,18 @@
     <section class="slide">
         <h2>Темы</h2>
         <ol>
-            <li></li>
-            <li></li>
+            <li>REST API</li>
+            <li>недостатки REST</li>
+            <li>GraphQL</li>
         </ol>
+    </section>
+
+    <section class="slide">
+        <h2>REST</h2>
+        <p>
+            <i>REST</i> - это набор ограничений и правил как организовать кода приложения, чтобы все системы легко
+            обменивались данными и приложение можно было легко масштабировать.
+        </p>
     </section>
 
     <section class="slide">
@@ -124,7 +133,7 @@
     </section>
 
     <section class="slide">
-        <h2>Query</h2>
+        <h2>Query - получение данных</h2>
         <pre>
             <code>query log{</code>
             <code>  login(login:"test", password:"test")</code>
@@ -143,7 +152,7 @@
     </section>
 
     <section class="slide mutation">
-        <h2>Mutation</h2>
+        <h2>Mutation - изменение данных</h2>
         <pre>
             <code>mutation reg{</code>
             <code>  UserUpsert(user: {login:"test", password:"test"}){</code>
