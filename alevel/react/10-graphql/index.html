@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A_Level. React. GraphQL</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre code {
+            font-size: 20px;
+        }
+        img.responsive {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level. React. GraphQL.</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <img class="logo" src="./assets/graphql-logo.svg" alt="React Router Logo">
+            <span>GraphQL</span>
+        </h2>
+        <style>
+            #cover h2 {
+                color: #e10098;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+                border-radius: 50%;
+            }
+            #cover .logo {
+                width: auto;
+                height: 75px;
+                transform: translateY(15%);
+                border-radius: 50%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li></li>
+            <li></li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>REST API</h2>
+        <table class="striped">
+            <tr>
+                <th scope="col">Task</th>
+                <th>Method</th>
+                <th>Path</th>
+            </tr>
+            <tr>
+                <td>Получить все таски</td>
+                <td>GET</td>
+                <td>/tasks</td>
+            </tr>
+            <tr>
+                <td>Создать новую таску</td>
+                <td>POST</td>
+                <td>/tasks</td>
+            </tr>
+            <tr>
+                <td>Получить определенную таску</td>
+                <td>GET</td>
+                <td>/tasks/{id}</td>
+            </tr>
+            <tr>
+                <td>Обновить существующую таску</td>
+                <td>PUT</td>
+                <td>/tasks/{id}</td>
+            </tr>
+            <tr>
+                <td>Удалить существующую таску</td>
+                <td>DELETE</td>
+                <td>/tasks/{id}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="slide rest-in-action">
+        <h2>REST API в реальности</h2>
+        <img src="./assets/rest-in-action.png" alt="rest in action" class="responsive">
+    </section>
+
+    <section class="slide">
+        <h2>REST API микросервисы</h2>
+        <img src="./assets/rest-api-advanced.png" alt="rest advanced" class="responsive">
+    </section>
+
+    <section class="slide">
+        <h2>GraphQL</h2>
+        <img src="./assets/graphql-diagram.png" alt="graphql diagram" class="responsive">
+    </section>
+
+    <section class="slide">
+        <h2>GraphQL</h2>
+        <p><b>GraphQL</b> это синтаксис, который описывает как запрашивать данные</p>
+
+        <h3>Основные характеристики</h3>
+        <ul>
+            <li>Позволяет клиенту точно указать, какие данные ему нужны.</li>
+            <li>Облегчает агрегацию данных из нескольких источников.</li>
+            <li>Использует систему типов для описания данных.</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Анатомия запроса</h2>
+        <img src="./assets/query-anatomy.png" alt="graphql anatomy">
+    </section>
+
+    <section class="slide">
+        <h2>Query</h2>
+        <pre>
+            <code>query log{</code>
+            <code>  login(login:"test", password:"test")</code>
+            <code>}</code>
+        </pre>
+        <ul>
+            <li><i>log</i> - имя для вашего удобства</li>
+            <li>
+                <i>login</i> - имя запроса на бэке.
+                <ul>
+                    <li>login - строка логина</li>
+                    <li>password - пароль</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide mutation">
+        <h2>Mutation</h2>
+        <pre>
+            <code>mutation reg{</code>
+            <code>  UserUpsert(user: {login:"test", password:"test"}){</code>
+            <code>    _id, login</code>
+            <code>  }</code>
+            <code>}</code>
+        </pre>
+        <ul>
+            <li><i>reg</i> - имя для вашего удобства</li>
+            <li><i>UserUpsert</i> - имя мутации с бэка</li>
+            <li><i>user</i> - значение типа для отправки на сервер (input UserInput).</li>
+            <li>_id, login - поля которые получим в ответ.</li>
+        </ul>
+        <style>
+            .mutation pre {
+                margin-bottom: 0;
+                font-size: 14px;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Task 1.</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+        <ul>
+            <li>
+                <a href="https://graphql.org/">GraphQL</a>
+            </li>
+            <li><a href="http://shop-roles.asmer.fs.a-level.com.ua/graphql">Бэк магазина (онлайн песочница)</a></li>
+            <li><a href="http://shop-roles.asmer.fs.a-level.com.ua/">Бэк магазина (для работы с ним)</a></li>
+            <li><a href="http://doc.a-level.com.ua/frontend-graphql-backs/">Дока</a></li>
+        </ul>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
