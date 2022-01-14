@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A-Level. React. TypeScript.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre code {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level. React. TypeScript.</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <img class="logo" src="./assets/ts-logo.svg" alt="React Router Logo">
+            <span>TypeScript</span>
+        </h2>
+        <style>
+            #cover h2 {
+                color: #3178c6;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+            }
+            #cover .logo {
+                width: auto;
+                height: 75px;
+                transform: translateY(15%);
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li></li>
+            <li></li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>TypeScript</h2>
+        <p>TypeScript is JavaScript with syntax for types</p>
+        <ul>
+            <li>Статическая типизация</li>
+            <li>Поддержка новейших функций JavaScript</li>
+            <li>Поддержка IDE</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h3>Установка</h3>
+        <code>npm install typescript --save-dev</code>
+
+        <h3>Инициализация</h3>
+        <code>tsc --init</code> - создаст файлик <i>tsconfig.json</i> с настройками компилятора
+    </section>
+
+    <section class="slide">
+        <h2>Настройки</h2>
+        <ul>
+            <li><i>noImplicitAny</i> - ошибка если тип не указан или any</li>
+            <li><i>target</i> - указывает в какую версию ECMAScript компилировать</li>
+            <li><i>removeComments</i> - даляет комментарии</li>
+        </ul>
+
+        <div>В <i>package.json</i> создаем скрипт для запуска компилятора</div>
+        <pre>
+            <code>"scripts": {</code>
+            <code>  "compile": "tsc ./index.ts",</code>
+            <code>  "watch": "tsc ./index.ts --watch"</code>
+            <code>},</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Типы</h2>
+        <div class="columns two">
+            <ul>
+                <li><b>Boolean</b>: логическое значение true или false</li>
+                <li><b>Number</b>: числовое значение</li>
+                <li><b>String</b>: строки</li>
+                <li><b>Array</b>: массивы</li>
+                <li><b>Tuple</b>: кортежи</li>
+                <li><b>Enum</b>: перечисления</li>
+                <li><b>Any</b>: произвольный тип</li>
+            </ul>
+            <ul>
+
+                <li><b>Null</b> и <b>undefined</b>: соответствуют значениям null и undefined в javascript</li>
+                <li><b>Void</b>: отсутствие конкретного значения, используется в основном в качестве возвращаемого типа функций</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2></h2>
+        <pre>
+            <code>const a: number = 1;</code>
+            <code>const b: string = 2;</code>
+            <code>const c: boolean = false;</code>
+            <code>const arr: number[] = [1,2,3,4];</code>
+            <code>const arr1: string[] = ['a', 'b', 'c', 'd'];</code>
+            <code>let userInfo: [string, number];</code>
+            <code>enum Color { Red, Green, Blue }</code>
+            <code>enum HTTPCodes { Success = 200, ClientError = 400, ServerError = 500 }</code>
+        </pre>
+    </section>
+
+    <section class="slide func">
+        <h2>Функции</h2>
+        <pre>
+            <code>function add(a: number, b: number): number {</code>
+            <code>  return a + b;</code>
+            <code>}</code>
+            <code>let result1 = add(1, 2);</code>
+        </pre>
+
+        <pre>
+            <code>function getFullName(firstName: string, lastName?: string) {</code>
+            <code>  if (lastName)</code>
+            <code>    return firstName + " " + lastName;</code>
+            <code>  else</code>
+            <code>    return firstName;</code>
+            <code>}</code>
+        </pre>
+
+        <style>
+            .func code {
+                font-size: 16px;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Классы</h2>
+        <pre>
+            <code>class User {</code>
+            <code>  id: number;</code>
+            <code>  name: string;</code>
+            <code>  getInfo(): string {</code>
+            <code>    return "id:" + this.id + " name:" + this.name;</code>
+            <code>  }</code>
+            <code>}</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Модификаторы доступа</h2>
+        <pre>
+            <code>class User {</code>
+            <code>  public name: string;</code>
+            <code>  protected year: number;</code>
+            <code>  private: inn: number;</code>
+            <code>  readonly numberOdLegs = 8;</code>
+            <code>}</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+        <ul>
+            <li>
+                <a href="https://www.typescriptlang.org/">typescriptlang.org</a>
+            </li>
+        </ul>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>
