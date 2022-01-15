@@ -45,8 +45,10 @@
     <section class="slide">
         <h2>Темы</h2>
         <ol>
-            <li></li>
-            <li></li>
+            <li>Приемущества</li>
+            <li>Типы</li>
+            <li>Функции</li>
+            <li>Class</li>
         </ol>
     </section>
 
@@ -145,6 +147,21 @@
     </section>
 
     <section class="slide">
+        <h2>Функции</h2>
+
+        <pre>
+            <code class="comment">// описываем контракт</code>
+            <code>type FuncType = (baseValue: number, incrementValue: number) => number;</code>
+            <code>&nbsp;</code>
+            <code>const increase = &lt;FuncType&gt;function (x:number, y: number): number {</code>
+            <code>  return x + y;</code>
+            <code>}</code>
+            <code>&nbsp;</code>
+            <code>const otherIncrease: FuncType = (x, y) => x + y;</code>
+        </pre>
+    </section>
+
+    <section class="slide">
         <h2>Классы</h2>
         <pre>
             <code>class User {</code>
@@ -170,10 +187,26 @@
     </section>
 
     <section class="slide">
+        <h2>Generics</h2>
+        <pre>
+            <code>const logging = function&lt;T&gt;(arg: T): T {</code>
+            <code>  <mark class="comment">// send Data to log</mark></code>
+            <code>  return arg</code>
+            <code>}</code>
+            <code></code>
+            <code>const logString: string = log&lt;string&gt;('str');</code>
+            <code>const logNumber: number = log&lt;number&gt;(1);</code>
+        </pre>
+    </section>
+
+    <section class="slide">
         <h2>Links</h2>
         <ul>
             <li>
                 <a href="https://www.typescriptlang.org/">typescriptlang.org</a>
+            </li>
+            <li>
+                <a href="https://create-react-app.dev/docs/custom-templates/">create-react-app - Custom Templates</a>
             </li>
         </ul>
     </section>
