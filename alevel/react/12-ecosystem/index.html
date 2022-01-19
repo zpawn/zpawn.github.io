@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>A_Level. React.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre code {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level. React. Router.</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <img class="logo" src="./assets/editorconfig-logo.png" alt="Editorconfig logo">
+            <img class="logo" src="./assets/eslint-logo.svg" alt="eslint logo">
+            <img class="logo" src="./assets/prettier-logo.svg" alt="prettier logo">
+            <span>Ecosystem</span>
+        </h2>
+        <style>
+            #cover h2 {
+                /*#f0db4f #323330*/
+                color: #323330;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+            }
+            #cover .logo {
+                width: auto;
+                height: 1em;
+                transform: translateY(12.5%);
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li>Editorconfig</li>
+            <li>ESLint</li>
+            <li>Prettier</li>
+            <li>husky</li>
+            <li>lint-staged</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://editorconfig.org/">EditorConfig</a></h2>
+        <p>
+            <i>EditorConfig</i> помогает поддерживать единый набор правил.
+            Чтобы все члены команды пользовались едиными настройками, касающимися отступов или символов перевода строки
+            и т.п. применяют файл <i>.editorconfig</i>
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>EditorConfig. Пример.</h2>
+        <pre>
+            <code>[*]</code>
+            <code>end_of_line = lf</code>
+            <code>charset = utf-8</code>
+            <code>trim_trailing_whitespace = true</code>
+            <code>insert_final_newline = true</code>
+            <code>max_line_length = 80</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>EditorConfig. Настройки.</h2>
+        <ul>
+            <li><b>root</b> = true - корневая директория.</li>
+            <li><b>trim_trailing_whitespace</b> = true - удаление пробелов в конце строк.</li>
+            <li><b>indent_style</b> = space - отступы оформляются пробелами, а не табуляции.</li>
+            <li><b>indent_size</b> = 2 - размер отступа равен двум пробелам.</li>
+            <li><b>end_of_line</b> = lf - перевод строки в виде символа lf независимо от ОС.</li>
+            <li><b>insert_final_newline</b> = true — в конце файла должна быть пустая строка.</li>
+            <li><b>max_line_length</b> = 80 — максимальная длина строки 80 символов.</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://eslint.org/">ESLint</a></h2>
+        <blockquote>
+            <p>ESLint - Find and fix problems in your JavaScript code.</p>
+        </blockquote>
+        <p>
+            ESLint - это статический анализатор кода для нахождения проблемных участков, который не соответствуют
+            руководству по стилю.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h3>Install</h3>
+        <code>npm install eslint --save-dev</code>
+
+        <h3>Запуск</h3>
+        <pre>
+            <code>"scripts": {</code>
+            <code>  ...</code>
+            <code>  "lint": "eslint './src/**/*.{js,jsx}'"</code>
+            <code>},</code>
+        </pre>
+    </section>
+
+    <section class="slide eslint">
+        <pre class="code">
+            <code class="comment">// .eslintrc</code>
+            <code>{</code>
+            <code>  "env": {</code>
+            <code>    "browser": true,</code>
+            <code>    "node": true</code>
+            <code>  },</code>
+            <code>  "extends": ["react-app", "airbnb"],</code>
+            <code>  "parserOptions": {</code>
+            <code>    "ecmaVersion":  2018,</code>
+            <code>    "sourceType":  "module",</code>
+            <code>    "ecmaFeatures": {</code>
+            <code>      "jsx":  true</code>
+            <code>    },</code>
+            <code>  },</code>
+            <code>  "rules":  { ... },</code>
+            <code>}</code>
+        </pre>
+        <style>
+            .eslint pre, .eslint code {
+                font-size: 14px;
+            }
+        </style>
+    </section>
+
+    <section class="slide prettier">
+        <h2><a href="https://prettier.io/">Prettier</a></h2>
+        <p>Prettier — это средство для форматирования кода, которое нацелено на использование жёстко заданных правил.</p>
+        <h3>Install</h3>
+        <code>npm i -D prettier eslint-config-prettier</code>
+
+        <p>
+            <i>eslint-config-prettier</i> - Отключает все правила, которые могут конфликтовать с Prettier.
+        </p>
+
+        <style>
+            .prettier code {
+                font-size: 24px;
+            }
+        </style>
+    </section>
+
+    <section class="slide prettier-example">
+        <pre>
+            <code>{</code>
+            <code>  ...</code>
+            <code>  "extends": ["react-app", "airbnb", "prettier"], <span class="comment">// eslint-config-prettier</span></code>
+            <code>  "plugins": ["react"],</code>
+            <code>  ...</code>
+            <code>  "rules":  {</code>
+            <code>    ...</code>
+            <code>    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]</code>
+            <code>    ...</code>
+            <code>  }</code>
+            <code>}</code>
+        </pre>
+        <style>
+            .prettier-example code {
+                font-size: 14px;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://typicode.github.io/husky/#/">husky</a></h2>
+        <blockquote>
+            Husky improves your commits and more
+            <span style="font-style: normal">🐶</span>
+            <span style="color: var(--color-line) !important;">woof!</span>
+        </blockquote>
+        <h3>Install</h3>
+        <code>npx husky-init && npm install</code>
+    </section>
+
+    <section class="slide">
+        <h2>husky</h2>
+        <p>Добавляем хуки и испольняемые команды:<br>
+            <code>npx husky add .husky/pre-commit "npm run lint"</code>
+        </p>
+
+        <p>или ручками в файлике <code>.husky/pre-commit</code></p>
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://github.com/okonet/lint-staged">lint-staged</a></h2>
+        <blockquote>
+            Run linters against staged git files and don't let
+            <span style="font-style: normal">💩</span>
+            slip into your code base!
+        </blockquote>
+        <h3>Install</h3>
+        <code>npm install --save-dev lint-staged</code>
+    </section>
+
+    <section class="slide">
+        <h2>lint-staged</h2>
+        <div class="columns two">
+            <pre>
+                <code class="comment">.husky/pre-commit</code>
+                <code>#!/bin/sh</code>
+                <code>. "$(dirname "$0")/_/husky.sh"</code>
+                <code>&nbsp;</code>
+                <code>npx lint-staged</code>
+            </pre>
+            <pre>
+                <code class="comment">package.json</code>
+                <code>...</code>
+                <code>"lint-staged": {</code>
+                <code> "src/**/*.{js,jsx}": [</code>
+                <code>   "prettier --write",</code>
+                <code>   "eslint"</code>
+                <code> ],</code>
+                <code>},</code>
+                <code>...</code>
+            </pre>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+        <ul>
+            <li><a href="https://editorconfig.org/">editorconfig</a></li>
+            <li><a href="https://eslint.org/">ESLint</a></li>
+            <li><a href="https://prettier.io/">Prettier</a></li>
+            <li><a href="https://typicode.github.io/husky/#/">husky</a></li>
+            <li><a href="https://github.com/okonet/lint-staged">lint-staged</a></li>
+            <li>Список всех возможных <a href="https://git-scm.com/docs/githooks">git хуков</a></li>
+        </ul>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+</html>

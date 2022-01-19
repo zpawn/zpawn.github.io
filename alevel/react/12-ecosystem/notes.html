@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap-icons.css">
+    <title>A-Level. React.</title>
+    <style>
+        pre.code {
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--bs-gray-300);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-xl">
+    <h2 class="text-danger">Editorconfig</h2>
+    <pre class="code">
+<span class="text-success">; http://editorconfig.org</span>
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length = 80
+
+[*.{html,js,jsx,ts,tsx,css,sass,scss}]
+indent_style = space
+indent_size = 2
+
+[*.json]
+indent_style = space
+indent_size = 2
+
+[*.md]
+indent_size = 2</pre>
+
+    <h2 class="text-danger">ESLint</h2>
+    <pre class="code">
+<span class="text-success">// ./package.json</span>
+"devDependencies": {
+    "eslint-config-airbnb": "^19.0.4"
+}
+
+<span class="text-success">// ./.eslintrc</span>
+{
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "extends": [
+        "airbnb",
+    ],
+    "parserOptions": {
+        "ecmaVersion":  2018,
+        "sourceType":  "module",
+        "ecmaFeatures": {
+            "jsx":  true
+        },
+    },
+    "rules":  {
+        "comma-dangle": ["error", "always-multiline"],
+        "jsx-quotes": ["error", "prefer-single"],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    },
+}
+
+<span class="text-success">// .eslintignore</span>
+node_modules</pre>
+
+    <h2 class="text-danger">Prettier</h2>
+    <code>npm i -D prettier eslint-config-prettier eslint-plugin-prettier</code>
+    <pre class="code">
+<span class="text-success">// ./package.json</span>
+"scripts": {
+  "lint:js": "eslint './src/*.{js,jsx}'",
+  "fix": "npm run lint:js -- --fix"
+},
+<span class="text-success">// ./.eslintrc</span>
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "react-app",
+    "airbnb",
+    "prettier"
+  ],
+  "plugins": ["react", "prettier"],
+  "parserOptions": {
+    "ecmaVersion":  2018,
+    "sourceType":  "module",
+    "ecmaFeatures": {
+      "jsx":  true
+    }
+  },
+  "rules":  {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "jsxSingleQuote": true,
+        "trailingComma": 'all'
+      }
+    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  }
+}</pre>
+</div>
+
+</body>
+</html>
