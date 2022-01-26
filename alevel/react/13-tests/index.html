@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>A-Level. React. Tests.</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <style>
+        :root {
+            --color-danger: #B85450;
+            --color-warning: #9E7200;
+            --color-success: #6F9957;
+        }
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+        pre code {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>A-Level. React. Tests.</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>
+            <img class="logo" src="./assets/jest-logo.svg" alt="Jest Logo">
+            <img
+                class="logo testing-library"
+                src="./assets/testing-library-logo.png"
+                alt="Testing Library Logo"
+            >
+            <span>Tests</span>
+        </h2>
+        <style>
+            #cover h2 {
+                color: #15c213;
+                text-align: center;
+                font-size: 70px;
+                position: relative;
+                top: 50%;
+                transform: translateY(calc(-50% - 75px));
+            }
+            #cover .logo {
+                width: auto;
+                height: 60px;
+                transform: translateY(12.5%);
+            }
+            #cover .logo.testing-library {
+                height: 75px;
+                transform: translateY(15%);
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Темы</h2>
+        <ol>
+            <li>Когда нужны тесты</li>
+            <li>Подходы тестирования</li>
+            <li>Пирамида тестирования</li>
+            <li>Интсрументы</li>
+            <li>Примеры, много примеров</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Тестирование</h2>
+        <figure>
+            <blockquote>
+                <p>
+                    <i>Тестирование ПО</i> - процесс исследования, испытания программного продукта, для проверки соответствия
+                    между реальным поведением программы и её ожидаемым поведением.
+                </p>
+            </blockquote>
+            <figcaption>wikipedia.org</figcaption>
+        </figure>
+    </section>
+
+    <section class="slide">
+        <h2>Автоматизированное тестирование</h2>
+        <figure>
+            <blockquote>
+                <p>
+                    <i>Автоматизированное тестирование ПО</i> - часть процесса тестирования на этапе контроля
+                    качества в процессе разработки программного обеспечения. Оно использует программные средства
+                    для выполнения тестов и проверки результатов выполнения, что помогает сократить время
+                    тестирования и упростить его процесс.
+                </p>
+            </blockquote>
+            <figcaption>wikipedia.org</figcaption>
+        </figure>
+    </section>
+
+    <section class="slide">
+        <h2>Когда нужно и не нужно тестировать</h2>
+        <ul>
+            <li>Простой сайт-визитку из 5 статических html-страниц и с одной формой отправки письма</li>
+            <li>
+                Рекламные одностраничники, лэндинги, баннеры - сложная верстка / анимация или большой
+                объем статики. Никакой логики.
+            </li>
+            <li>Проект для выставки. Срок жизни - от нескольких недель до месяца.</li>
+            <li>
+                Пишете код без ошибок, pet проект без дальнейшего коммерческое использование
+                или распространение в сообщества.
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide tdd">
+        <h2>TDD (test-driven development)</h2>
+        <div class="columns two">
+            <div>
+                <img src="./assets/tdd-cycle.png" alt="tdd cycle">
+            </div>
+            <div>
+                В основе лежат этапы:
+                <ol>
+                    <li>Пишем наш тест.</li>
+                    <li>Запускаем тест, и очевидно они упали, т.к. фича еще не готова.</li>
+                    <li>Реализуем фичу, которая удовлетворяет данный тест.</li>
+                    <li>Рефакторинг.</li>
+                </ol>
+            </div>
+        </div>
+
+        <style>
+            .tdd img {
+                width: 100%;
+                margin: 0 auto;
+            }
+        </style>
+    </section>
+
+    <section class="slide pyramid-diagram">
+        <h2>Пирамида тестирования</h2>
+        <div class="columns two">
+            <div>
+                <p>
+                    <i>Пирамида тестирования</i>
+                    - используется для распределения тестов по уровням приложения.
+                </p>
+            </div>
+            <div>
+                <img src="./assets/test-pyramid-diagram.svg" alt="Пирамида тестирования">
+            </div>
+        </div>
+
+        <style>
+            .pyramid-diagram img {
+                width: 80%;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Интсрументы</h2>
+        <ul>
+            <li><b>Jest</b> - утилита для запуска тестов и анализа результатов</li>
+            <li><b>React Testing Library</b> - утилита для симуляции рендеринга нашего Реакт приложения/компонентов</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Этапы любого тест кейса</h2>
+        <ol>
+            <li>
+                <b>Arrange</b> (подготовка) - настройка тестовых данных.
+            </li>
+            <li>
+                <b>Act</b> (выполнение) - вызов тестируемого метода/ф-ции/ т.п.
+            </li>
+            <li>
+                <b>Assert</b> (проверка) - проверка результатов и сверка с ожидаемыми.
+            </li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Пример</h2>
+        <pre>
+            <code>import { render, screen } from '@testing-library/react';</code>
+            <code>import App from './App';</code>
+            <code>&nbsp;</code>
+            <code>test('renders learn react link', () => {</code>
+            <code>  render(&lt;App /&gt;);</code>
+            <code>  const linkElement = screen.getByText(/learn react/i);</code>
+            <code>  expect(linkElement).toBeInTheDocument();</code>
+            <code>});</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Пример</h2>
+        <ul>
+            <li><b>render</b> - рендерит нам компонент.</li>
+            <li><b>screen</b> - виртуальный скрин/имитация браузера в котором мы можем получить доступ к элементам на странице.</li>
+            <li><b>expect</b> - функцию "утверждения",т.е. проверяем ожидаемый результат.</li>
+            <li><b>screen.debug()</b> - при запуске теста увидим в консоле состояние дома</li>
+        </ul>
+    </section>
+
+    <section class="slide search-types">
+        <h2>Поиск элементов</h2>
+        <table class="striped">
+            <tbody>
+            <tr>
+                <td><strong>...ByLabelText</strong></td>
+                <td>label or aria-label content</td>
+                <td><code>&lt;label for="element" /&gt;</code></td>
+            </tr>
+            <tr>
+                <td><strong>...ByPlaceholderText</strong></td>
+                <td>input placeholder value</td>
+                <td><code>&lt;input placeholder="name" /&gt;</code></td>
+            </tr>
+            <tr>
+                <td><strong>...ByText</strong></td>
+                <td>element text content</td>
+                <td><code>&lt;p&gt;Lorem ipsum&lt;/p&gt;</code></td>
+            </tr>
+            <tr>
+                <td><strong>...ByDisplayValue</strong></td>
+                <td colspan="2">Current value of input element</td>
+            </tr>
+            <tr>
+                <td><strong>...ByAltText</strong></td>
+                <td>img alt attribute</td>
+                <td><code>&lt;img alt="movie poster" /&gt;</code></td>
+            </tr>
+            <tr>
+                <td><strong>...ByTitle</strong></td>
+                <td>title attribute or svg title tag</td>
+                <td><code>&lt;span title="Add" /&gt;</code> or <code>&lt;title /&gt;</code></td>
+            </tr>
+            <tr>
+                <td><strong>...ByRole</strong></td>
+                <td>
+                    <a href="https://www.w3.org/TR/html-aria/#document-conformance-requirements-for-use-of-aria-attributes-in-html">
+                        ARIA role
+                    </a>
+                </td>
+                <td><code>&lt;div role="dialog" /&gt;</code></td>
+            </tr>
+            <tr>
+                <td><strong>...ByTestId</strong></td>
+                <td>data-testid attribute</td>
+                <td><code>&lt;div data-testid="some-message" /&gt;</code></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <style>
+            .search-types th {
+                text-align: center;
+            }
+            .search-types code {
+                font-size: 14px;
+            }
+        </style>
+    </section>
+
+    <section class="slide search-variants">
+        <h2>Варианты поиска</h2>
+        <table class="striped">
+            <thead>
+            <tr>
+                <th></th>
+                <th>no match</th>
+                <th>1 match</th>
+                <th>1+ match</th>
+                <th>Await?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><strong>getBy...</strong></td>
+                <td>throw</td>
+                <td>return</td>
+                <td>throw</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td><strong>findBy...</strong></td>
+                <td>throw</td>
+                <td>return</td>
+                <td>throw</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td><strong>queryBy...</strong></td>
+                <td><code>null</code></td>
+                <td>return</td>
+                <td>throw</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td><strong>getAllBy...</strong></td>
+                <td>throw</td>
+                <td>array</td>
+                <td>array</td>
+                <td>No</td>
+            </tr>
+            <tr>
+                <td><strong>findAllBy...</strong></td>
+                <td>throw</td>
+                <td>array</td>
+                <td>array</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td><strong>queryAllBy...</strong></td>
+                <td><code>[]</code></td>
+                <td>array</td>
+                <td>array</td>
+                <td>No</td>
+            </tr>
+            </tbody>
+        </table>
+        <style>
+            .search-variants th,
+            .search-variants td:not(:first-child) {
+                text-align: center;
+            }
+        </style>
+    </section>
+
+    <section class="slide queries-example">
+        <h2>Поиск элементов</h2>
+        <pre>
+            <code>screen.getByText(/Search:/i)</code>
+            <code>screen.getByRole('textbox')</code>
+            <code>screen.getByLabelText(/Search:/i)</code>
+            <code>screen.getByPlaceholderText('search text...')</code>
+            <code>screen.getByAltText('search image')</code>
+            <code>screen.getByDisplayValue('123')</code>
+        </pre>
+
+        <div>* getBy... - нужно найти элемент</div>
+        <div>* queryBy... - нужно показать, что элемента нет в DOM</div>
+        <div>* allBy... - если элементов несколько</div>
+
+        <style>
+            .queries-example div {
+                line-height: 40px;
+                color: var(--color-grey);
+                opacity: .75;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://github.com/testing-library/jest-dom">Список утверждений</a></h2>
+        <div class="columns three">
+            <ul>
+                <li>toBeDisabled</li>
+                <li>toBeEnabled</li>
+                <li>toBeInvalid</li>
+                <li>toBeRequired</li>
+                <li>toBeValid</li>
+                <li>toBeVisible</li>
+                <li>toBeChecked</li>
+                <li>toHaveStyle</li>
+            </ul>
+            <ul>
+                <li>toContainElement</li>
+                <li>toContainHTML</li>
+                <li>toHaveValue</li>
+                <li>toHaveDisplayValue</li>
+                <li>toHaveAttribute</li>
+                <li>toHaveClass</li>
+                <li>toHaveFocus</li>
+                <li>toHaveFormValues</li>
+            </ul>
+            <ul>
+                <li>toHaveTextContent</li>
+                <li>toHaveAccessibleDescription</li>
+                <li>toHaveAccessibleName</li>
+                <li>toBePartiallyChecked</li>
+                <li>toHaveErrorMessage</li>
+                <li>toBeEmptyDOMElement</li>
+                <li>toBeInTheDocument</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Примеры</h2>
+        <pre>
+            <code>expect(screen.getByPlaceholderText('search text...')).toBeRequired();</code>
+            <code class="comment">// если нам нужно отрицание, то ставим not</code>
+            <code>expect(screen.getByPlaceholderText('search text...')).not.toBeRequired();</code>
+            <code>expect(screen.getByPlaceholderText('search text...')).toBeEmptyDOMElement();</code>
+            <code>expect(screen.getByPlaceholderText('search text...')).toHaveAttribute('id');</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>События. fireEvent</h2>
+        <p>fireEvent - имитация взаимодействия юзера с какими-то элементами</p>
+        <pre>
+            <code>test('change search input', () => {</code>
+            <code>  render(&lt;Search/&gt;);</code>
+            <code>  const inputElement = screen.getByRole('textbox');</code>
+            <code class="mark">  fireEvent.change(inputElement, {</code>
+            <code class="mark">    target: { value: 'React' }</code>
+            <code class="mark">  })</code>
+            <code>  expect(screen.queryByText(/Searches for React/i)).toBeInTheDocument();</code>
+            <code>});</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Пример. Чекбокс.</h2>
+        <pre>
+            <code>test('checkbox click', () => {</code>
+            <code>  const handleChange = jest.fn();</code>
+            <code>  const { container: { firstChild: checkbox } } = render(</code>
+            <code>    &lt;input type="checkbox" onChange={handleChange} /&gt;</code>
+            <code>  )</code>
+            <code>  expect(checkbox).not.toBeChecked();</code>
+            <code class="mark">  fireEvent.click(checkbox);</code>
+            <code>  expect(handleChange).toBeCalledTimes(1);</code>
+            <code>  expect(checkbox).toBeChecked();</code>
+            <code>})</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Пример. Фокус на инпуте</h2>
+        <pre>
+            <code>test('input focus', () => {</code>
+            <code>  const { getByTestId } = render(</code>
+            <code>    &lt;input type="text" data-testid="my-input" /&gt;</code>
+            <code>  )</code>
+            <code>  const input = getByTestId('my-input');</code>
+            <code>  expect(input).not.toHaveFocus();</code>
+            <code class="mark">  input.focus();</code>
+            <code>  expect(input).toHaveFocus();</code>
+            <code>})</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2><a href="https://github.com/testing-library/user-event">События. userEvent.</a></h2>
+        <ul>
+            <li><i>userEvent</i> - лучше описывают реальное поведение</li>
+            <li><i>userEvent</i> - имитирует реальное поведение браузера более точно при каких-то событиях</li>
+        </ul>
+        <code>import userEvent from '@testing-library/user-event'</code>
+    </section>
+
+    <section class="slide">
+        <h2>Пример. Чекбокс.</h2>
+        <pre>
+            <code>test('click on checkbox', () => {</code>
+            <code>  const { container } = render(&lt;input type="checkbox" /&gt;)</code>
+            <code>  const checbox = container.firstChild;</code>
+            <code>  expect(checbox).not.toBeChecked();</code>
+            <code class="mark">  userEvent.click(checbox);</code>
+            <code>  expect(checbox).toBeChecked();</code>
+            <code>})</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Пример. Инпут</h2>
+        <pre>
+            <code>test('onChange input', () => {</code>
+            <code>  const { getByTestId } = render(&lt;Search /&gt;);</code>
+            <code>  const input = getByTestId('input-data');</code>
+            <code>  expect(input.value).toBeFalsy();</code>
+            <code class="mark">  userEvent.type(input, 'I love tests')</code>
+            <code>  expect(input.value).toBe('I love tests');</code>
+            <code>})</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Пример. Инпут через screen</h2>
+        <pre>
+            <code>test('onChange input with screen', () => {</code>
+            <code>  render(&lt;Search /&gt;);</code>
+            <code>  expect(screen.queryByDisplayValue('I love tests')).not.toBeInTheDocument();</code>
+            <code class="mark">  userEvent.type(screen.getByTestId('input-data'), 'I love tests')</code>
+            <code>  expect(screen.getByDisplayValue('I love tests')).toBeTruthy();</code>
+            <code>})</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Пример. Чекбоксу с зажатым shift/ctrl</h2>
+        <pre>
+            <code>test('click on checkbox', () => {</code>
+            <code>  const { container } = render(&lt;input type="checkbox" /&gt;);</code>
+            <code>  const checkbox = container.firstChild;</code>
+            <code>  expect(checkbox).not.toBeChecked();</code>
+            <code class="comment">  // в случае необходимисти можно добавить настройки для ивента</code>
+            <code class="comment">  // например: мы нажимаем на чекбоекс с зажатым ctrl/shift</code>
+            <code class="mark">  userEvent.click(checkbox, { ctrlKey: true, shiftKey: true });</code>
+            <code>  expect(checkbox).toBeChecked();</code>
+            <code>})</code>
+        </pre>
+    </section>
+
+    <section class="slide">
+        <h2>Пример. Даблклик</h2>
+        <pre>
+            <code>test('dblClick on checkbox', () => {</code>
+            <code>  const onChange = jest.fn();</code>
+            <code>  const { container } = render(&lt;input type="checkbox" onChange={onChange} /&gt;)</code>
+            <code>  const checkbox = container.firstChild;</code>
+            <code>  expect(checkbox).not.toBeChecked();</code>
+            <code class="mark">  userEvent.dblClick(checkbox);</code>
+            <code>  expect(onChange).toHaveBeenCalledTimes(2);</code>
+            <code>})</code>
+        </pre>
+    </section>
+
+    <section class="slide user-event-tab">
+        <h2>Пример. Перемещение по Tab</h2>
+        <pre>
+            <code>test('tab focus', () => {</code>
+            <code>  const { getAllByTestId } = render(&lt;&gt;</code>
+            <code>    &lt;input data-testid='element' type="checkbox" /&gt;</code>
+            <code>    &lt;input data-testid='element' type="radio" /&gt;</code>
+            <code>    &lt;input data-testid='element' type="number" /&gt;</code>
+            <code>  &lt;/&gt;)</code>
+            <code>  const [checkbox, radio, number] = getAllByTestId('element');</code>
+            <code class="mark">  userEvent.tab();</code>
+            <code>  expect(checkbox).toHaveFocus();</code>
+            <code class="mark">  userEvent.tab();</code>
+            <code>  expect(radio).toHaveFocus();</code>
+            <code class="mark">  userEvent.tab();</code>
+            <code>  expect(number).toHaveFocus();</code>
+            <code>})</code>
+        </pre>
+        <style>
+            .user-event-tab code {
+                font-size: 14px;
+            }
+        </style>
+    </section>
+
+    <section class="slide user-event-select">
+        <h2>Пример. Select.</h2>
+        <pre>
+            <code>test('select option', () => {</code>
+            <code>  const { getByRole, getByText } = render(</code>
+            <code>    &lt;select&gt;</code>
+            <code>      &lt;option value="1"&gt;A&lt;/option&gt;</code>
+            <code>      &lt;option value="2"&gt;B&lt;/option&gt;</code>
+            <code>      &lt;option value="3"&gt;C&lt;/option&gt;</code>
+            <code>    &lt;/select&gt;</code>
+            <code>  )</code>
+            <code class="mark">  userEvent.selectOptions(getByRole('combobox'), '1'); <span class="comment">// значение, которое юзер выбирает</span></code>
+            <code>  expect(getByText('A').selected).toBeTruthy();</code>
+            <code class="mark">  userEvent.selectOptions(getByRole('combobox'), '2');</code>
+            <code>  expect(getByText('A').selected).toBeFalsy();</code>
+            <code>  expect(getByText('B').selected).toBeTruthy();</code>
+            <code>})</code>
+        </pre>
+
+        <style>
+            .user-event-select code {
+                font-size: 14px;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Async</h2>
+        <div>Идея в следующем:</div>
+        <ol>
+            <li>Сначала мы мокаем функцию, через которую делаем запрос</li>
+            <li>Потом сами конструируем ответ от сервера/сервиса</li>
+            <li>И проверяем состояние нашего компонента или результат отрисовки.</li>
+        </ol>
+    </section>
+
+    <section class="slide async">
+        <h2>Async. Пример.</h2>
+        <pre>
+            <code>test('fetch', async () => {</code>
+            <code class="mark">  window.fetch = jest.fn();</code>
+            <code class="mark">  window.fetch.mockResolvedValueOnce({</code>
+            <code class="mark">    json: async () => ({ ...mockData... }),</code>
+            <code class="mark">  });</code>
+            <code>&nbsp;</code>
+            <code>  const { findAllByRole } = render(&lt;Async/&gt;);</code>
+            <code>&nbsp;</code>
+            <code>  const listItemElement = await findAllByRole('listitem');</code>
+            <code>  expect(listItemElement).not.toHaveLength(0);</code>
+            <code>});</code>
+        </pre>
+        <style>
+            .async code {
+                font-size: 16px;
+            }
+        </style>
+    </section>
+
+    <section class="slide">
+        <h2>Links</h2>
+        <ul>
+            <li>
+                <a href="https://www.youtube.com/watch?v=JGu9v1riBu8&list=PLvTBThJr861zDff6GUZojZxVijaI6fMiz">
+                    Илья Климов про тестирование
+                </a>
+            </li>
+            <li><a href="https://jestjs.io/">Jest</a></li>
+            <li><a href="https://testing-library.com/">testing-library</a></li>
+            <li>
+                <a href="https://github.com/testing-library/react-hooks-testing-library">
+                    react-hooks-testing-library
+                </a>
+            </li>
+            <li><a href="https://github.com/testing-library/jest-dom">jest-dom</a></li>
+            <li>
+                <a href="https://www.w3.org/TR/html-aria/#document-conformance-requirements-for-use-of-aria-attributes-in-html">
+                    ARIA roles in HTML
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+</body>
+</html>

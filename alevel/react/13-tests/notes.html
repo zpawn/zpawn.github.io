@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap-icons.css">
+    <title>A-Level. React.</title>
+    <style>
+        pre.code {
+            padding: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid var(--bs-gray-300);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-xl">
+    <h1 class="text-danger">React. Tests</h1>
+
+    <h2 class="text-danger">@testing-library</h2>
+    <p>functions started on:</p>
+    <ul>
+        <li>
+            <b>screen.get</b> - return throw an error if en element isn't find
+        </li>
+        <li>
+            <b>screen.query</b> - won't do that (throw error)
+        </li>
+        <li>
+            <b>screen.find</b> - return promise
+        </li>
+
+
+    </ul>
+
+    <h2 class="text-danger">First Test</h2>
+    <pre class="code">
+<span class="text-success">./src/components/Greeting.js</span>
+const Greeting = () => {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Hello, World!&lt;/h2&gt;
+      &lt;p&gt;It's good to see you!&lt;/p&gt;
+    &lt;/div&gt;
+  )
+};</pre>
+    <pre class="code">
+<span class="text-success">// ./src/components/Greeting.test.js</span>
+test('render Hello World as a text', () => {
+  <span class="text-black-50">// Подготовка</span>
+  render(&lt;Greeting/&gt;);
+
+  <span class="text-black-50">// Действия</span>
+  // ...nothing
+
+  <span class="text-black-50">// Проверка</span>
+  const helloWorldElement = screen.getByText('Hello, World', { exact: false });
+  expect(helloWorldElement).toBeInTheDocument();
+});</pre>
+
+    <h2 class="text-danger">Test Suites & Tests</h2>
+    <pre class="code">
+describe('Greeting component', () => {
+  test('render "Hello World" as a text', () => {
+    ...
+  });
+})</pre>
+
+    <h2 class="text-danger"></h2>
+    <p>userEvent - is an object that helps us trigger user events in this virtual screen</p>
+    <pre class="code">
+const Greeting = () => {
+    const [changedText, setChangedText] = useState(false);
+
+    const onChangeText = () => setChangedText(true);
+
+    return (
+        &lt;div&gt;
+            &lt;h2&gt;Hello, World!&lt;/h2&gt;
+            {!changedText && &lt;p&gt;It's good to see you!&lt;/p&gt;}
+            {changedText && &lt;p&gt;Changed!&lt;/p&gt;}
+            &lt;button type='button' onClick={onChangeText}&gt;Change Text&lt;/button&gt;
+        &lt;/div&gt;
+    )
+};</pre>
+    <pre class="code">
+    test('render "good to see you!" if the button was NOT clicked', () => {
+        render(&lt;Greeting/&gt;);
+
+        const outputElement = screen.getByText('good to see you!', { exact: false });
+        expect(outputElement).toBeInTheDocument();
+    });
+
+    test('render "Changed!" if the button was clicked', () => {
+        render(&lt;Greeting/&gt;);
+
+        const buttonElement = screen.getByRole('button');
+        userEvent.click(buttonElement);
+
+        const outputElement = screen.getByText('Changed!');
+        expect(outputElement).toBeInTheDocument();
+    });
+
+    test('is NOT render "good to see you!" if the button was clicked', () => {
+        render(&lt;Greeting/&gt;);
+
+        const buttonElement = screen.getByRole('button');
+        userEvent.click(buttonElement);
+
+        const outputElement = screen.queryByText('good to see you!', { exact: false });
+        expect(outputElement).toBeNull();
+    });</pre>
+
+    <h2 class="text-danger">Connected Components</h2>
+    <pre class="code">
+<span class="text-success">// ./src/components/Block.js</span>
+const Block = (props) => (
+  &lt;p&gt;{props.children}&lt;/p&gt;
+);
+
+<span class="text-success">// ./src/components/Greeting.js</span>
+const Greeting = () => {
+  ...
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Hello, World!&lt;/h2&gt;
+      {!changedText && &lt;Block&gt;It's good to see you!&lt;/Block&gt;}
+      {changedText && &lt;Block&gt;Changed!&lt;/Block&gt;}
+      &lt;button type='button' onClick={onChangeText}&gt;Change Text&lt;/button&gt;
+    &lt;/div&gt;
+  )
+};</pre>
+
+    <h2 class="text-danger">Async Code</h2>
+    <pre class="code">
+<span class="text-success">// ./src/components/Async.js</span>
+const Async = () => {
+  const [coins, setCoins] = useState([]);
+
+  useEffect(() => {
+    fetch('https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD')
+      .then(res => res.json())
+      .then(({ Data }) => setCoins(Data));
+  }, []);
+
+  return (
+    &lt;ul&gt;
+      {coins.map(({ CoinInfo, DISPLAY }) => (
+        &lt;li key={CoinInfo.Id}&gt;
+          &lt;img
+            src={`https://www.cryptocompare.com${CoinInfo.ImageUrl}`}
+            alt={`Coin ${CoinInfo.FullName}`}
+            style={{ width: '50px' }}
+          /&gt;
+          {CoinInfo.FullName}: {DISPLAY.USD.PRICE}
+        &lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  )
+};</pre>
+
+    <pre class="code">
+<span class="text-success">// ./src/components/Async.test.js</span>
+describe('Async component', () => {
+  test('renders coins if request success', async () => {
+    render(&lt;Async/&gt;);
+
+    const listItemElement = await screen.findAllByRole('listitem');
+    expect(listItemElement).not.toHaveLength(0);
+  });
+});</pre>
+
+    <h2 class="text-danger">Mocks</h2>
+    <ol>
+        <li>Ожидание запроса, а тестов может быть очень много</li>
+        <li>Сценарии могут что нибудь записывать в базу</li>
+    </ol>
+    <p>В тестах мы хотим тестировать поведение компонента и оно не должно зависеть от сторонних запросов</p>
+    <pre class="code">
+describe('Async component', () => {
+  test('renders coins if request success', async () => {
+    window.fetch = jest.fn();
+    window.fetch.mockResolvedValueOnce({
+      json: async () => ({
+        Data: [{
+          CoinInfo: { Id: '00001', ImageUrl: '/media/37746251/btc.png', FullName: 'Bitcoin' },
+          DISPLAY: { USD: { PRICE: '$ 33,701.4' }},
+        }]
+      }),
+    });
+
+    render(&lt;Async/&gt;);
+
+    const listItemElement = await screen.findAllByRole('listitem');
+    expect(listItemElement).not.toHaveLength(0);
+  });
+});</pre>
+
+    <h2 class="text-danger">Пирамида тестирования</h2>
+    <ul>
+        <li>
+            Типизация - позволяет нам отловить ошибки на уровне строки кода
+            (обращаешься к полю компонента которого нет)
+        </li>
+        <li>Юниты - позволяют описать бтзнес логику конкретного модуля</li>
+        <li>Интеграционные - проверяют как несколько модулей собираются в систему</li>
+        <li>e2e - Эмуляция действий пользователя (при изменении ширины экрана на кнопочку налазит блок и её физтчески не возможно нажать)</li>
+    </ul>
+    <pre>
+more integration         slower  expensive
+          |       /\       |        |
+          |      /__\      |        |
+          |     /____\     |        |
+          |    /______\    |        |
+more isolation           faster   cheaper</pre>
+
+    <p>
+        <b>Fixture</b> - Заранее заранее предопределенные данные, которые мы будем использовать
+        для тестирования, т.е. данные которые будут использоваться для тестирования
+    </p>
+
+    <p>
+        <b>Mock</b> - это програмная подмена функционала, который сложно или не возможно протестировать
+    </p>
+
+    <div class="card">
+        <div class="card-body">
+            <p><b>expect</b> - проверяет сущность которую мы тестируем</p>
+            <p><b>.toBe</b> - ф-ция сравнитель или мэтчер</p>
+            <p>Результат выполнения expect передастся мэтчеру toBe для того, чтоб он определил успешность прохождения теста</p>
+        </div>
+    </div>
+
+    <h2>What? & How?</h2>
+    <ol>
+        <li>Jest - tool for running tests and asserting result</li>
+        <li>React Testing Library - tool to "simulating" (rendering) our React app/components</li>
+    </ol>
+</div>
+
+</body>
+</html>
