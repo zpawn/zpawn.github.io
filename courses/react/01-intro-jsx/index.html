@@ -59,15 +59,15 @@
         <p>JavaScript-библиотека для создания пользовательских интерфейсов.</p>
         <p>
             Реакт позволяет построить абсракцию вокруг верстки. Т.е. вы вместо того чтоб работать примитивами уровня
-            HTML, вы оперируете отдельными частями приложения и говорите что вы хотите видеть, а не пошагово описываете
-            как должно выглядеть.
+            HTML, вы оперируете отдельными частями приложения (компонентами) и говорите что вы хотите видеть,
+            а не пошагово описываете как должно выглядеть.
         </p>
     </section>
 
     <section class="slide">
         <h2>Компоненты</h2>
         <p>
-            Компоненты позволяют разбить интерфейс на независимые части, про которые легко думать в отдельности.
+            Компоненты позволяют разбить интерфейс на независимые части, про которые легко думать по отдельности.
             Их можно складывать вместе и использовать несколько раз.
         </p>
         <p>
@@ -77,15 +77,22 @@
     </section>
 
     <section class="slide">
+        <h2>Преимущества</h2>
+        <ul>
+            <li>Переиспользование компонентов</li>
+        </ul>
+    </section>
+
+    <section class="slide">
         <h2>Создаем приложение.</h2>
         <p>
             <a href="https://create-react-app.dev/docs/getting-started"><i>Create React App</i></a> is an officially
             supported way to create single-page React applications. It offers a modern build setup with no configuration.
         </p>
         <pre>
-            <code>npx create-react-app my-app</code>
-            <code>cd my-app</code>
-            <code>npm start</code>
+            <code>npx create-react-app my-app <span class="comment">// npx - утилита для запуска npm-пакетов</span></code>
+            <code>cd my-app <span class="comment">// переходм в директорию созданного приложения</span></code>
+            <code>npm start <span class="comment">// запускаем приложение</span></code>
         </pre>
     </section>
 
@@ -96,9 +103,23 @@
                 <code>src</code> - в этой папке будут все наши компоненты
             </li>
             <li>
-                <code>public</code> - в этой папке хранится наш шаблон html странички.
+                <code>public</code> - в этой папке хранится наш шаблон html странички
+            </li>
+            <li>
+                <code>build</code> - в эту папку билится итоговый бандл
             </li>
         </ul>
+    </section>
+
+    <section class="slide">
+        <h2>JSX</h2>
+        <p>
+            JSX — это расширение языка JavaScript (синтаксический сахар). Который напоминает язык шаблонов,
+            наделённый мощью JavaScript. С помощью JSX описывать UI компонента стало куда проще.
+        </p>
+        <p>
+            JSX компилируется c помощью Babel в React.createElement().
+        </p>
     </section>
 
     <section class="slide">
@@ -117,11 +138,7 @@
     </section>
 
     <section class="slide">
-        <p>
-            <code>const element = &lt;h1&gt;Hello, World&lt;/h1&gt;</code> - react-элемент. В отличие от DOM-элементов,
-            элементы React — это простые объекты, не отнимающие много ресурсов. React DOM обновляет DOM, чтобы он
-            соответствовал переданным React-элементам.
-        </p>
+        <p><code>const element = &lt;h1&gt;Hello, World&lt;/h1&gt;</code> - react-элемент.</p>
         <pre>
             <code>{</code>
             <code>  type: 'h1',</code>
@@ -130,6 +147,10 @@
             <code>  }</code>
             <code>};</code>
         </pre>
+        <p>
+            В отличие от DOM-элементов, элементы React — это простые объекты, не отнимающие много ресурсов.
+            React DOM обновляет DOM, чтобы он соответствовал переданным React-элементам.
+        </p>
     </section>
 
     <section class="slide">
@@ -192,8 +213,16 @@
                 <code>import React from 'react';</code>
             </li>
             <li>
-                <div><i>Большая буква</i> - значит компоненьт и React будет в текущей области видимости искать эту ф-цию</div>
-                <div><i>Маленькая буква</i> - dom-элемент</div>
+                <div>
+                    <i>Большая буква</i> - значит компонент и React будет искать в текущей области видимости эту ф-цию
+                    <code>&lt;Welcome/&gt;</code>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <i>Маленькая буква</i> - dom-элемент
+                    <code>&lt;div/&gt;</code>, <code>&lt;p/&gt;</code>, <code>&lt;ul/&gt;</code>, ...
+                </div>
             </li>
         </ul>
     </section>
@@ -201,14 +230,19 @@
     <section class="slide">
         <ul>
             <li>
-                Использование записи через точку "."
+                Использование записи через точку <code>.</code>
                 <pre>
-                    <code>const MyComponents = {</code>
-                    <code>  DatePicker: (props) => &lt;div&gt; ... &lt;/div&gt;</code>
+                    <code>const List = {</code>
+                    <code>  Ordered: (props) => &lt;ol&gt;{props.children}&lt;/ol&gt;,</code>
+                    <code>  Unordered: (props) => &lt;ul&gt;{props.children}&lt;/ul&gt;,</code>
+                    <code>  Item: (props) => &lt;li&gt;{props.children}&lt;/li&gt;,</code>
                     <code>}</code>
-                    <code>const BlueDatePicker = () => {</code>
-                    <code>  return &lt;MyComponents.DatePicker color="blue" /&gt;</code>
-                    <code>}</code>
+                    <code>&nbsp;</code>
+                    <code>&lt;List.Unordered&gt;</code>
+                    <code>  {items.map((item, index) =></code>
+                    <code>    &lt;List.Item key={index}&gt;{item}&gt;/List.Item&gt;</code>
+                    <code>  )}</code>
+                    <code>&lt;/List.Unordered&gt;</code>
                 </pre>
             </li>
         </ul>
@@ -260,9 +294,9 @@
                 <b>Spread – атрибуты</b>
                 <pre>
                     <code>const Button = props => {</code>
-                    <code>  const { type, ...other } = props;</code>
+                    <code>  const { type, ...otherProps } = props;</code>
                     <code>  const className = type === "primary" ? "PrimaryBtn" : "SecondaryBtn";</code>
-                    <code>  return &lt;button className={className} {...other} /&gt;</code>
+                    <code>  return &lt;button className={className} {...otherProps} /&gt;</code>
                     <code>};</code>
                 </pre>
             </li>
@@ -294,15 +328,18 @@
     <section class="slide">
         <ul>
             <li>
+                <b>Парный / не парный тэг</b>
+                <pre>
+                    <code>&lt;p&gt;Hello, World!&lt;/p&gt;</code>
+                    <code>&lt;p children='Hello, World!' /&gt;</code>
+                </pre>
+            </li>
+            <li>
                 <b>Картинки</b>
-                <p>Вариант 1:</p>
                 <pre>
                     <code>import img from './picture.png';</code>
                     <code>&lt;img src={img} alt=""/&gt;</code>
-                </pre>
-
-                <p>Вариант 2:</p>
-                <pre>
+                    <code>&nbsp;</code>
                     <code>&lt;img src="https://some/url/to/picture.png" alt=""/&gt;</code>
                 </pre>
             </li>
@@ -332,13 +369,16 @@
         <ul>
             <li>
                 <b>Динамическое создание потомков</b>
+                <p>
+                    Ключи помогают React определять, какие элементы были изменены/добавлены/удалены
+                    и перерендерить только те dom-узлы, которые изменились.
+                </p>
                 <pre>
-                    <code>const users = [{ id: '1', name: 'Valia' }, { id: '2', name: 'Petia' }];</code>
-                    <code>&nbsp;</code>
+                    <code>const users = [{ id: '1', name: 'Valia' },{ id: '2', name: 'Petia' }];</code>
                     <code>&lt;List&gt;</code>
-                    <code>  users.map((user) => {</code>
-                    <code>    return &lt;ListItem key={user.id} {...user}&gt;{user.name}&lt;/ListItem&gt;</code>
-                    <code>  })</code>
+                    <code>  {users.map((user) => {</code>
+                    <code>    return &lt;ListItem key={user.id}&gt;{user.name}&lt;/ListItem&gt;</code>
+                    <code>  })}</code>
                     <code>&lt;/List&gt;</code>
                 </pre>
             </li>
@@ -346,12 +386,27 @@
     </section>
 
     <section class="slide">
-        <h2>Задача:</h2>
-        <ol>
-            <li>Сделайте маркерованный список: 1 2 3</li>
-            <li>Разделить на разные компоненты</li>
-            <li>Вынести компоненты в разные файлы</li>
-        </ol>
+        <h2>Преимущества</h2>
+        <ul>
+            <li>Переиспользование компонентов;</li>
+            <li class="next">Простота (благодаря JSX);</li>
+        </ul>
+    </section>
+
+    <section class="slide homework">
+        <h2>HomeWork:</h2>
+        <div>Сверстать страничку (Стили не важны, можно испоьзовать любую css либу)</div>
+        <img src="./assets/homework.png" alt="react task">
+
+        <style>
+            .homework img {
+                height: 70%;
+                width: auto;
+                display: block;
+                margin: 0 auto;
+                box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+            }
+        </style>
     </section>
 
     <section class="slide">
@@ -378,56 +433,54 @@
         </div>
     </section>
 
-    <section class="slide homework">
-        <h2>HomeWork:</h2>
-        <div>Сверстать страничку (Стили не важны, можно испоьзовать любую css либу)</div>
-        <img src="./assets/homework.png" alt="react task">
-
-        <style>
-            .homework img {
-                height: 70%;
-                width: auto;
-                display: block;
-                margin: 0 auto;
-                box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-            }
-        </style>
-    </section>
-
     <section class="slide">
         <h2>Links:</h2>
-        <ul>
-            <li>
-                <a href="https://create-react-app.dev/docs/getting-started">
-                    Create React App
-                </a>
-            </li>
-            <li>
-                <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes">
-                    Классы в JavaScript
-                </a>
-            </li>
-            <li>
-                JSX
-                <ul>
-                    <li>
-                        <a href="https://ru.reactjs.org/docs/introducing-jsx.html">
-                            Знакомство с JSX
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://ru.reactjs.org/docs/rendering-elements.html">
-                            Рендеринг элементов
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://ru.reactjs.org/docs/components-and-props.html">
-                            Компоненты и пропсы
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        <div class="columns two">
+            <ul>
+                <li>
+                    <a href="https://create-react-app.dev/docs/getting-started">
+                        Create React App
+                    </a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes">
+                        Классы в JavaScript
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    JSX
+                    <ul>
+                        <li>
+                            <a href="https://ru.reactjs.org/docs/introducing-jsx.html">
+                                Знакомство с JSX
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://ru.reactjs.org/docs/jsx-in-depth.html">
+                                JSX в деталях
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://ru.reactjs.org/docs/rendering-elements.html">
+                                Рендеринг элементов
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://ru.reactjs.org/docs/components-and-props.html">
+                                Компоненты и пропсы
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://ru.reactjs.org/docs/lists-and-keys.html">
+                                Списки и ключи
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </section>
 
     <div class="progress"></div>
