@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Shower Presentation Engine</title>
+    <title>A-Level. React. State & Lifecycle & Events.</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
@@ -21,13 +21,12 @@
 <body class="shower list">
 
     <header class="caption">
-        <h1>Shower Presentation Engine</h1>
-        <p>Yours Truly, Famous Inc.</p>
+        <h1>A-Level. React. State & Lifecycle & Events.</h1>
     </header>
 
     <section class="slide" id="cover">
         <h2>
-            <img src="./assets/react.png" alt="React Logo" style="height: auto; width: 50px">
+            <img src="./assets/react.png" alt="React Logo">
             <span>State and Lifecycle</span>
         </h2>
         <style>
@@ -38,6 +37,11 @@
                 position: relative;
                 top: 50%;
                 transform: translateY(calc(-50% - 75px));
+            }
+            #cover img {
+                width: auto;
+                height: 65px;
+                transform: translateY(12.5%);
             }
         </style>
     </section>
@@ -52,7 +56,30 @@
     </section>
 
     <section class="slide">
-        <h1>Props</h1>
+        <h2>Virtual DOM</h2>
+        <p>
+            Виртуальный DOM (VDOM) - это концепция программирования, в которой "виртуальное"
+            представление пользовательского интерфейса хранится в памяти и синхронизируется
+            с «реальным» DOM при помощи библиотеки, такой как ReactDOM.
+            Это процесс называется согласованием (<i>reconciliation</i>).
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Virtual DOM</h2>
+        <p>
+            Когда мы меняем какой-то компонент и он должен перерисоваться, то вначале
+            изменения вносят в VDOM, после чего происходит сравнение (согласование / reconciliation)
+            с реальным DOM и перерендаривается лишь изменившаяся часть.
+        </p>
+        <p>
+            Самый последний механизм согласования был введен в React версии 16,
+            и называется <i>Fiber</i>.
+        </p>
+    </section>
+
+    <section class="slide">
+        <h2>Props</h2>
         <ul>
             <li>
                 Это объект в который собираются все JSX-атрибуты и дочерние элементы (children) и передаём их компоненту
@@ -63,15 +90,12 @@
     </section>
 
     <section class="slide">
-        <h1>Props</h1>
+        <h2>Props</h2>
         <p><mark class="important">Пропсы можно только читать !!!</mark></p>
         <pre>
             <code>function Input(props) {</code>
-            <code>  <mark>props.value = 'baz'</mark></code>
+            <code>  <mark>props.value = 'baz'</mark> <span class="comment">// НЕЛЬЗЯ</span></code>
             <code>  return &lt;input value={props.value} /&gt;</code>
-            <code>}</code>
-            <code>function Form() {</code>
-            <code>  return &lt;Input value='foo' /&gt;</code>
             <code>}</code>
         </pre>
     </section>
@@ -99,6 +123,46 @@
             <code>  return {counter: state.counter + props.step};</code>
             <code>});</code>
         </pre>
+    </section>
+
+    <section class="slide">
+        <h2>setState асинхронный</h2>
+        <ul>
+            <li>
+                Если ваше новое состояние основывается на значении предыдущего, то во
+                избежание багов всегда передавайте в качестве первого аргумента функцию.
+            </li>
+            <li>
+                Если нам необходимо по тем или иным причинам избежать перерисовки,
+                то данная функция должна вернуть <i>null</i>.
+            </li>
+            <li>
+                Вторым аргументом <i>this.setState()</i> принимает <i>callback</i>
+                функцию, которая выполниться сразу после завершения обновления состояния.
+            </li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Частичное слияние состояния</h2>
+        <div class="columns two">
+            <p>
+                Обновляются только переданные свойства.
+                Т.е. в данном примере изменится только значение <i>productId</i>
+            </p>
+            <pre>
+                <code>class Cart extends Component {</code>
+                <code>  state = {</code>
+                <code>    value: 'defaultValue',</code>
+                <code>    productId: null,</code>
+                <code>  };</code>
+                <code>  ...</code>
+                <code>  onAddToCart = (productId) => {</code>
+                <code>    this.setState({ productId });</code>
+                <code>  }</code>
+                <code>}</code>
+            </pre>
+        </div>
     </section>
 
     <section class="slide">
@@ -293,15 +357,17 @@
     </section>
 
     <section class="slide">
-        <h2>Task 1.</h2>
-        <p>
-            Сделать инпут range. (при перетаскивании ползунка в range мы записываем value из range в новый input)
-            <img src="./assets/task-range.gif" alt="task range">
-        </p>
+        <h2>Преимущества</h2>
+        <ul>
+            <li>Переиспользование компонентов;</li>
+            <li>Простота (благодаря JSX);</li>
+            <li class="next">Возможность хранения данных в стейте компонента;</li>
+            <li class="next">Быстрота (благодаря Virtual DOM);</li>
+        </ul>
     </section>
 
     <section class="slide">
-        <h2>Task 2.</h2>
+        <h2>Task 1.</h2>
         <p>
             Сделать counter, который будет прибавлять/отнимать по кликам на кнопки
             <img src="./assets/task-counter.gif" alt="task counter">
@@ -309,8 +375,8 @@
     </section>
 
     <section class="slide tasks">
-        <h2>Task 3.</h2>
-        <p>Сжелать форму авторизации:</p>
+        <h2>Task 2.</h2>
+        <p>Сделать форму авторизации:</p>
         <ul>
             <li>с полями: userName и password</li>
             <li>По нажатию на кнопку submit вывести в консоль значения с полей.</li>
@@ -322,37 +388,51 @@
     </section>
 
     <section class="slide tasks">
-        <h2>Task 4.</h2>
-        <p>Вывести табличку со списком фильмов:</p>
-        <ul>
-            <li>Выводим поля: название, год выпуска, продолжительность фильма</li>
-            <li>Сверху делаем строку с поиском по названию</li>
-            <li>Делаем кнопки для сортировки: по названию, по году выпуска, по продолжительности</li>
-            <li>Список фильмов берем из апи http://api.tvmaze.com/shows</li>
-            <li>Выводим список не более чем из 20 фильмов</li>
-        </ul>
+        <h2>Task 3: ToDo List</h2>
+        <div class="columns two">
+            <ul>
+                <li>Строка поиска по названию</li>
+                <li>Сортировка: active, completed, all</li>
+                <li>Список задач</li>
+                <li>Возможность редактировать таску</li>
+                <li>Поле для добавления новой задачи</li>
+            </ul>
+            <img src="./assets/task-todo.png" alt="task todo">
+        </div>
     </section>
 
     <section class="slide">
         <h2>Links</h2>
         <ul>
             <li>
-                <a href="https://ru.reactjs.org/docs/state-and-lifecycle.html">Состояние и жизненный цикл</a>
+                <a href="https://ru.reactjs.org/docs/faq-internals.html">
+                    Виртуальный DOM
+                </a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/react-component.html">Cправочник API React.Component</a>
+                <a href="https://ru.reactjs.org/docs/state-and-lifecycle.html">
+                    Состояние и жизненный цикл
+                </a>
             </li>
             <li>
-                <a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">Диаграми методов жизненного цикла компонентов</a>
+                <a href="https://ru.reactjs.org/docs/react-component.html">
+                    Cправочник API React.Component
+                </a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/handling-events.html">Обработка событий</a>
+                <a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">
+                    Диаграмма методов жизненного цикла компонентов
+                </a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/events.html">Список синтетических событий</a>
+                <a href="https://ru.reactjs.org/docs/handling-events.html">
+                    Обработка событий
+                </a>
             </li>
             <li>
-                <a href="https://www.postman.com/downloads/">Postman (утилита для тестирования API)</a>
+                <a href="https://ru.reactjs.org/docs/events.html">
+                    Список синтетических событий
+                </a>
             </li>
         </ul>
     </section>
