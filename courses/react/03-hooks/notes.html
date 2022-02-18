@@ -57,8 +57,76 @@ const Counter = () => {
       {`Clicked: ${count}`}
     &lt;/button&gt;
   );
-};
-    </pre>
+};</pre>
+
+    <h1 class="text-danger">Custom hooks</h1>
+    <pre class="code">
+const ForwardCounter = () => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prevCount) => prevCount + 1)
+    }, 1000)
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    &lt;h1 style={{ border: '1px solid #eee' }}&gt;{count}&lt;/h1&gt;
+  );
+}</pre>
+
+    <h2 class="text-danger">useCounter</h2>
+    <pre class="code">
+const useCounter = (forward = true) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (forward) {
+          setCount((prevCount) => prevCount + 1)
+      } else {
+          setCount((prevCount) => prevCount - 1)
+      }
+    }, 1000)
+      return () => clearInterval(interval);
+  }, [forward]);
+
+  return count;
+}</pre>
+
+    <h2 class="text-danger">useHttp v1</h2>
+    <pre class="code">
+const useHttp = (config, applyDataFn) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const sendRequest = async () => {
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await fetch(config.url, {
+                method: config.method ? config.method : 'GET',
+                headers: config.headers ? config.headers : {},
+                body: config.body ? JSON.stringify(config.body) : null,
+            })
+
+            if (!response.ok) {
+                throw new Error('Request failed!');
+            }
+
+            const data = await response.json();
+            applyDataFn(data);
+        } catch (err) {
+            setError(err.message || 'Something went wrong!');
+        }
+
+        setIsLoading(false);
+    };
+
+    return { isLoading, error, sendRequest };
+}</pre>
 </div>
 
 </body>
