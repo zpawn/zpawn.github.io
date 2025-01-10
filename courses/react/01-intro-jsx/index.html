@@ -45,68 +45,69 @@
     </section>
 
     <section class="slide">
-        <h2>Темы</h2>
+        <h2>Теми</h2>
         <ol>
-            <li>Что такое React</li>
-            <li>Научимся создавать приложения</li>
-            <li>Компоненты</li>
+            <li>Що таке React</li>
+            <li>Навчимося створювати застосунки</li>
+            <li>Компоненти</li>
             <li>JSX</li>
         </ol>
     </section>
 
     <section class="slide">
         <h2>React</h2>
-        <p>JavaScript-библиотека для создания пользовательских интерфейсов.</p>
+        <p>JavaScript - бібліотека для створення користувацьких інтерфейсів.</p>
         <p>
-            Реакт позволяет построить абсракцию вокруг верстки. Т.е. вы вместо того чтоб работать примитивами уровня
-            HTML, вы оперируете отдельными частями приложения (компонентами) и говорите что вы хотите видеть,
-            а не пошагово описываете как должно выглядеть.
+            Реакт дає змогу створити абстракцію навколо верстки.
+            Тобто ви, замість того щоб працювати з примітивами рівня HTML,
+            оперуєте окремими частинами застосунку (компонентами) й указуєте,
+            що ви хочете бачити, а не покроково описуєте, як це має виглядати.
         </p>
     </section>
 
     <section class="slide">
-        <h2>Компоненты</h2>
+        <h2>Компоненти</h2>
         <p>
-            Компоненты позволяют разбить интерфейс на независимые части, про которые легко думать по отдельности.
-            Их можно складывать вместе и использовать несколько раз.
+            Компоненти дозволяють розділити інтерфейс на незалежні частини, про які легко думати окремо один від одного.
+            Їх можна компонувати разом і використовувати кілька разів.
         </p>
         <p>
-            Во многом компоненты ведут себя как обычные функции JavaScript. Они принимают произвольные входные данные
-            (так называемые «пропсы») и возвращают React-элементы, описывающие, что мы хотим увидеть на экране.
+            Загалом компоненти поводяться себе, як звичайні функції JavaScript. Вони приймають вхідні дані
+            (які називаються "props") та повертають React-елементи, які описують те, що ми хочемо побачити на екрані.
         </p>
     </section>
 
     <section class="slide">
-        <h2>Преимущества</h2>
+        <h2>Переваги</h2>
         <ul>
-            <li>Переиспользование компонентов</li>
+            <li>Повторне використання компонентів</li>
         </ul>
     </section>
 
     <section class="slide">
-        <h2>Создаем приложение.</h2>
+        <h2>Створення застосунку.</h2>
         <p>
             <a href="https://create-react-app.dev/docs/getting-started"><i>Create React App</i></a> is an officially
             supported way to create single-page React applications. It offers a modern build setup with no configuration.
         </p>
         <pre>
-            <code>npx create-react-app my-app <span class="comment">// npx - утилита для запуска npm-пакетов</span></code>
-            <code>cd my-app <span class="comment">// переходм в директорию созданного приложения</span></code>
-            <code>npm start <span class="comment">// запускаем приложение</span></code>
+            <code>npx create-react-app my-app <span class="comment">// npx - утиліта для запуску npm-пакетів.</span></code>
+            <code>cd my-app <span class="comment">// переходимо в папку створенного застосунку</span></code>
+            <code>npm start <span class="comment">// запускаємо застосунок</span></code>
         </pre>
     </section>
 
     <section class="slide">
-        <h2>Структура проекта:</h2>
+        <h2>Структура проекту:</h2>
         <ul>
             <li>
-                <code>src</code> - в этой папке будут все наши компоненты
+                <code>src</code> - в цій папці будуть всі нащі компоненти
             </li>
             <li>
-                <code>public</code> - в этой папке хранится наш шаблон html странички
+                <code>public</code> - в цій папці зберігається наш шаблон html сторінки
             </li>
             <li>
-                <code>build</code> - в эту папку билится итоговый бандл
+                <code>build</code> - в цю папку білдиться фінальний бандл
             </li>
         </ul>
     </section>
@@ -114,31 +115,31 @@
     <section class="slide">
         <h2>JSX</h2>
         <p>
-            JSX — это расширение языка JavaScript (синтаксический сахар). Который напоминает язык шаблонов,
-            наделённый мощью JavaScript. С помощью JSX описывать UI компонента стало куда проще.
+            JSX — це розширення мови JavaScript (синтаксичний цукор), яке нагадує шаблонну мову,
+            але наділене можливостями JavaScript. Завдяки JSX описувати UI компоненти стало набагато простіше.
         </p>
         <p>
-            JSX компилируется c помощью Babel в React.createElement().
+            JSX компілюється за допомогою Babel у <code>React.createElement()</code>.
         </p>
     </section>
 
     <section class="slide">
-        <h2>Как отрендерить компонент</h2>
+        <h2>Як відрендерити компонент</h2>
         <pre>
             <code>ReactDOM.render(</code>
-            <code>  <mark>&lt;h1&gt;Hello, World!&lt;/h1&gt;,</mark> <span class="next comment">// react-элемент</span></code>
+            <code>  <mark>&lt;h1&gt;Hello, World!&lt;/h1&gt;,</mark> <span class="next comment">// react-елемент</span></code>
             <code>  document.getElementById('root')</code>
             <code>);</code>
             <code>&nbsp;</code>
             <code>ReactDOM.render(</code>
-            <code>  <mark>createElement('h1', {}, 'Hello, World!'),</mark> <span class="next comment">// react-элемент</span></code>
+            <code>  <mark>createElement('h1', {}, 'Hello, World!'),</mark> <span class="next comment">// react-елемент</span></code>
             <code>  document.getElementById('root')</code>
             <code>);</code>
         </pre>
     </section>
 
     <section class="slide">
-        <p><code>const element = &lt;h1&gt;Hello, World&lt;/h1&gt;</code> - react-элемент.</p>
+        <p><code>const element = &lt;h1&gt;Hello, World&lt;/h1&gt;</code> - react-елемент.</p>
         <pre>
             <code>{</code>
             <code>  type: 'h1',</code>
@@ -148,30 +149,29 @@
             <code>};</code>
         </pre>
         <p>
-            В отличие от DOM-элементов, элементы React — это простые объекты, не отнимающие много ресурсов.
-            React DOM обновляет DOM, чтобы он соответствовал переданным React-элементам.
+            На відміну від DOM-елементів, елементи React — це прості об'єкти, які не використовують багато ресурсів.
+            ReactDOM оновлює DOM, щоб він відповідав переданим React-елементам.
         </p>
     </section>
 
     <section class="slide">
-        <h2>Функциональные компоненты</h2>
+        <h2>Функціональні компоненти</h2>
         <pre>
             <code>function Welcome(props) {</code>
-            <code>  return &lt;h1&gt;Привет, {props.name}&lt;/h1&gt;</code>
+            <code>  return &lt;h1&gt;Привіт, {props.name}&lt;/h1&gt;</code>
             <code>}</code>
         </pre>
         <p>
-            Эта функция — компонент, потому что она получает данные в одном объекте («пропсы») в качестве параметра
-            и возвращает React-элемент. Мы будем называть такие компоненты «функциональными», так как они буквально
-            являются функциями.
+            Ця функція є компонентом, тому що отримує дані в одному об’єкті («пропси») як параметр і повертає React-елемент.
+            Ми називатимемо такі компоненти «функціональними», оскільки вони і є звичаними функціями.
         </p>
     </section>
 
     <section class="slide">
         <h2>Классовые компоненты</h2>
         <p>
-            Ещё компоненты можно определять как
-            <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes">классы ES6</a>:
+            Ще компоненти можна визначати як
+            <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes">класи ES6</a>:
         </p>
         <pre>
             <code>class Welcome extends React.Component {</code>
@@ -183,18 +183,18 @@
     </section>
 
     <section class="slide">
-        <h2>Как создать собственный компонент</h2>
-        <p>Пока что мы только встречали React-элементы, представляющие собой DOM-теги:</p>
+        <h2>Як створити власний компонент</h2>
+        <p>Поки що ми лише зустрічали React-елементи, які представляють собою DOM-теги:</p>
         <p><code>const element = &lt;div /&gt;</code></p>
-        <p>Но элементы могут описывать и наши собственные компоненты:</p>
+        <p>Але елементи можуть описувати й наші власні компоненти:</p>
         <p><code>const element = &lt;Welcome name="Тарас" /&gt;</code></p>
     </section>
 
     <section class="slide">
-        <h2>Пропсы</h2>
+        <h2>Пропси</h2>
         <p>
-            Когда React встречает подобный элемент, он собирает все JSX-атрибуты и дочерние элементы в один объект
-            (props) и передаёт их нашему компоненту.
+            Коли React зустрічає подібний елемент, він збирає всі JSX-атрибути та дочірні елементи в один об'єкт
+            (props) і передає їх нашому компоненту.
         </p>
         <pre>
             <code>function Welcome(props) {</code>
@@ -205,22 +205,22 @@
     </section>
 
     <section class="slide">
-        <h2>Ньюансы</h2>
+        <h2>Нюанси</h2>
         <ul>
             <li>
-                Т.к. JSX компилируется в вызовы функции React.createElement, библиотека React всегда должна находиться
-                в области видимости вашего кода JSX.
+                Оскільки JSX компілюється у виклики функції React.createElement, бібліотека React завжди має знаходитися
+                в області видимості вашого коду JSX.
                 <code>import React from 'react';</code>
             </li>
             <li>
                 <div>
-                    <i>Большая буква</i> - значит компонент и React будет искать в текущей области видимости эту ф-цию
+                    <i>Велика літера</i> - означає, що це компонент і React буде шукати цю функцію в поточній області видимості.
                     <code>&lt;Welcome/&gt;</code>
                 </div>
             </li>
             <li>
                 <div>
-                    <i>Маленькая буква</i> - dom-элемент
+                    <i>Маленька літера</i> - dom-елемент
                     <code>&lt;div/&gt;</code>, <code>&lt;p/&gt;</code>, <code>&lt;ul/&gt;</code>, ...
                 </div>
             </li>
@@ -230,7 +230,7 @@
     <section class="slide">
         <ul>
             <li>
-                Использование записи через точку <code>.</code>
+                Використання запису через крапку <code>.</code>
                 <pre>
                     <code>const List = {</code>
                     <code>  Ordered: (props) => &lt;ol&gt;{props.children}&lt;/ol&gt;,</code>
@@ -249,16 +249,16 @@
     </section>
 
     <section class="slide">
-        <h2>Свойства props в JSX</h2>
+        <h2>Обʼєкт props в JSX</h2>
         <ul>
             <li>
-                <b>JavaScript выражения как свойства.</b>
+                <b>JavaScript-вирази як проп.</b>
                 <div><code>&lt;MyComponent foo={1 + 2 + 3 + 4} /&gt;</code></div>
             </li>
             <li>
-                <b>Строковые литералы</b>
-                <div><code>&lt;MyComponent message="Привет мир!" /&gt;</code></div>
-                <div><code>&lt;MyComponent message={'Привет мир!'} /&gt;</code></div>
+                <b>Як рядок</b>
+                <div><code>&lt;MyComponent message="Слава Україні!" /&gt;</code></div>
+                <div><code>&lt;MyComponent message={'Героям Слава!'} /&gt;</code></div>
             </li>
         </ul>
     </section>
@@ -266,8 +266,7 @@
     <section class="slide">
         <ul>
             <li>
-                Инструкции <i>if</i> или циклы <i>for</i> не являются выражениями в JavaScript, поэтому они не могут
-                использоваться непосредственно в JSX.
+                Інструкції <i>if</i> або цикли <i>for</i> не є виразами в JavaScript, тому їх не можна використовувати безпосередньо в JSX.
                 <pre>
                     <code>function NumberDescriber(props) {</code>
                     <code>  let description;</code>
@@ -276,7 +275,7 @@
                     <code>  } else {</code>
                     <code>    description = &lt;i&gt;odd&lt;/i&gt;</code>
                     <code>  }</code>
-                    <code>  return &lt;div&gt;{props.number} - это {description} число&lt;/div&gt;</code>
+                    <code>  return &lt;div&gt;{props.number} - це {description} число&lt;/div&gt;</code>
                     <code>}</code>
                 </pre>
             </li>
@@ -286,14 +285,14 @@
     <section class="slide">
         <ul>
             <li>
-                <b>Установка свойств по умолчанию в true</b>
+                <b>Встановлення пропсів за замовчуванням у true</b>
                 <div><code>&lt;button disabled /&gt;</code></div>
                 <div><code>&lt;button disabled={true} /&gt;</code></div>
             </li>
             <li>
-                <b>Spread – атрибуты</b>
+                <b>Spread – атрибути</b>
                 <pre>
-                    <code>const Button = props => {</code>
+                    <code>const Button = (props) => {</code>
                     <code>  const { type, ...otherProps } = props;</code>
                     <code>  const className = type === "primary" ? "PrimaryBtn" : "SecondaryBtn";</code>
                     <code>  return &lt;button className={className} {...otherProps} /&gt;</code>
@@ -306,7 +305,7 @@
     <section class="slide">
         <ul>
             <li>
-                <div><b>Booleans, Null и Undefined игнорируются</b></div>
+                <div><b>Booleans, Null и Undefined ігноруються</b></div>
                 <pre>
                     <code>&lt;div /&gt;</code>
                     <code>&lt;div&gt;&lt;/div&gt;</code>
@@ -317,9 +316,9 @@
                 </pre>
             </li>
             <li>
-                <b>Комментарии</b>
+                <b>Коментарі</b>
                 <pre>
-                    <code>&lt;p&gt;{/* Это комментарий */}&lt;/p&gt;</code>
+                    <code>&lt;p&gt;{/* Це коментар */}&lt;/p&gt;</code>
                 </pre>
             </li>
         </ul>
@@ -328,14 +327,14 @@
     <section class="slide">
         <ul>
             <li>
-                <b>Парный / не парный тэг</b>
+                <b>Парний / не парний тиг</b>
                 <pre>
                     <code>&lt;p&gt;Hello, World!&lt;/p&gt;</code>
                     <code>&lt;p children='Hello, World!' /&gt;</code>
                 </pre>
             </li>
             <li>
-                <b>Картинки</b>
+                <b>Зображення</b>
                 <pre>
                     <code>import img from './picture.png';</code>
                     <code>&lt;img src={img} alt=""/&gt;</code>
@@ -347,10 +346,10 @@
     </section>
 
     <section class="slide">
-        <h2>Children (потомки)</h2>
+        <h2>Children (дочірні елементи)</h2>
         <ul>
             <li>
-                <div>Несколько Компонентов</div>
+                <div>Декілька Компонентів</div>
                 <pre>
                     <code>&lt;MyContainer /&gt;</code>
                     <code>  &lt;MyFirstComponent /&gt;</code>
@@ -359,8 +358,8 @@
                 </pre>
             </li>
             <li>
-                JavaScript выражения как потомки
-                <div><code>&lt;MyComponent&gt;{'Привет!'}&lt;/MyComponent&gt;</code></div>
+                JavaScript-вирази як дочірні елементи
+                <div><code>&lt;MyComponent&gt;{'Привіт!'}&lt;/MyComponent&gt;</code></div>
             </li>
         </ul>
     </section>
@@ -368,13 +367,13 @@
     <section class="slide">
         <ul>
             <li>
-                <b>Динамическое создание потомков</b>
+                <b>Динамічне створення дочірніх елементів</b>
                 <p>
-                    Ключи помогают React определять, какие элементы были изменены/добавлены/удалены
-                    и перерендерить только те dom-узлы, которые изменились.
+                    Ключі допомагають React визначати, які елементи були змінені/додані/видалені,
+                    і перерендерити лише ті DOM-елементи, які змінилися.
                 </p>
                 <pre>
-                    <code>const users = [{ id: '1', name: 'Valia' },{ id: '2', name: 'Petia' }];</code>
+                    <code>const users = [{ id: '1', name: 'Lesia' },{ id: '2', name: 'Taras' }];</code>
                     <code>&lt;List&gt;</code>
                     <code>  {users.map((user) => {</code>
                     <code>    return &lt;ListItem key={user.id}&gt;{user.name}&lt;/ListItem&gt;</code>
@@ -386,16 +385,17 @@
     </section>
 
     <section class="slide">
-        <h2>Преимущества</h2>
+        <h2>Переваги</h2>
         <ul>
-            <li>Переиспользование компонентов;</li>
+            <li>Повторне використання компонентів</li>
             <li class="next">Простота (благодаря JSX);</li>
+            <li class="next">Модульність</li>
         </ul>
     </section>
 
     <section class="slide homework">
         <h2>HomeWork:</h2>
-        <div>Сверстать страничку (Стили не важны, можно испоьзовать любую css либу)</div>
+        <div>Зробити верстку сторінки (стилі не важливі, можна використовувати будь-яку CSS-бібліотеку).</div>
         <img src="./assets/homework.png" alt="react task">
 
         <style>
@@ -410,7 +410,7 @@
     </section>
 
     <section class="slide">
-        <h2>Как использовать стили</h2>
+        <h2>Як використовувати стилі</h2>
         <div class="columns two">
             <pre>
                 <code><span class="comment">/** ./style.css */</span></code>
@@ -438,46 +438,19 @@
         <div class="columns two">
             <ul>
                 <li>
-                    <a href="https://create-react-app.dev/docs/getting-started">
+                    <a href="https://create-react-app.dev/docs/getting-started" target="_blank">
                         Create React App
                     </a>
                 </li>
                 <li>
-                    <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes">
-                        Классы в JavaScript
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes" target="_blank">
+                        Класи в JavaScript
                     </a>
                 </li>
-            </ul>
-            <ul>
                 <li>
-                    JSX
-                    <ul>
-                        <li>
-                            <a href="https://ru.reactjs.org/docs/introducing-jsx.html">
-                                Знакомство с JSX
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://ru.reactjs.org/docs/jsx-in-depth.html">
-                                JSX в деталях
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://ru.reactjs.org/docs/rendering-elements.html">
-                                Рендеринг элементов
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://ru.reactjs.org/docs/components-and-props.html">
-                                Компоненты и пропсы
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://ru.reactjs.org/docs/lists-and-keys.html">
-                                Списки и ключи
-                            </a>
-                        </li>
-                    </ul>
+                    <a href="https://uk.react.dev/learn" target="_blank">
+                        Офіційна документація React
+                    </a>
                 </li>
             </ul>
         </div>

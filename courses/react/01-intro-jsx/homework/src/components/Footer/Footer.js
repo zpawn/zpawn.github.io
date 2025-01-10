@@ -6,28 +6,28 @@ const Footer = () => (
     <footer className='footer'>
         <ul className='list-inline'>
             <li className='list-inline-item'>
-                <Link href='#'>Всё о Google</Link>
+                <Link href='#'>Про Google</Link>
             </li>
             <li className='list-inline-item'>
                 <Link href='#'>Реклама</Link>
             </li>
             <li className='list-inline-item'>
-                <Link href='#'>Для бизнеса</Link>
+                <Link href='#'>Для бізнесу</Link>
             </li>
             <li className='list-inline-item'>
-                <Link href='#'>Как работает Google Поиск</Link>
+                <Link href='#'>Як працює пошук</Link>
             </li>
         </ul>
 
         <ul>
             <li className='list-inline-item'>
-                <Link href='#'>Конфиденциальность</Link>
+                <Link href='#'>Конфіденційність</Link>
             </li>
             <li className='list-inline-item'>
-                <Link href='#'>Условия</Link>
+                <Link href='#'>Умови</Link>
             </li>
             <li className='list-inline-item'>
-                <Link href='#'>Настройки</Link>
+                <Link href='#'>Налаштування</Link>
             </li>
         </ul>
     </footer>
