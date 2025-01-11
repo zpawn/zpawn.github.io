@@ -47,76 +47,70 @@
     </section>
 
     <section class="slide">
-        <h2>Темы</h2>
+        <h2>Теми</h2>
         <ol>
-            <li>Внутреннее состояние компонента</li>
-            <li>Методы жизненного цикла</li>
-            <li>События</li>
+            <li>Внутрішній стан компонента</li>
+            <li>Методи життєвого циклу</li>
+            <li>Події</li>
         </ol>
     </section>
 
     <section class="slide">
         <h2>Virtual DOM</h2>
         <p>
-            Виртуальный DOM (VDOM) - это концепция программирования, в которой "виртуальное"
-            представление пользовательского интерфейса хранится в памяти и синхронизируется
-            с «реальным» DOM при помощи библиотеки, такой как ReactDOM.
-            Это процесс называется согласованием (<i>reconciliation</i>).
+            Віртуальний DOM (VDOM) — це концепція програмування, у якій "віртуальне"
+            представлення користувацького інтерфейсу зберігається в пам'яті та синхронізується
+            з «реальним» DOM за допомогою бібліотеки, такої як ReactDOM.
+            Цей процес називається узгодженням (<i>reconciliation</i>).
         </p>
     </section>
 
     <section class="slide">
         <h2>Virtual DOM</h2>
         <p>
-            Когда мы меняем какой-то компонент и он должен перерисоваться, то вначале
-            изменения вносят в VDOM, после чего происходит сравнение (согласование / reconciliation)
-            с реальным DOM и перерендаривается лишь изменившаяся часть.
-        </p>
-        <p>
-            Самый последний механизм согласования был введен в React версии 16,
-            и называется <i>Fiber</i>.
+            Коли ми змінюємо якийсь компонент і він має перерендеритися, спочатку
+            зміни вносяться у VDOM, після чого відбувається порівняння (узгодження / reconciliation)
+            з реальним DOM, і перерендерюється лише частина яка змінилася.
         </p>
     </section>
 
     <section class="slide">
         <h2>Props</h2>
         <ul>
-            <li>
-                Это объект в который собираются все JSX-атрибуты и дочерние элементы (children) и передаём их компоненту
-            </li>
-            <li>Способ общения родительского компонента с дочерними</li>
-            <li>Props - это входные данные, которые передаются в компонент извне</li>
+            <li>Це об'єкт, у який збираються всі JSX-атрибути та дочірні елементи (children) і передаються компоненту.</li>
+            <li>Спосіб взаємодії батьківського компонента з дочірніми.</li>
+            <li>Props — це вхідні дані, які передаються в компонент ззовні.</li>
         </ul>
     </section>
 
     <section class="slide">
         <h2>Props</h2>
-        <p><mark class="important">Пропсы можно только читать !!!</mark></p>
+        <p><mark class="important">Пропси можна лише ЧИТАТИ !!!</mark></p>
         <pre>
             <code>function Input(props) {</code>
-            <code>  <mark>props.value = 'baz'</mark> <span class="comment">// НЕЛЬЗЯ</span></code>
+            <code>  <mark>props.value = 'baz'</mark> <span class="comment">// НЕ МОЖНО</span></code>
             <code>  return &lt;input value={props.value} /&gt;</code>
             <code>}</code>
         </pre>
     </section>
 
     <section class="slide">
-        <h2>State (состояние)</h2>
+        <h2>State (стан)</h2>
         <p>
-            Конструктор — единственное место, где можно напрямую изменять state.<br>
+            Конструктор — єдине місце, де можна безпосередньо змінювати state.<br>
             <code>this.state = { count: 0 };</code>
         </p>
         <p>
-            В остальных методах необходимо использовать this.setState().<br>
+            В інших місцях необхідно використовувати <code>this.setState()</code>.<br>
             <code>this.setState({ count: state.count + 1 })</code>
         </p>
     </section>
 
     <section class="slide">
-        <h2>setState асинхронный</h2>
+        <h2>setState асинхронний</h2>
         <p>
-            <code>setState(updater, [callback])</code> добавляет в очередь изменения в состоянии компонента.
-            Т.е. думайте о setState() как о запросе на изменения, а не о команде немедленного обновления компонента.
+            <code>setState(updater, [callback])</code> додає в чергу зміни у стані компонента.
+            Тобто думайте про setState() як про запит на зміни, а не як про команду для негайного оновлення компонента.
         </p>
         <pre>
             <code>this.setState((state, props) => {</code>
@@ -126,29 +120,25 @@
     </section>
 
     <section class="slide">
-        <h2>setState асинхронный</h2>
+        <h2>setState асинхронний</h2>
         <ul>
             <li>
-                Если ваше новое состояние основывается на значении предыдущего, то во
-                избежание багов всегда передавайте в качестве первого аргумента функцию.
+                Якщо ваш новий стан базується на значенні попереднього, тоді,
+                щоб уникнути багів, завжди передавайте функцію як перший аргумент.
             </li>
             <li>
-                Если нам необходимо по тем или иным причинам избежать перерисовки,
-                то данная функция должна вернуть <i>null</i>.
-            </li>
-            <li>
-                Вторым аргументом <i>this.setState()</i> принимает <i>callback</i>
-                функцию, которая выполниться сразу после завершения обновления состояния.
+                Другим аргументом <i>this.setState()</i> приймає <i>callback</i>
+                функцію, яка виконається одразу після завершення оновлення стану.
             </li>
         </ul>
     </section>
 
     <section class="slide">
-        <h2>Частичное слияние состояния</h2>
+        <h2>Часткове злиття стану</h2>
         <div class="columns two">
             <p>
-                Обновляются только переданные свойства.
-                Т.е. в данном примере изменится только значение <i>productId</i>
+                Оновлюються лише передані властивості.
+                Тобто в цьому прикладі зміниться лише значення <i>productId</i>
             </p>
             <pre>
                 <code>class Cart extends Component {</code>
@@ -169,7 +159,7 @@
         <h2><a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">Lifecycle</a></h2>
         <div class="columns two">
             <div>
-                <div><b>Монтирование</b></div>
+                <div><b>Монтування</b></div>
                 <ol>
                     <li>constructor()</li>
                     <li>static getDerivedStateFromProps()</li>
@@ -177,13 +167,13 @@
                     <li>componentDidMount()</li>
                 </ol>
 
-                <div><b>Размонтирование</b></div>
+                <div><b>Відєʼднання</b></div>
                 <ol>
                     <li>componentWillUnmount()</li>
                 </ol>
             </div>
             <div>
-                <div><b>Обновление</b></div>
+                <div><b>Оновлення</b></div>
                 <ol>
                     <li>static getDerivedStateFromProps()</li>
                     <li>shouldComponentUpdate()</li>
@@ -198,16 +188,16 @@
     <section class="slide">
         <h2>Constructor</h2>
         <p>
-            <b>constructor()</b> - инициализация компонента. Вызывается до того, как компонент будет примонтирован.
+            <b>constructor()</b> - ініціалізація компонента. Викликається до того, як компонент буде примонтований.
         </p>
-        <div>Конструкторы в React обычно используют для двух целей:</div>
+        <div>Конструктори в React зазвичай використовують для двох цілей:</div>
         <ul>
             <li>
-                Инициализация внутреннего состояния через присвоение объекта.<br>
+                Ініціалізація внутрішнього стану через присвоєння об'єкта.<br>
                 <code>this.state = { counter: 0 };</code>
             </li>
             <li>
-                Привязка обработчиков событий к экземпляру.<br>
+                Прив'язка обробників подій до екземпляра.<br>
                 <code>this.handleClick = this.handleClick.bind(this);</code>
             </li>
         </ul>
@@ -216,13 +206,13 @@
     <section class="slide">
         <h2>Render</h2>
         <p>
-            При вызове он проверяет this.props и this.state и возвращает один из следующих вариантов:
+            Під час виклику він перевіряє this.props і this.state та повертає один із наступних варіантів:
         </p>
         <ul>
-            <li>Элемент React</li>
-            <li>Массивы и фрагменты</li>
-            <li>Порталы</li>
-            <li>Строки и числа</li>
+            <li>Елемент React</li>
+            <li>Массиви або Фрагменти</li>
+            <li>Портали</li>
+            <li>Рядок або число</li>
             <li>Booleans или null</li>
         </ul>
     </section>
@@ -230,48 +220,48 @@
     <section class="slide">
         <h2>componentDidMount</h2>
         <p>
-            Вызывается сразу после монтирования (то есть, вставки компонента в DOM)
+            Викликається одразу після монтування (тобто коли компонент вставляється в DOM).
         </p>
-        <div>Это место для:</div>
+        <div>Це місце для:</div>
         <ul>
-            <li>Создания сетевых запросов.</li>
-            <li>Настройка подписок (но не забываем отписаться от них в componentWillUnmount().</li>
+            <li>Створення мережевих запитів.</li>
+            <li>Налаштування підписок (але не забуваємо відписатися від них у componentWillUnmount()).</li>
         </ul>
     </section>
 
     <section class="slide">
         <h2>componentWillUnmount</h2>
-        <p>Вызывается непосредственно перед размонтированием и удалением компонента.</p>
-        <p>В этом методе выполняется необходимый сброс: отмена таймеров, сетевых запросов и подписок, созданных в componentDidMount()</p>
+        <p>Викликається безпосередньо перед відєʼднанням і видаленням компонента.</p>
+        <p>У цьому методі виконується необхідне очищення: скасування таймерів, мережевих запитів і підписок, створених у componentDidMount().</p>
     </section>
 
     <section class="slide">
         <h2>componentDidUpdate</h2>
-        <p>Вызывается сразу после обновления. Не вызывается при первом рендере.</p>
+        <p>Викликається одразу після оновлення. Не викликається під час першого рендеру.</p>
         <p>
-            Метод позволяет работать с DOM при обновлении компонента. Также он подходит для выполнения сетевых
-            запросов, которые выполняются на основании результата сравнения текущих пропсов с предыдущими. Если
-            пропсы не изменились, новый запрос может и не требоваться.
+            Метод дозволяє працювати з DOM під час оновлення компонента. Також він підходить
+            для виконання мережевих запитів, які виконуються на основі результату порівняння
+            поточних пропсів із попередніми. Якщо пропси не змінилися, новий запит може бути не потрібен.
         </p>
     </section>
 
     <section class="slide">
         <h2>getDerivedStateFromProps</h2>
-        <p>Этот метод существует для редких случаев, когда <code>state</code> зависит от изменений в <code>props</code></p>
+        <p>Цей метод потрібен для рідкісних випадків, коли <code>state</code> залежить від змін в <code>props</code></p>
         <ul>
-            <li>getDerivedStateFromProps должен возвращать объект, чтоб обновить сосотояние, или <code>null</code>, чтобы ничего не обновлять.</li>
-            <li>В getDerivedStateFromProps методе нет доступа к this</li>
-            <li>Метод запускается при каждом рендере, независимо от причины.</li>
+            <li>getDerivedStateFromProps повинен повертати обʼєкт, щоб оновити стан, або <code>null</code>, щоб нічого не оновляти.</li>
+            <li>В getDerivedStateFromProps методі немає доступу до this</li>
+            <li>Метод запускається під час кожного рендеру, незалежно від причини.</li>
         </ul>
     </section>
 
     <section class="slide">
         <h2>shouldComponentUpdate</h2>
         <ul>
-            <li>Этот метод отвечает на вопрос - должен ли компонент обновиться?</li>
-            <li>Нужен только для повышения производительности.</li>
-            <li>Не выполняйте никаких сайд-эффектов (вызовы AJAX и т.д.)</li>
-            <li>Не вызывайте this.setState</li>
+            <li>Цей метод відповідає на запитання: чи повинен компонент оновитися?</li>
+            <li>Потрібен для підвищення продуктивності.</li>
+            <li>Не виконуйте жодних сайд-ефектів (викликів AJAX тощо).</li>
+            <li>Не викликайте this.setState</li>
         </ul>
         <pre>
             <code>shouldComponentUpdate(nextProps, nextState) {</code>
@@ -282,23 +272,23 @@
 
     <section class="slide">
         <h2>getSnapshotBeforeUpdate</h2>
-        <p>вызывается прямо перед этапом "фиксирования" (например, перед добавлением в DOM).</p>
+        <p>Викликається безпосередньо перед етапом "фіксації" (наприклад, перед додаванням у DOM).</p>
         <p>
-            Он позволяет вашему компоненту брать некоторую информацию из DOM (например, положение прокрутки) перед её
-            возможным изменением. Любое значение, возвращаемое этим методом жизненного цикла, будет передано как
-            параметр componentDidUpdate()
+            Він дозволяє вашому компоненту отримувати певну інформацію з DOM (наприклад, положення прокрутки)
+            перед її можливими змінами. Будь-яке значення, повернуте цим методом життєвого циклу, буде передане
+            як параметр у componentDidUpdate().
         </p>
     </section>
 
     <section class="slide react-events">
         <h2>Events</h2>
-        <p>События в React именуются в стиле camelCase вместо нижнего регистра.</p>
-        <p>С JSX вы передаёте функцию как обработчик события вместо строки.</p>
+        <p>Назви події в React пишуться у стилі camelCase замість нижнього регістра.</p>
+        <p>В JSX ви передаєте функцію як обробник події замість рядка.</p>
 
-        <div>Например, в HTML</div>
+        <div>Приклад, в HTML</div>
         <code>&lt;button onclick="activateLasers()"&gt;Кнопка в html&lt;/button&gt;</code>
 
-        <div>Например, в React</div>
+        <div>Приклад, в React</div>
         <code>&lt;button onClick={activateLasers}&gt;Кнопка в react&lt;/button&gt;</code>
 
         <style>
@@ -310,20 +300,20 @@
 
     <section class="slide">
         <div>
-            Отмена события
+            Відміна події
             <pre>
                 <code>function handleSubmit(e) {</code>
                 <code>  e.preventDefault();</code>
-                <code>  console.log('Отправлена форма.');</code>
+                <code>  console.log('Відправлена форма.');</code>
                 <code>}</code>
             </pre>
         </div>
 
         <div>
-            Передача аргументов в обработчики событий
+            Передача аргументів у обробники подій
             <pre>
-                <code>&lt;button onClick={(e) => this.deleteRow(id, e)}&gt;Удалить строку&lt;/button&gt;</code>
-                <code>&lt;button onClick={this.deleteRow.bind(this, id)}&gt;Удалить строку&lt;/button&gt;</code>
+                <code>&lt;button onClick={(e) => this.deleteRow(id, e)}&gt;Видалити рядок&lt;/button&gt;</code>
+                <code>&lt;button onClick={this.deleteRow.bind(this, id)}&gt;Видалити рядок&lt;/button&gt;</code>
             </pre>
         </div>
     </section>
@@ -331,11 +321,11 @@
     <section class="slide">
         <h2>SyntheticEvent</h2>
         <p>
-            SyntheticEvent - это кроссбраузерная обёртка над нативным экземпляром события.
-            Эта обёртка помогает событиям работать одинаково во всех браузерах (т.е. содержали одинаковые свойства во всех браузерах).
+            SyntheticEvent - це кросбраузерна обгортка над нативним екземпляром події.
+            Ця обгортка допомагає подіям працювати однаково в усіх браузерах (тобто мати однакові властивості у всіх браузерах).
         </p>
         <div>
-            Если всё-таки нужно получить нативное браузерное событие, обратитесь к атрибуту nativeEvent
+            Якщо все ж потрібно отримати нативну браузерну подію, зверніться до атрибута nativeEvent.
             <pre>
                 <code>handleClick = (e) => {</code>
                 <code>  console.log(e.nativeEvent)</code>
@@ -345,11 +335,11 @@
     </section>
 
     <section class="slide">
-        <h2>Фаза всплытия/перехвата</h2>
+        <h2>Фаза вспливання/перехоплення</h2>
         <p>
-            Обработчики вызываются на фазе всплытия (bubbling). А чтобы зарегистрировать событие на фазе перехвата
-            (capture), просто добавьте <mark>Capture</mark> к имени события; например, вместо <mark>onClick</mark>
-            используйте <mark>onClickCapture</mark>, чтобы обработать событие на фазе перехвата.
+            Обробники викликаються на фазі спливання (bubbling). А щоб оголосити подію на фазі перехоплення
+            (capture), просто додайте <mark>Capture</mark> до назви події; наприклад, замість <mark>onClick</mark>
+            використовуйте <mark>onClickCapture</mark>, щоб обробити подію на фазі перехоплення.
         </p>
         <pre>
             <code>&lt;button onClickCapture={this.handleClick}&gt;Кнопка&lt;/button&gt;</code>
@@ -357,32 +347,33 @@
     </section>
 
     <section class="slide">
-        <h2>Преимущества</h2>
+        <h2>Переваги</h2>
         <ul>
-            <li>Переиспользование компонентов;</li>
-            <li>Простота (благодаря JSX);</li>
-            <li class="next">Возможность хранения данных в стейте компонента;</li>
-            <li class="next">Быстрота (благодаря Virtual DOM);</li>
+            <li>Повторне використання компонентів;</li>
+            <li>Простота (завдяки JSX);</li>
+            <li>Модульність</li>
+            <li class="next">Можливість зберігання даних у стані компонента;</li>
+            <li class="next">Швидкість (завдяки Virtual DOM);</li>
         </ul>
     </section>
 
     <section class="slide">
         <h2>Task 1.</h2>
         <p>
-            Сделать counter, который будет прибавлять/отнимать по кликам на кнопки
+            Створити counter, який буде додавати/віднімати коли клікаємо на відповідні кнопки<br>
             <img src="./assets/task-counter.gif" alt="task counter">
         </p>
     </section>
 
     <section class="slide tasks">
         <h2>Task 2.</h2>
-        <p>Сделать форму авторизации:</p>
+        <p>Зробити форму авторизації:</p>
         <ul>
-            <li>с полями: userName и password</li>
-            <li>По нажатию на кнопку submit вывести в консоль значения с полей.</li>
+            <li>з полями: userName и password</li>
+            <li>Після натискання на submit вивести в консоль значення цих полів.</li>
             <li>
-                Если поля пустые или не заполнено хотя бы одно поле ничего в консоль не выводить и под формой вывести
-                сообщение "не заполнено поле [какое поле]"
+                Якщо поля порожні або не заповнено хоча б одне поле, нічого в консоль не виводити,
+                а під формою вивести повідомлення: "не заповнено поле [яке поле]".
             </li>
         </ul>
     </section>
@@ -391,11 +382,11 @@
         <h2>Task 3: ToDo List</h2>
         <div class="columns two">
             <ul>
-                <li>Строка поиска по названию</li>
-                <li>Сортировка: active, completed, all</li>
+                <li>Рядок пошуку за назвою</li>
+                <li>Сортування: active, completed, all</li>
                 <li>Список задач</li>
-                <li>Возможность редактировать таску</li>
-                <li>Поле для добавления новой задачи</li>
+                <li>Можливість редагувати таску</li>
+                <li>Поле для додавання нової таски</li>
             </ul>
             <img src="./assets/task-todo.png" alt="task todo">
         </div>
@@ -405,33 +396,33 @@
         <h2>Links</h2>
         <ul>
             <li>
-                <a href="https://ru.reactjs.org/docs/faq-internals.html">
-                    Виртуальный DOM
+                <a href="https://uk.legacy.reactjs.org/docs/faq-internals.html" target="_blank">
+                    Віртуальний DOM
                 </a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/state-and-lifecycle.html">
-                    Состояние и жизненный цикл
+                <a href="https://uk.legacy.reactjs.org/docs/state-and-lifecycle.html" target="_blank">
+                    Стан та життєвий цикл
                 </a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/react-component.html">
-                    Cправочник API React.Component
+                <a href="https://uk.legacy.reactjs.org/docs/react-component.html" target="_blank">
+                    Довідник API React.Component
                 </a>
             </li>
             <li>
-                <a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/">
-                    Диаграмма методов жизненного цикла компонентов
+                <a href="https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/" target="_blank">
+                    Діаграма методів життєвого циклу компонента
                 </a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/handling-events.html">
-                    Обработка событий
+                <a href="https://uk.legacy.reactjs.org/docs/handling-events.html" target="_blank">
+                    Обробка подій
                 </a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/events.html">
-                    Список синтетических событий
+                <a href="https://uk.legacy.reactjs.org/docs/events.html" target="_blank">
+                    Список подій
                 </a>
             </li>
         </ul>
