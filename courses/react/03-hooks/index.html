@@ -41,7 +41,7 @@
     </section>
 
     <section class="slide">
-        <h2>Темы</h2>
+        <h2>Теми</h2>
         <ol>
             <li>State</li>
             <li>Hooks</li>
@@ -49,8 +49,8 @@
     </section>
 
     <section class="slide">
-        <h2>State. Частичное слияние.</h2>
-        <p>Когда мы вызываем setState(), React объединит новое состояние c текущим.</p>
+        <h2>State. Часткове злиття.</h2>
+        <p>Коли ми викликаємо setState(), React обʼєдгає новий стан із поточним.</p>
         <pre>
             <code>state = {</code>
             <code>  firstname: '',</code>
@@ -62,11 +62,11 @@
     </section>
 
     <section class="slide">
-        <h2>State. Подъём состояния.</h2>
-        <p>Для любых изменяемых данных в React-приложении должен быть один "источник истины".</p>
+        <h2>State. Підняття стану.</h2>
+        <p>Для будь-яких змінюваних даних у React-додатку має бути одне "джерело істини".</p>
         <p>
-            Т.е. если несколько компонентов должны отражать одни и те же изменяющиеся данные. В таком случае поднимаем
-            общее состояние до ближайшего общего предка
+            Тобто, якщо декілька компонентів повинні відображати одні й ті самі змінювані дані,
+            у такому випадку піднімаємо спільний стан до найближчого спільного батьківського компонента.
         </p>
     </section>
 
@@ -97,26 +97,26 @@
 
     <section class="slide">
         <h2>Hooks (Хуки)</h2>
-        <p>Хуки — позволяют использовать состояние и другие возможности React без написания классов (в функциональных компонентах).</p>
+        <p>Хуки — дозволяють використовувати стан та інші можливості React без написання класів (у функціональних компонентах).</p>
         <div><b>Правила:</b></div>
         <ul style="flex-grow: 1">
-            <li>Хуки не работают внутри классов.</li>
-            <li>Не вызывайте хуки внутри циклов, условий или вложенных функций.</li>
+            <li>Хуки не працюють всередині класів.</li>
+            <li>Не викликайте хуки всередині циклів, умов або вкладених функцій.</li>
             <li>
-                Вызывать хуки только из функциональных компонентов. Не вызывайте из обычных
-                функций. Исключение — это <i>пользовательские хуки</i>.
+                Викликайте хуки лише у функціональних компонентах. Не викликайте їх у звичайних функціях.
+                Виключення — це <i>користувацькі хуки</i>.
             </li>
         </ul>
     </section>
 
     <section class="slide">
         <h2>Hooks</h2>
-        <div>Самые популярные:</div>
+        <div>Найпопулярніші:</div>
         <ul>
-            <li><i>useState</i> - наделяем наш функциональный компонент внутренним состоянием</li>
+            <li><i>useState</i> - надаємо нашому функціональному компоненту внутрішній стан.</li>
             <li>
-                <i>useEffect</i> - можем использовать методы жизненного цикла. Аналог для
-                <code>componentDidMount</code>, <code>componentDidUpdate</code> и <code>componentWillUnmount</code>
+                <i>useEffect</i> - дає змогу використовувати методи життєвого циклу. Аналог для
+                <code>componentDidMount</code>, <code>componentDidUpdate</code> та <code>componentWillUnmount</code>
             </li>
         </ul>
     </section>
@@ -124,14 +124,14 @@
     <section class="slide">
         <h2>useState</h2>
         <p>
-            Наделяет наш функциональный компонент внутренним состоянием.
-            React будет хранить это состояние между рендерами.
+            Надає нашому функціональному компоненту внутрішній стан.
+            React зберігатиме цей стан між рендерами.
         </p>
         <div><code>const [state, setState] = useState(initialState);</code></div>
         <ul>
-            <li><i>state</i> - состояние</li>
-            <li><i>setState</i> - функция для обновления состояния</li>
-            <li><i>initialState</i> - дефолтное значение</li>
+            <li><i>state</i> - стан</li>
+            <li><i>setState</i> - функція для зміну стану</li>
+            <li><i>initialState</i> - дефолтне значення</li>
         </ul>
 
     </section>
@@ -143,8 +143,8 @@
             <code>  const [count, setCount] = useState(0);</code>
             <code>  return (</code>
             <code>    &lt;div&gt;</code>
-            <code>      &lt;p&gt;Вы нажали {count} раз&lt;/p&gt;</code>
-            <code>      &lt;button onClick={() => setCount(count + 1)}&gt;Жми&lt;/button&gt;</code>
+            <code>      &lt;p&gt;Ви клікнули {count} разів&lt;/p&gt;</code>
+            <code>      &lt;button onClick={() => setCount(count + 1)}&gt;Тисни&lt;/button&gt;</code>
             <code>    &lt;/div&gt;</code>
             <code>  );</code>
             <code>}</code>
@@ -154,8 +154,8 @@
     <section class="slide">
         <h2>useEffect</h2>
         <p>
-            Хук useEffect представляет собой совокупность методов <code>componentDidMount</code>,
-            <code>componentDidUpdate</code> и <code>componentWillUnmount</code>.
+            Хук useEffect являє собою сукупність методів. <code>componentDidMount</code>,
+            <code>componentDidUpdate</code> та <code>componentWillUnmount</code>.
         </p>
     </section>
 
@@ -174,14 +174,14 @@
     <section class="slide">
         <h2>useEffect.</h2>
         <ul>
-            <li><code>useEffect(callback)</code> - запускать всегда</li>
+            <li><code>useEffect(callback)</code> - запускати завжди</li>
             <li>
-                <code>useEffect(callback, [])</code> - запускать только при mount и unmount (т.е. эффект не зависит ни от одного
-                параметра, а раз не зависит, значит его не надо перезапускать)
+                <code>useEffect(callback, [])</code> - запускати лише при mount і unmount (тобто ефект не залежить
+                ні від жодного параметра, а якщо не залежить, то його не потрібно перезапускати).
             </li>
             <li>
-                <code>useEffect(callback, [arg1, ...])</code> - не запускать этот эффект если не изменились параметры в массиве
-                (т.е. из замыкания он берет текущие, а из массива предыдущие и сравнивает).
+                <code>useEffect(callback, [arg1, ...])</code> - запускати цей ефект, якщо змінився хочаб якийсь параметри в масиві
+                (тобто із замикання він бере поточні, а з масиву попередні та порівнює).
             </li>
         </ul>
     </section>
@@ -204,7 +204,7 @@
 
     <section class="slide">
         <h2>Tasks</h2>
-        <p>Переделать все задачи с прошлого урока на Хуки.</p>
+        <p>Переробити всі завдання із минулого заняття на Хуки.</p>
     </section>
 
     <section class="slide">
@@ -219,19 +219,19 @@
                 </a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/forms.html">Работа с формами</a>
+                <a href="https://uk.legacy.reactjs.org/docs/forms.html">Работа з формами</a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/lifting-state-up.html">Подъём состояния</a>
+                <a href="https://uk.legacy.reactjs.org/docs/lifting-state-up.html">Підйом стану</a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/hooks-state.html">useState</a>
+                <a href="https://uk.legacy.reactjs.org/docs/hooks-state.html">useState</a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/hooks-effect.html">useEffect</a>
+                <a href="https://uk.legacy.reactjs.org/docs/hooks-effect.html">useEffect</a>
             </li>
             <li>
-                <a href="https://github.com/streamich/react-use">Коллекция хуков</a>
+                <a href="https://github.com/streamich/react-use">Коллекція хуків</a>
             </li>
         </ul>
     </section>
