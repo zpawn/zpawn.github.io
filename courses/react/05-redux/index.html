@@ -45,59 +45,59 @@
     </section>
 
     <section class="slide">
-        <h2>Темы</h2>
+        <h2>Теми</h2>
         <ol>
-            <li>Что такое Redux.</li>
-            <li>Почему он важен в экосистеме React.</li>
-            <li>Зачем нам его юзать?</li>
-            <li>Как нам его юзать?</li>
-            <li>Как нам его юзать в React приложениии?</li>
+            <li>Що таке Redux.</li>
+            <li>Чому він важливий в екосистемі React.</li>
+            <li>Навіщо нам його юзати?</li>
+            <li>Як нам його юзати?</li>
+            <li>Як нам його юзати в React застосунку?</li>
         </ol>
     </section>
 
     <section class="slide">
-        <h2>Проблемы</h2>
+        <h2>Проблеми</h2>
         <ul>
-            <li>Распределение обязаностей между визуальными компонентами</li>
-            <li>Выделение логики приложения</li>
-            <li>Управление моделью данных</li>
+            <li>Розподіл обов’язків між візуальними компонентами.</li>
+            <li>Відокремлення логіки додатка.</li>
+            <li>Керування моделлю даних.</li>
         </ul>
     </section>
 
     <section class="slide">
         <h2><a href="https://redux.js.org/">Redux</a></h2>
         <ul>
-            <li>Redux решаем проблему управления состоянием в приложении</li>
-            <li>Redux предлагает храниить state в одном "глобальном объекте"</li>
-            <li>Фунуция Reducer обновляет глобальный state в ответ на actions</li>
-            <li>Обект Store оповещает об обновлениях</li>
+            <li>Redux вирішує проблему управління станом у додатку</li>
+            <li>Redux пропонує зберігати state в одному "глобальному об'єкті"</li>
+            <li>Функція Reducer оновлює глобальний state у відповідь на actions</li>
+            <li>Об'єкт Store повідомляє про оновлення</li>
         </ul>
     </section>
 
     <section class="slide">
-        <h2>3 Принципа</h2>
+        <h2>3 Принципи</h2>
         <ul>
-            <li>Единственный источник правды.</li>
-            <li>Состояние только для чтения.</li>
-            <li>Мутации написаны как чистые ф-ции.</li>
+            <li>Єдине джерело правди.</li>
+            <li>Стан лише для читання.</li>
+            <li>Мутації написані як чисті функції</li>
         </ul>
     </section>
 
     <section class="slide">
         <img src="./assets/redux.drawio.svg" alt="Redux diagram">
         <ul>
-            <li>View - компоненты</li>
-            <li>Action - описывает, что происходит</li>
-            <li>Reducer - ф-ция которая меняет state</li>
-            <li>State - объект в котором хранятся данные приложения</li>
+            <li>View - компоненти</li>
+            <li>Action - описує що відбувається</li>
+            <li>Reducer - ф-ція яка змінює стейт</li>
+            <li>State - обʼєкт в якому зберігаються данні застосунку</li>
         </ul>
     </section>
 
     <section class="slide">
         <h2>Install Redux</h2>
         <p><code>npm install redux</code></p>
-        <h2>Создаем store</h2>
-        <p>Store будет управлять нашими данными.</p>
+        <h2>Створюємо store</h2>
+        <p>Store буде керувати нашими данними.</p>
         <pre>
             <code>import { createStore } from 'redux';</code>
             <code>&nbsp;</code>
@@ -107,7 +107,7 @@
 
     <section class="slide">
         <h2>Reducer</h2>
-        <p>Описываем ф-цию, которая будет менять state.</p>
+        <p>Описуємо ф-цію, яка буде змінювати state.</p>
         <pre>
             <code>const counterReducer = (state = { counter: 0 }, action) => {</code>
             <code>  return {</code>
@@ -119,8 +119,8 @@
     </section>
 
     <section class="slide">
-        <h2>Опишем подписчика (subscriber)</h2>
-        <p>Который будет реагировать на изменения в State.</p>
+        <h2>Опишемо підписника (subscriber)</h2>
+        <p>Який реагуватиме на зміни в State.</p>
         <pre>
             <code>store.subscribe(() => {</code>
             <code>  const latestState = store.getState();</code>
@@ -131,7 +131,7 @@
 
     <section class="slide">
         <h2>Dispatch</h2>
-        <p>Меняем состояние.</p>
+        <p>Змінюємо стан.</p>
         <pre>
             <code>store.dispatch({ type: 'increment' });</code>
         </pre>
@@ -154,7 +154,7 @@
 
     <section class="slide">
         <h2>Multiply reducers</h2>
-        <p>Мы можем разделять редьюсеры на более мелкие ф-ции, каждая из которых будет управлять своим кусочком состояния.</p>
+        <p>Ми можемо розділяти ред'юсери на дрібніші функції, кожна з яких керуватиме своєю частиною стану.</p>
         <pre>
             <code>const store = createStore(combineReducers({</code>
             <code>  counter: counterReducer,</code>
@@ -165,7 +165,7 @@
 
     <section class="slide">
         <h2>React Redux</h2>
-        <p><code>npm install react-redux</code> - устанавливаем пакет</p>
+        <p><code>npm install react-redux</code> - встановлюємо пакет</p>
         <h2>Connect Redux to React</h2>
         <pre>
             <code>import { Provider } from 'react-redux';</code>
@@ -178,8 +178,8 @@
 
     <section class="slide">
         <h2>useSelector</h2>
-        <p>Подключаем наш компонент к стору.</p>
-        <p>Позволяет извлечь данные из redux стора с помощью селектора</p>
+        <p>Підключаємо наш компонент до стору..</p>
+        <p>Дозволяє отримати дані з Redux-стору за допомогою селектора.</p>
         <pre>
             <code>import { useSelector } from 'react-redux';</code>
             <code>const counter = useSelector((state) => state.counter);</code>
@@ -188,7 +188,7 @@
 
     <section class="slide">
         <h2>useDispatch</h2>
-        <p>Этот хук возвращает ссылку на функцию dispatch из Redux. Что позволяет нам инициировать изменения в сторе.</p>
+        <p>Цей хук повертає посилання на функцію dispatch із Redux, що дозволяє нам ініціювати зміни в сторі.</p>
         <pre>
             <code>const dispatch = useDispatch();</code>
             <code>const onClickPlus = () => dispatch({ type: 'increment' });</code>
@@ -198,7 +198,7 @@
 
     <section class="slide">
         <h2>Class Component</h2>
-        <p>Функция <code>connect</code> подключает классовый компонент к стору и помещает их в пропсы.</p>
+        <p>Функція <code>connect</code> підключає класовий компонент до стору та передає їх у пропси.</p>
         <pre>
             <code>const mapStateToProps = (state) => ({ counter: state.counter });</code>
             <code>const mapDispatchToProps = (dispatch) => ({</code>
@@ -212,9 +212,9 @@
     <section class="slide">
         <h2>Task 1.</h2>
         <ol>
-            <li>Продолжаем делать ToDo List</li>
-            <li>Прикручиваем Redux</li>
-            <li>Для хранения скиска задач используем либо localStorage либо Firebase</li>
+            <li>Продовжуємо робити ToDo List</li>
+            <li>Підключаємо Redux</li>
+            <li>Для збереження списку задач використовуємо або localStorage, або Firebase (або буть що, на ваш розсуд) </li>
         </ol>
     </section>
 
@@ -225,11 +225,6 @@
                 <a href="https://redux.js.org/">Redux</a>
             </li>
             <li><a href="https://react-redux.js.org/">React Redux</a></li>
-            <li>
-                <a href="https://www.youtube.com/watch?v=-m3evZuzXC8&list=PLqHlAwsJRxANFIgAf7BO8hNYdvipLERxQ&index=1">
-                    Видосик как создать собственный redux
-                </a>
-            </li>
         </ul>
     </section>
 
