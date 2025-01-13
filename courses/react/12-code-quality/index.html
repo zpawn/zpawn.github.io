@@ -46,7 +46,7 @@
     </section>
 
     <section class="slide">
-        <h2>Темы</h2>
+        <h2>Теми</h2>
         <ol>
             <li>Editorconfig</li>
             <li>ESLint</li>
@@ -59,14 +59,14 @@
     <section class="slide">
         <h2><a href="https://editorconfig.org/">EditorConfig</a></h2>
         <p>
-            <i>EditorConfig</i> помогает поддерживать единый набор правил.
-            Чтобы все члены команды пользовались едиными настройками, касающимися отступов или символов перевода строки
-            и т.п. применяют файл <i>.editorconfig</i>
+            <i>EditorConfig</i> допомагає підтримувати єдиний набір правил.
+            Щоб усі члени команди користувалися єдиними налаштуваннями, що стосуються відступів
+            або символів переводу рядка тощо, застосовують файл <i>.editorconfig</i>
         </p>
     </section>
 
     <section class="slide">
-        <h2>EditorConfig. Пример.</h2>
+        <h2>EditorConfig. Приклад.</h2>
         <pre>
             <code>[*]</code>
             <code>end_of_line = lf</code>
@@ -78,15 +78,15 @@
     </section>
 
     <section class="slide">
-        <h2>EditorConfig. Настройки.</h2>
+        <h2>EditorConfig. Налаштування.</h2>
         <ul>
-            <li><b>root</b> = true - корневая директория.</li>
-            <li><b>trim_trailing_whitespace</b> = true - удаление пробелов в конце строк.</li>
-            <li><b>indent_style</b> = space - отступы оформляются пробелами, а не табуляции.</li>
-            <li><b>indent_size</b> = 2 - размер отступа равен двум пробелам.</li>
-            <li><b>end_of_line</b> = lf - перевод строки в виде символа lf независимо от ОС.</li>
-            <li><b>insert_final_newline</b> = true — в конце файла должна быть пустая строка.</li>
-            <li><b>max_line_length</b> = 80 — максимальная длина строки 80 символов.</li>
+            <li><b>root</b> = true - коренева директорія.</li>
+            <li><b>trim_trailing_whitespace</b> = true - видалення пробілі в кінці рядка.</li>
+            <li><b>indent_style</b> = space - відступи будуть я пробели, а не табуляції.</li>
+            <li><b>indent_size</b> = 2 - розмір відступу дорівнє два пробіли.</li>
+            <li><b>end_of_line</b> = lf - перевод рядка у вигляді символу lf незалежно від ОС.</li>
+            <li><b>insert_final_newline</b> = true — в кінці файлу повинна бути порожній рядок.</li>
+            <li><b>max_line_length</b> = 80 — максимальна довжина рядка 80 символів.</li>
         </ul>
     </section>
 
@@ -96,8 +96,8 @@
             <p>ESLint - Find and fix problems in your JavaScript code.</p>
         </blockquote>
         <p>
-            ESLint - это статический анализатор кода для нахождения проблемных участков, который не соответствуют
-            руководству по стилю.
+            ESLint — це статичний аналізатор коду для знаходження проблемних ділянок,
+            які не відповідають керівництву по стилю.
         </p>
     </section>
 
@@ -142,12 +142,12 @@
 
     <section class="slide prettier">
         <h2><a href="https://prettier.io/">Prettier</a></h2>
-        <p>Prettier — это средство для форматирования кода, которое нацелено на использование жёстко заданных правил.</p>
+        <p>Prettier — це інструмент для форматування коду, який націлений на використання жорстко заданих правил.</p>
         <h3>Install</h3>
         <code>npm i -D prettier eslint-config-prettier</code>
 
         <p>
-            <i>eslint-config-prettier</i> - Отключает все правила, которые могут конфликтовать с Prettier.
+            <i>eslint-config-prettier</i> - Вимикає всі правила, які можуть кофліктувати з Pretier
         </p>
 
         <style>
@@ -192,10 +192,11 @@
     <section class="slide">
         <h2>husky</h2>
         <p>Добавляем хуки и испольняемые команды:<br>
+        <p>Додаємо хуки та команди які треба виконати:<br>
             <code>npx husky add .husky/pre-commit "npm run lint"</code>
         </p>
 
-        <p>или ручками в файлике <code>.husky/pre-commit</code></p>
+        <p>або рученятами у файліку <code>.husky/pre-commit</code></p>
     </section>
 
     <section class="slide">
