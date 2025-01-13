@@ -48,10 +48,10 @@
     </section>
 
     <section class="slide">
-        <h2>Темы</h2>
+        <h2>Теми</h2>
         <ol>
             <li>REST API</li>
-            <li>недостатки REST</li>
+            <li>Недоліки REST</li>
             <li>GraphQL</li>
         </ol>
     </section>
@@ -59,8 +59,8 @@
     <section class="slide">
         <h2>REST</h2>
         <p>
-            <i>REST</i> - это набор ограничений и правил как организовать кода приложения, чтобы все системы легко
-            обменивались данными и приложение можно было легко масштабировать.
+            <i>REST</i> - Це набір правил і обмежень, як організувати код застосунку,
+            щоб усі системи легко обмінювалися даними і додаток можна було легко масштабувати.
         </p>
     </section>
 
@@ -73,27 +73,27 @@
                 <th>Path</th>
             </tr>
             <tr>
-                <td>Получить все таски</td>
+                <td><span class="next">Отримати всі таски</span></td>
                 <td>GET</td>
                 <td>/tasks</td>
             </tr>
             <tr>
-                <td>Создать новую таску</td>
+                <td><span class="next">Створити нову таску</span></td>
                 <td>POST</td>
                 <td>/tasks</td>
             </tr>
             <tr>
-                <td>Получить определенную таску</td>
+                <td><span class="next">Отримати конкретну таску</span></td>
                 <td>GET</td>
                 <td>/tasks/{id}</td>
             </tr>
             <tr>
-                <td>Обновить существующую таску</td>
+                <td><span class="next">Оновити існуючу таску</span></td>
                 <td>PUT</td>
                 <td>/tasks/{id}</td>
             </tr>
             <tr>
-                <td>Удалить существующую таску</td>
+                <td><span class="next">Оновити існуючу таску</span></td>
                 <td>DELETE</td>
                 <td>/tasks/{id}</td>
             </tr>
@@ -101,12 +101,12 @@
     </section>
 
     <section class="slide rest-in-action">
-        <h2>REST API в реальности</h2>
+        <h2>REST API в реальних умовах</h2>
         <img src="./assets/rest-in-action.png" alt="rest in action" class="responsive">
     </section>
 
     <section class="slide">
-        <h2>REST API микросервисы</h2>
+        <h2>REST API мікросервіси</h2>
         <img src="./assets/rest-api-advanced.png" alt="rest advanced" class="responsive">
     </section>
 
@@ -117,34 +117,34 @@
 
     <section class="slide">
         <h2>GraphQL</h2>
-        <p><b>GraphQL</b> это синтаксис, который описывает как запрашивать данные</p>
+        <p><b>GraphQL</b> це синтаксис, який описує, як запитувати дані</p>
 
-        <h3>Основные характеристики</h3>
+        <h3>Основні характеристики:</h3>
         <ul>
-            <li>Позволяет клиенту точно указать, какие данные ему нужны.</li>
-            <li>Облегчает агрегацию данных из нескольких источников.</li>
-            <li>Использует систему типов для описания данных.</li>
+            <li>Дозволяє клієнту точно вказати, які дані йому потрібні.</li>
+            <li>Полегшує агрегацію даних з кількох джерел.</li>
+            <li>Використовує систему типів для опису даних.</li>
         </ul>
     </section>
 
     <section class="slide">
-        <h2>Анатомия запроса</h2>
+        <h2>Анатомія запиту</h2>
         <img src="./assets/query-anatomy.png" alt="graphql anatomy">
     </section>
 
     <section class="slide">
-        <h2>Query - получение данных</h2>
+        <h2>Query - отримання даних</h2>
         <pre>
             <code>query log{</code>
             <code>  login(login:"test", password:"test")</code>
             <code>}</code>
         </pre>
         <ul>
-            <li><i>log</i> - имя для вашего удобства</li>
+            <li><i>log</i> - імʼя для нашої зручності</li>
             <li>
-                <i>login</i> - имя запроса на бэке.
+                <i>login</i> - імʼя запита на бекенді.
                 <ul>
-                    <li>login - строка логина</li>
+                    <li>login - значення логіна</li>
                     <li>password - пароль</li>
                 </ul>
             </li>
@@ -152,19 +152,19 @@
     </section>
 
     <section class="slide mutation">
-        <h2>Mutation - изменение данных</h2>
+        <h2>Mutation - зміна даних</h2>
         <pre>
             <code>mutation reg{</code>
-            <code>  UserUpsert(user: {login:"test", password:"test"}){</code>
+            <code>  UserUpsert(user: { login:"test", password:"test" }){</code>
             <code>    _id, login</code>
             <code>  }</code>
             <code>}</code>
         </pre>
         <ul>
-            <li><i>reg</i> - имя для вашего удобства</li>
-            <li><i>UserUpsert</i> - имя мутации с бэка</li>
-            <li><i>user</i> - значение типа для отправки на сервер (input UserInput).</li>
-            <li>_id, login - поля которые получим в ответ.</li>
+            <li><i>reg</i> - імʼя для нашої зручності</li>
+            <li><i>UserUpsert</i> - імʼя мутації на бекенді</li>
+            <li><i>user</i> - значення типу для відправки на сервер (input UserInput)</li>
+            <li>_id, login - поля які отримаємо у відповідь</li>
         </ul>
         <style>
             .mutation pre {
@@ -181,12 +181,10 @@
     <section class="slide">
         <h2>Links</h2>
         <ul>
-            <li>
-                <a href="https://graphql.org/">GraphQL</a>
-            </li>
-            <li><a href="http://shop-roles.asmer.fs.a-level.com.ua/graphql">Бэк магазина (онлайн песочница)</a></li>
-            <li><a href="http://shop-roles.asmer.fs.a-level.com.ua/">Бэк магазина (для работы с ним)</a></li>
-            <li><a href="http://doc.a-level.com.ua/frontend-graphql-backs/">Дока</a></li>
+            <li><a href="https://graphql.org/" target="_blank">GraphQL</a></li>
+            <li><a href="http://shop-roles.asmer.fs.a-level.com.ua/graphql" target="_blank">Бэк магазина (онлайн песочница)</a></li>
+            <li><a href="http://shop-roles.asmer.fs.a-level.com.ua/" target="_blank">Бэк магазина (для работы с ним)</a></li>
+            <li><a href="http://doc.a-level.com.ua/frontend-graphql-backs/" target="_blank">Дока</a></li>
         </ul>
     </section>
 
