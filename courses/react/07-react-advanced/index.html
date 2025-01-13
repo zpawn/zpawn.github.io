@@ -45,7 +45,7 @@
     </section>
 
     <section class="slide">
-        <h2>Темы</h2>
+        <h2>Теми</h2>
         <ol>
             <li>JSX</li>
             <li>Router</li>
@@ -53,8 +53,8 @@
     </section>
 
     <section class="slide">
-        <h2>Условный рендеринг.</h2>
-        <p>Рендерим компонент по условию или не рендерим вообще.</p>
+        <h2>Умовний рендериіг.</h2>
+        <p>Рендеримо компонент за умовою або не рендеримо взагалі.</p>
         <div class="columns two">
             <pre>
                 <code>const Greeting = ({ isAuth }) => {</code>
@@ -77,8 +77,8 @@
     </section>
 
     <section class="slide">
-        <h2>Списки и ключи.</h2>
-        <p>key помогает React определить, какие элементы были изменены, добавлены или удалены</p>
+        <h2>Списки та ключі.</h2>
+        <p>key допомагає React визначити, які елементи були змінені, додані або видалені</p>
         <pre>
             <code>const content = tasks.map((task) =></code>
             <code>  &lt;Task</code>
@@ -90,12 +90,12 @@
     </section>
 
     <section class="slide">
-        <h2>Фрагменты</h2>
+        <h2>Фрагменти</h2>
         <p>
-            Возврат нескольких элементов из компонента является распространённой практикой в React.
-            Фрагменты позволяют формировать список дочерних элементов, не создавая лишних узлов в DOM.
+            Повернення кількох елементів із компонента є поширеною практикою в React.
+            Фрагменти дозволяють формувати список дочірніх елементів, не створюючи зайвих вузлів у DOM.
             <br>
-            <code>key</code> — это единственный атрибут, допустимый у Fragment
+            <code>key</code> — це єдиний атрибут, дозволений у Fragment
         </p>
         <div class="columns two">
             <pre>
@@ -116,23 +116,23 @@
     <section class="slide">
         <h2>dangerouslySetInnerHTML</h2>
         <p>
-            <i>dangerouslySetInnerHTML</i> соответствует свойству innerHTML в DOM браузера.
-            Как правило, вставка HTML из кода рискованна, так как можно случайно подвергнуть пользователей XSS атаке.
-            Но если очень надо и мы уверены, то можно так:
+            <i>dangerouslySetInnerHTML</i> аналог innerHTML у DOM браузера.
+            Як правило, вставка HTML із коду є ризикованою, оскільки можна випадково наражати користувачів на XSS-атаку.
+            Але якщо дуже потрібно й ми впевнені в безпеці цього коду, то можна так:
         </p>
         <pre>
-            <code>&lt;p dangerouslySetInnerHTML={{ __html: 'Первый &copy; Второй <' }}/&gt;</code>
+            <code>&lt;p dangerouslySetInnerHTML={{ __html: '&copy; Copyright' }}/&gt;</code>
         </pre>
     </section>
 
     <section class="slide">
-        <h2>Функции как дочерние компоненты</h2>
+        <h2>Функції як дочірні компоненти</h2>
         <p>
-            <i>props.children</i> работает так же, как и любой другой проп, поэтому в него можно передавать любые типы данных.
+            <i>props.children</i> працює так само, як і будь-який інший проп, тому в нього можна передавати будь-які типи даних.
         </p>
         <p>
-            Мы можем передать колбэк в props.children, но с тем условием, что компонент преобразует их во что-то,
-            что React сможет понять и отрендерить.
+            Ми можемо передати колбек у props.children, але за умови, що компонент перетворить їх на щось,
+            що React зможе зрозуміти та відрендерити.
         </p>
     </section>
 
@@ -147,7 +147,7 @@
             <code>}</code>
             <code>const ListOfTenThings = () => (</code>
             <code>  &lt;Repeat numTimes={10}&gt;</code>
-            <code>    {(index) => &lt;li key={index}&gt;Это элемент списка с ключом {index}&lt;/li&gt;}</code>
+            <code>    {(index) => &lt;li key={index}&gt;Цей ед=лемент списку з ключем {index}&lt;/li&gt;}</code>
             <code>  &lt;/Repeat&gt;</code>
             <code>);</code>
         </pre>
@@ -156,10 +156,10 @@
     <section class="slide">
         <h2>Render Props</h2>
         <div class="columns" style="grid-template-columns: 1fr 3fr;">
-            <div>Позволяет:</div>
+            <div>Дозволяє:</div>
             <ol>
-                <li>Отделить представление от логики.</li>
-                <li>Достучаться до состояния дочернего компонента</li>
+                <li>Відокремити представлення від логіки</li>
+                <li>Дістатися до стану дочірнього компонента</li>
             </ol>
         </div>
         <pre>
@@ -173,11 +173,10 @@
     </section>
 
     <section class="slide">
-        <h2>Разделение кода.</h2>
+        <h2>Розбиття коду</h2>
         <p>
-            <i>React.lazy</i> - позволяет рендерить динамический импорт как обычный компонент.
-            Результатом является модуль, который экспортирует по умолчанию React-компонент
-            (export default).
+            <i>React.lazy</i> - дозволяє рендерити динамічний імпорт як звичайний компонент.
+            Результатом є модуль, який експортує за замовчуванням React-компонент (export default).
         </p>
         <pre>
             <code>const OtherComponent = React.lazy(() => import('./OtherComponent'));</code>
@@ -187,8 +186,8 @@
     <section class="slide">
         <h2>Suspense</h2>
         <p>
-            Компонент с ленивой загрузкой (lazy) должен рендериться внутри компонента Suspense, который позволяет показать
-            запасное содержимое пока происходит загрузка ленивого компонента.
+            Компонент з лінивим завантаженням (lazy) повинен рендеритись всередині компонента Suspense,
+            який дозволяє показати резервний контент, поки відбувається завантаження лінивого компонента.
         </p>
     </section>
 
@@ -199,7 +198,7 @@
             <code>&nbsp;</code>
             <code>const MyComponent = () => {</code>
             <code>  return (</code>
-            <code>    &lt;Suspense fallback={&lt;div&gt;Загрузка...&lt;/div&gt;}></code>
+            <code>    &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}></code>
             <code>      &lt;OtherComponent /&gt;</code>
             <code>    &lt;/Suspense&gt;</code>
             <code>  );</code>
@@ -208,7 +207,7 @@
     </section>
 
     <section class="slide">
-        <h2>Разделение кода и Router.</h2>
+        <h2>Розділення коді та Router.</h2>
         <pre>
             <code>&lt;Suspense fallback={&lt;&gt;Loading...&lt:/&gt;}&gt;</code>
             <code>  &lt;Routes&gt;</code>
@@ -221,9 +220,9 @@
     <section class="slide">
         <h2>Task 1.</h2>
         <ol>
-            <li>Сделать route на который можно попасть только авторизованным пользователям</li>
-            <li>Доделываем ToDo.</li>
-            <li>Определяемся и приступаем к диплому</li>
+            <li>Зробити route на який можно потрапити тільки авторизованним користувачам</li>
+            <li>Дороблюжмо ToDo.</li>
+            <li>Визначаємося і починаємо диплом</li>
         </ol>
     </section>
 
@@ -231,17 +230,17 @@
         <h2>Links</h2>
         <ul>
             <li>
-                <a href="https://ru.reactjs.org/docs/conditional-rendering.html">Условный рендеринг</a>
+                <a href="https://uk.legacy.reactjs.org/docs/conditional-rendering.html">Умовний рендеринг</a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/lists-and-keys.html">Списки и ключи</a>
+                <a href="https://uk.legacy.reactjs.org/docs/lists-and-keys.html">Списки и ключі</a>
             </li>
             <li>
-                <a href="https://ru.reactjs.org/docs/code-splitting.html">Разделение кода</a>
+                <a href="https://uk.legacy.reactjs.org/docs/code-splitting.html">Розбиття коду</a>
             </li>
-            <li><a href="https://ru.reactjs.org/docs/fragments.html">Фрагменты</a></li>
-            <li><a href="https://ru.reactjs.org/docs/jsx-in-depth.html">JSX</a></li>
-            <li><a href="https://ru.reactjs.org/docs/render-props.html">Render Props</a></li>
+            <li><a href="https://uk.legacy.reactjs.org/docs/fragments.html">Фрагменти</a></li>
+            <li><a href="https://uk.legacy.reactjs.org/docs/jsx-in-depth.html">JSX</a></li>
+            <li><a href="https://uk.legacy.reactjs.org/docs/render-props.html">Render Props</a></li>
         </ul>
     </section>
 
