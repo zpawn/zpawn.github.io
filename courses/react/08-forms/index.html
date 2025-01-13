@@ -45,17 +45,18 @@
     </section>
 
     <section class="slide">
-        <h2>Темы</h2>
+        <h2>Теми</h2>
         <ol>
-            <li>Работать с формами</li>
-            <li>Валидировать значения</li>
+            <li>Прицювати з формами</li>
+            <li>Валідувати значення</li>
             <li>Formik</li>
-            <li>Научитесь писать валидационные схемы</li>
+            <li>Навчитеся писати валідаційні схеми</li>
         </ol>
     </section>
 
     <section class="slide">
         <h2><a href="https://formik.org/">Formik.</a></h2>
+        <br><br>
         <blockquote>
             <p>Build forms in React, without the tears.</p>
         </blockquote>
@@ -75,10 +76,10 @@
     </section>
 
     <section class="slide">
-        <h2>Обязательные props</h2>
+        <h2>Обовʼязкові props</h2>
         <ul>
-            <li><i>initialValues</i> - стейт формы при инициализации.</li>
-            <li><i>onSubmit</i> - обработка сабмита формы.</li>
+            <li><i>initialValues</i> - стейт форми при ініціалізації.</li>
+            <li><i>onSubmit</i> - обробка сабміта форми.</li>
         </ul>
         <pre>
             <code>const onSubmit = (values, actions) => { ... };</code>
@@ -89,7 +90,7 @@
     </section>
 
     <section class="slide">
-        <h2>Подключаем инпут</h2>
+        <h2>Підключаємо інпут</h2>
         <pre>
             <code>&lt;Input</code>
             <code>  name='email'</code>
@@ -102,8 +103,8 @@
     </section>
 
     <section class="slide">
-        <h2>Валидация</h2>
-        <p>Обрабатываем ошибки валидации данных и возвращаем объект со списком ошибок</p>
+        <h2>Валідація</h2>
+        <p>Обробляємо помилки валідації даних та повертаємо об'єкт зі списком помилок</p>
         <pre>
             <code>const onValidate = (values) => {</code>
             <code>  const errors = {};</code>
@@ -117,23 +118,23 @@
     </section>
 
     <section class="slide">
-        <h2>Отображение ошибок</h2>
+        <h2>Відображення помилок</h2>
         <pre>
             <code>&lt;Formik ...&gt;</code>
             <code>  {(formik) => (</code>
             <code>    &lt;Input name='email' ... /&gt;</code>
-            <code>    {(formik.touched.email && formik.errors.email)</code>
-            <code>      && &lt;div type='danger'&gt;{errors.email}&lt;/div&gt;</code>
-            <code>    }</code>
+            <code>    {(formik.touched.email && formik.errors.email) && (</code>
+            <code>      &lt;div type='danger'&gt;{errors.email}&lt;/div&gt;</code>
+            <code>    )}</code>
             <code>  )}</code>
             <code>&lt;/Formik&gt;</code>
         </pre>
     </section>
 
     <section class="slide">
-        <h2>Валидация с <a href="https://github.com/jquense/yup">Yup</a></h2>
-        <p><code>npm install yup</code> - инсталим</p>
-        <div>Описываем схему валидации:</div>
+        <h2>Валідація з <a href="https://github.com/jquense/yup">Yup</a></h2>
+        <p><code>npm install yup</code> - інстаюємо</p>
+        <div>Описуємо схему валізації:</div>
         <pre>
             <code>const validationSchema = yup.object().shape({</code>
             <code>  email: yup.string().required().email(),</code>
@@ -162,12 +163,12 @@
         <h2>Task 1.</h2>
         <ol>
             <li>
-                <div>Сделать форму регистрации:</div>
+                <div>Створюємо форму реєсрації:</div>
                 <ul>
                     <li>поля: firstName, lastName, email, password, confirmPassword, agree</li>
-                    <li>все поля обязательные</li>
-                    <li>password - минимум 3 символа, максимум - 10</li>
-                    <li>agree - Соглашение, без чекбокса не пускаем дальше</li>
+                    <li>всі поля обовʼязкові</li>
+                    <li>password - мінімум 3 символа, максимум - 10</li>
+                    <li>agree - угода, без чекбокса не пускаємо далі</li>
                 </ul>
             </li>
 
@@ -177,8 +178,8 @@
     <section class="slide">
         <h2>Links</h2>
         <ul>
-            <li><a href="https://formik.org/">Formik</a></li>
-            <li><a href="https://github.com/jquense/yup">Yup - валидация значений</a></li>
+            <li><a href="https://formik.org/" target="_blank">Formik</a></li>
+            <li><a href="https://github.com/jquense/yup" target="_blank">Yup - валідація значень</a></li>
         </ul>
     </section>
 
