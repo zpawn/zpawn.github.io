@@ -43,11 +43,11 @@
     </section>
 
     <section class="slide">
-        <h2>Темы</h2>
+        <h2>Теми</h2>
         <ol>
-            <li>Приемущества</li>
-            <li>Типы</li>
-            <li>Функции</li>
+            <li>Переваги</li>
+            <li>Типи</li>
+            <li>Функції</li>
             <li>Class</li>
         </ol>
     </section>
@@ -56,29 +56,29 @@
         <h2>TypeScript</h2>
         <p>TypeScript is JavaScript with syntax for types</p>
         <ul>
-            <li>Статическая типизация</li>
-            <li>Поддержка новейших функций JavaScript</li>
-            <li>Поддержка IDE</li>
+            <li>Статична типізація</li>
+            <li>Підтримка новітніх функцій JavaScript</li>
+            <li>Підтримка IDE</li>
         </ul>
     </section>
 
     <section class="slide">
-        <h3>Установка</h3>
+        <h3>Астановлення</h3>
         <code>npm install typescript --save-dev</code>
 
-        <h3>Инициализация</h3>
-        <code>tsc --init</code> - создаст файлик <i>tsconfig.json</i> с настройками компилятора
+        <h3>Ініціалізація</h3>
+        <code>tsc --init</code> - створює файлік <i>tsconfig.json</i> з налаштуваннями компілятора
     </section>
 
     <section class="slide">
-        <h2>Настройки</h2>
+        <h2>Налаштування</h2>
         <ul>
-            <li><i>noImplicitAny</i> - ошибка если тип не указан или any</li>
-            <li><i>target</i> - указывает в какую версию ECMAScript компилировать</li>
-            <li><i>removeComments</i> - даляет комментарии</li>
+            <li><i>noImplicitAny</i> - помилка, якщо тип не вказаний або використано any</li>
+            <li><i>target</i> - вказуємо, в яку версію ECMAScript компілювати</li>
+            <li><i>removeComments</i> - видаляє коментарі</li>
         </ul>
 
-        <div>В <i>package.json</i> создаем скрипт для запуска компилятора</div>
+        <div>В <i>package.json</i> створюємо скрипт для запуска компілятора</div>
         <pre>
             <code>"scripts": {</code>
             <code>  "compile": "tsc ./index.ts",</code>
@@ -88,21 +88,21 @@
     </section>
 
     <section class="slide">
-        <h2>Типы</h2>
+        <h2>Типи</h2>
         <div class="columns two">
             <ul>
-                <li><b>Boolean</b>: логическое значение true или false</li>
-                <li><b>Number</b>: числовое значение</li>
-                <li><b>String</b>: строки</li>
-                <li><b>Array</b>: массивы</li>
-                <li><b>Tuple</b>: кортежи</li>
-                <li><b>Enum</b>: перечисления</li>
-                <li><b>Any</b>: произвольный тип</li>
+                <li><b>Boolean</b>: логічне значення true або false</li>
+                <li><b>Number</b>: числове значення</li>
+                <li><b>String</b>: рядок</li>
+                <li><b>Array</b>: массив</li>
+                <li><b>Tuple</b>: кортедж</li>
+                <li><b>Enum</b>: перелічення</li>
+                <li><b>Any</b>: довільний тип</li>
             </ul>
             <ul>
 
-                <li><b>Null</b> и <b>undefined</b>: соответствуют значениям null и undefined в javascript</li>
-                <li><b>Void</b>: отсутствие конкретного значения, используется в основном в качестве возвращаемого типа функций</li>
+                <li><b>Null</b> і <b>undefined</b>: відповідяють значенням null і undefined в javascript</li>
+                <li><b>Void</b>: відсутність конкретного значення, використовується в основному як тип, що повертається функціями.</li>
             </ul>
         </div>
     </section>
@@ -122,7 +122,7 @@
     </section>
 
     <section class="slide func">
-        <h2>Функции</h2>
+        <h2>Функції</h2>
         <pre>
             <code>function add(a: number, b: number): number {</code>
             <code>  return a + b;</code>
@@ -147,10 +147,10 @@
     </section>
 
     <section class="slide">
-        <h2>Функции</h2>
+        <h2>Функції</h2>
 
         <pre>
-            <code class="comment">// описываем контракт</code>
+            <code class="comment">// описує контракт</code>
             <code>type FuncType = (baseValue: number, incrementValue: number) => number;</code>
             <code>&nbsp;</code>
             <code>const increase = &lt;FuncType&gt;function (x:number, y: number): number {</code>
@@ -162,7 +162,7 @@
     </section>
 
     <section class="slide">
-        <h2>Классы</h2>
+        <h2>Класси</h2>
         <pre>
             <code>class User {</code>
             <code>  id: number;</code>
@@ -175,7 +175,7 @@
     </section>
 
     <section class="slide">
-        <h2>Модификаторы доступа</h2>
+        <h2>Модифікатори доступу</h2>
         <pre>
             <code>class User {</code>
             <code>  public name: string;</code>
