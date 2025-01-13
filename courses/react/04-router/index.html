@@ -47,28 +47,28 @@
     <section class="slide">
         <h2>Темы</h2>
         <ol>
-            <li>Виртуальный DOM</li>
+            <li>Віртуальний DOM</li>
             <li>SPA</li>
             <li>React Router .v6</li>
         </ol>
     </section>
 
     <section class="slide">
-        <h2>Проблема DOM</h2>
+        <h2>Проблеми DOM</h2>
         <p>
-            Главная проблема DOM — он никогда не был рассчитан для создания динамического пользовательского интерфейса (UI)
+            Головна проблема DOM — він ніколи не був розрахований для створення динамічного інтерфейсу користувача (UI).
         </p>
         <p>
-            Многие библиотеки упрощали работу с DOM, но е решали проблему с производительностью.
+            Багато бібліотек спрощували роботу з DOM, але не вирішували проблему з продуктивністю.
         </p>
     </section>
 
     <section class="slide">
-        <h2>Виртуальный DOM</h2>
+        <h2>Віртуальний DOM</h2>
         <p>
-            Мы можем вносить изменения в копию, исходя из наших потребностей, а после этого применять изменения к
-            реальному DOM. При этом происходит сравнение DOM-дерева с его виртуальной копией, определяется разница и
-            запускается перерисовка того, что было изменено.
+            Ми можемо вносити зміни до копії, виходячи з наших потреб, а після цього застосовувати зміни до реального DOM.
+            При цьому відбувається порівняння DOM-дерева з його віртуальною копією, визначається різниця та запускається
+            перерисовка того, що було змінено.
         </p>
         <p></p>
     </section>
@@ -76,21 +76,21 @@
     <section class="slide">
         <h2>SPA</h2>
         <p>
-            Это одна страница, c которой взаимодействует пользователь, страница динамически
-            перерисовывается, а не загружает целые страницы с сервера
+            Це одна сторінка, з якою взаємодіє користувач, сторінка динамічно перерисовується,
+            а не завантажуються цілі сторінки з сервера.
         </p>
         <table>
             <tr>
                 <th>SPA</th>
-                <th>Многостраничный сайт</th>
+                <th>Багатосторінковий сайт.</th>
             </tr>
             <tr>
                 <td>Один HTML файл</td>
-                <td>На каждую страницу отдельный HTML файл</td>
+                <td>На кожну сторінку окремий HTML файл.</td>
             </tr>
             <tr>
-                <td>Переход между страницами без перезагрузки</td>
-                <td>На каждую страницу отдельное приложение</td>
+                <td>Перехід між сторінками без перезавантаження.</td>
+                <td>На кожну сторінку окремий додаток.</td>
             </tr>
         </table>
     </section>
@@ -98,15 +98,15 @@
     <section class="slide">
         <h2><a href="https://reactrouter.com/">React Router</a></h2>
         <ul>
-            <li>Механизм переключения страниц</li>
-            <li>Считывание данных с URL строки</li>
-            <li>Работа с историей переходов по сайту</li>
+            <li>Механізм перемикання сторінок</li>
+            <li>Зчитування даних із URL</li>
+            <li>Робота з історією переходів на сайті</li>
         </ul>
     </section>
 
     <section class="slide">
         <h2>BrowserRouter</h2>
-        <p>Подключаем Router к нашему приложению.</p>
+        <p>Підключаємо Router до нашого додатку</p>
         <pre>
             <code>import { BrowserRouter } from 'react-router-dom'</code>
 
@@ -121,10 +121,10 @@
 
     <section class="slide">
         <h2>Route</h2>
-        <div>Описываем соответствие роутов и подключяемых компонентов.</div>
+        <div>Описуємо відповідність роутів і компонентів які підключаємо</div>
         <ul>
-            <li><code>path</code> - шаблон, по которому будем сравнивать запрошенный URL (точное совпадение)</li>
-            <li><code>element</code> - компонент, который будет отрендерен по этому роуту</li>
+            <li><code>path</code> - шаблон, за яким будемо порівнювати запитаний URL (точна відповідність)</li>
+            <li><code>element</code> - компонент, який буде відрендерений за цим роутом</li>
         </ul>
         <pre>
             <code>&lt;Routes&gt;</code>
@@ -136,13 +136,13 @@
 
     <section class="slide">
         <h2>Link</h2>
-        <p>Позволяют изменить отображаемую в данный момент страницу (компонент) и изменив текущее url.</p>
+        <p>дозволяють змінити сторінку (компонент), яка відображається в даний момент та зміниши поточний URL.</p>
         <code>&lt;Link to='/home'&gt;Home&lt;Link&gt;</code>
     </section>
 
     <section class="slide">
         <h2>NavLink</h2>
-        <p>Аналог &lt;Link&gt;, но который знает, является ли ссылка активной.</p>
+        <p>Аналог &lt;Link&gt;, але який знає, чи є посилання активним.</p>
         <code>&lt;NavLink to='/home'&gt;Home&lt;/NavLink&gt;</code>
     </section>
 
@@ -150,10 +150,11 @@
         <h2>Dynamic Routes, useParams</h2>
         <code>&lt;Route path='/product/:id' element={&lt;Product/&gt;} /&gt;</code>
         <p>
-            <code>:id</code> - динамический участок урла
+            <code>:id</code> - Динамічна частина URL.
         </p>
         <p>
-            <code>useParams</code> - возвразает объект с динамическими параметрами url которые сопоставил с &lt;Route path&gt;
+            <code>useParams</code> - повертає об'єкт із динамічними параметрами URL, які були зіставлені з
+            <code>path</code> в компоненту <code>Route</code>
         </p>
         <p>
             <code>const params = useParams();</code>
@@ -162,13 +163,13 @@
 
     <section class="slide">
         <h2>Navigate</h2>
-        <p>Элемент Navigate меняет текущий url, когда рендерится</p>
+        <p>Елемент Navigate змінює поточний URL, коли рендериться</p>
         <code>&lt;Navigate to='/home' /&gt;</code>
     </section>
 
     <section class="slide">
         <h2>useNavigate</h2>
-        <div>Хук с помощью которого мы можем програмно переадресовать на нужный роут.</div>
+        <div>Хук, за допомогою якого ми можемо програмно перенаправити на потрібний маршрут.</div>
         <pre>
             <code>const navigate = useNavigate();</code>
             <code>navigate('/products');</code>
@@ -183,7 +184,7 @@
     <section class="slide">
         <h2>useLocation</h2>
         <p>
-            Возвращает объект с информацией о текущем url.
+            Повертає об'єкт з інформацією про поточний URL.
         </p>
         <code>const location = useLocation();</code>
     </section>
@@ -203,13 +204,13 @@
                 Browser API
                 <ul>
                     <li>
-                        <a href="https://developer.mozilla.org/ru/docs/Web/API/History_API">History API</a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API" target="_blank">History API</a>
                     </li>
                     <li>
-                        <a href="https://developer.mozilla.org/ru/docs/Web/API/URL">URL</a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/URL" target="_blank">URL</a>
                     </li>
                     <li>
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/URLSearchParams">URLSearchParams</a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/URLSearchParams" target="_blank">URLSearchParams</a>
                     </li>
                 </ul>
             </li>
