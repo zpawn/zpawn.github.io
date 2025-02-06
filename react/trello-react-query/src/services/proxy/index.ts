@@ -1,0 +1,1 @@
+export { getTokenInProxyService } from "./getTokenInProxyService";
