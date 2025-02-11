@@ -1,4 +1,4 @@
-import { FC, useMemo, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { get, has, noop, concat, isEmpty } from "lodash";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -41,7 +41,6 @@ import {
     SingleSelect,
     LoadingSpinner,
     TwoButtonGroup,
-    EmptyInlineBlock,
     TextBlockWithLabel,
 } from "../../components/common";
 import {
@@ -266,7 +265,7 @@ const CreateCardPage: FC = () => {
                 if (!isEmpty(labels)) {
                     setLabels(labels.map(({ id, name, color }) => getOption(id, (
                         <Pill
-                            label={name ? name : <EmptyInlineBlock/>}
+                            label={name ? name : "-"}
                             {...getLabelColor(lightTheme, color)}
                         />
                     ))));
@@ -353,6 +352,8 @@ const CreateCardPage: FC = () => {
                     id="dueDateSdk"
                     label="Due date"
                     error={!!(touched.dueDate && errors.dueDate)}
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
                     onChange={(date: [Date]) => setFieldValue("dueDate", date[0])}
                 />
 
@@ -457,7 +458,7 @@ const CreateCardPage: FC = () => {
                     />
                     <Button
                         text="Cancel"
-                        intent="tertiary"
+                        intent="secondary"
                         onClick={() => navigate("/home")}
                     />
                 </Stack>

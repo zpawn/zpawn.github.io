@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Checkbox } from "@deskpro/deskpro-ui";
 import { CardInfo } from "./CardInfo";
-import { HorizontalDivider } from "../HorizontalDivider";
+import { Divider } from "../Divider";
 import type { FC } from "react";
 import type { CardType, Organization } from "../../../services/trello/types";
 
@@ -26,7 +26,7 @@ const CardBody = styled.div`
     width: calc(100% - 12px - 8px);
 `;
 
-const Card: FC<Props> = ({ checked, onChange, card, organizations }) => (
+const TrelloCard: FC<Props> = ({ checked, onChange, card, organizations }) => (
     <>
         <CardUI>
             <CardMedia>
@@ -45,8 +45,8 @@ const Card: FC<Props> = ({ checked, onChange, card, organizations }) => (
                 />
             </CardBody>
         </CardUI>
-        <HorizontalDivider style={{ marginBottom: 9 }} />
+        <Divider style={{ marginBottom: 9 }} />
     </>
 );
 
-export { Card };
+export { TrelloCard };

@@ -1,8 +1,10 @@
-import { ChangeEvent, FC, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { omit } from "lodash";
 import { faFile } from "@fortawesome/free-regular-svg-icons";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import omit from "lodash/omit";
-import { AnyIcon, AttachmentTag, Button, Stack } from "@deskpro/deskpro-ui";
+// import { faPlus } from "@fortawesome/free-solid-svg-icons";
+// import { AnyIcon, AttachmentTag, Button, Stack } from "@deskpro/deskpro-ui";
+import { Button } from "../Button";
+import type { ChangeEvent, FC } from "react";
 
 export interface AttachmentFile {
     name: string;
@@ -85,7 +87,7 @@ const Attach: FC<AttachmentsFieldProps> = ({ onFiles, existing }: AttachmentsFie
                         key={idx}
                         filename={files[name].name}
                         fileSize={files[name].size}
-                        icon={faFile as AnyIcon}
+                        icon={faFile}
                         maxWidth="244px"
                         withClose
                         onClose={(e) => {
@@ -95,9 +97,9 @@ const Attach: FC<AttachmentsFieldProps> = ({ onFiles, existing }: AttachmentsFie
                     />
                 ))}
                 <Button
-                    minimal
+                    intent="minimal"
                     text="Add"
-                    icon={faPlus}
+                    // icon={faPlus}
                     onClick={add}
                 />
             </Stack>

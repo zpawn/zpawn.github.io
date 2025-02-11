@@ -1,38 +1,31 @@
 import { NavLink } from "react-router-dom";
-import { Stack, AnchorButton } from "@deskpro/deskpro-ui";
-import { Container } from "../Layout";
+import { AnchorButton } from "../Button";
+import { Divider } from "../Divider";
 import type { FC } from "react";
 
-type Props = {
-  //..
+type NavItem = {
+  route: string;
+  name: string;
 };
 
-const AppNavigation: FC<Props> = () => {
+export type AppNavigationProps = {
+  nav: NavItem[];
+};
+
+const AppNavigation: FC<AppNavigationProps> = ({ nav }) => {
   return (
-    <Container as={Stack} gap={8}>
-      <NavLink to="/home">
-        {({ isActive }) => (
-          <AnchorButton text="Home" intent={isActive ? "minimalUnderline" : "minimal"}/>
-        )}
-      </NavLink>
-      <NavLink to="/link_card">
-      {({ isActive }) => (
-        <AnchorButton text="Link Card" intent={isActive ? "minimalUnderline" : "minimal"}/>
-      )}
-      </NavLink>
-      {/* todo: Implement Route */}
-      <NavLink to="/unlink">
-        {({ isActive }) => (
-          <AnchorButton text="Unlink Card" intent={isActive ? "minimalUnderline" : "minimal"}/>
-        )}
-      </NavLink>
-      {/* todo: Implement Route */}
-      <NavLink to="/logout">
-        {({ isActive }) => (
-          <AnchorButton text="Logout" intent={isActive ? "minimalUnderline" : "minimal"}/>
-        )}
-      </NavLink>
-    </Container>
+    <div className="relative">
+      <Divider className="absolute bottom-0 w-full"/>
+      <div className="flex justify-evenly relative">
+        {nav.map(({ route, name }) => (
+          <NavLink key={route} to={route}>
+            {({ isActive }) => (
+              <AnchorButton text={name} intent="underline" active={isActive} />
+            )}
+        </NavLink>
+        ))}
+      </div>
+    </div>
   );
 };
 

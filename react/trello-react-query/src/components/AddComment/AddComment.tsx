@@ -55,7 +55,7 @@ const AddComment: FC<Props> = ({ onSubmit, onCancel }) => {
                     />
                     <Button
                         text="Cancel"
-                        intent="tertiary"
+                        intent="minimal"
                         onClick={onCancel}
                     />
                 </Stack>

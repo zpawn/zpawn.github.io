@@ -10,10 +10,9 @@ import {
     Markdown,
     Container,
     TrelloLogo,
-    EmptyInlineBlock,
     TextBlockWithLabel,
 } from "../common";
-import { Members } from "../common/Cards";
+import { Members } from "../common/TrelloCards";
 import type { FC } from "react";
 import type { CardType, Organization } from "../../services/trello/types";
 
@@ -77,7 +76,7 @@ const Info: FC<Props> = ({ card, organizations }) => {
                                 labels.map(({ id, name, color }: any) => (
                                     <Pill
                                         key={id}
-                                        label={name ? name : <EmptyInlineBlock/>}
+                                        label={name ? name : "-"}
                                         {...getLabelColor(lightTheme, color)}
                                     />
                                 ))

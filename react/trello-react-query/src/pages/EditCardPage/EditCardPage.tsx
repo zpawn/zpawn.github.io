@@ -1,4 +1,4 @@
-import { FC, useMemo, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { get, has, isEmpty } from "lodash";
 import * as yup from "yup";
 import { useFormik } from "formik";
@@ -42,7 +42,6 @@ import {
     ErrorBlock,
     SingleSelect,
     LoadingSpinner,
-    EmptyInlineBlock,
     TextBlockWithLabel,
 } from "../../components/common";
 import type { Board, CardType, Member } from "../../services/trello/types";
@@ -230,7 +229,7 @@ const EditCardPage: FC = () => {
                                     label: (
                                         <Pill
                                             key={id}
-                                            label={name ? name : <EmptyInlineBlock/>}
+                                            label={name ? name : "-"}
                                             {...getLabelColor(lightTheme, color)}
                                         />
                                     ),
@@ -290,7 +289,7 @@ const EditCardPage: FC = () => {
                             label: (
                                 <Pill
                                     key={id}
-                                    label={name ? name : <EmptyInlineBlock/>}
+                                    label={name ? name : "-"}
                                     {...getLabelColor(lightTheme, color)}
                                 />
                             ),
@@ -377,6 +376,8 @@ const EditCardPage: FC = () => {
                         label="Due date"
                         error={!!(touched.dueDate && errors.dueDate)}
                         {...getFieldProps("dueDate")}
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-ignore
                         onChange={(date: [Date]) => setFieldValue("dueDate", date[0])}
                     />
                 </Label>
@@ -483,7 +484,7 @@ const EditCardPage: FC = () => {
                     />
                     <Button
                         text="Cancel"
-                        intent="tertiary"
+                        intent="secondary"
                         onClick={() => navigate(`/view_card/${card?.id}`)}
                     />
                 </Stack>

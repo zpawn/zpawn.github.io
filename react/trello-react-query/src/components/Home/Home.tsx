@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import size from "lodash/size";
-import { CardInfo, NoFound, InputSearch, Container, HorizontalDivider } from "../common";
+import { CardInfo, NoFound, InputSearch, Container, Divider } from "../common";
 import type { FC } from "react";
 import type { Props as SearchProps } from "../common/InputSearch";
 import type { CardType, Organization } from "../../services/trello/types";
@@ -29,7 +29,7 @@ const Home: FC<Props> = ({
                 onClear={onClearSearchCard}
                 onChange={onChangeSearchCard}
             />
-            <HorizontalDivider style={{ marginBottom: "9px" }}/>
+            <Divider style={{ marginBottom: "9px" }}/>
             {!size(cards)
                 ? (<NoFound text="No Trello cards found" />)
                 : cards.map((card) => (
@@ -39,7 +39,7 @@ const Home: FC<Props> = ({
                             organizations={organizations}
                             onTitleClick={() => onNavigateToViewCard(card.id)}
                         />
-                        <HorizontalDivider style={{ marginBottom: 9 }}/>
+                        <Divider style={{ marginBottom: 9 }}/>
                     </Fragment>
                 ))
             }

@@ -43,7 +43,7 @@ const useLogIn: UseLogIn = () => {
         .then(() => navigate("/home"))
         .catch(asyncErrorHandler)
         .finally(() => setIsLoading(false));
-    }, [asyncErrorHandler, state]);
+    }, [navigate, asyncErrorHandler, state]);
 
     return { authUrl, onLogin, isLoading };
 };

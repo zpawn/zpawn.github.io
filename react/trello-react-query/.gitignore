@@ -25,3 +25,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Storybook
+storybook-static/*
+*storybook.log
+
+# Project
+src/styles.css

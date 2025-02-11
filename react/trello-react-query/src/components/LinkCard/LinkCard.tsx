@@ -4,12 +4,12 @@ import { Stack } from "@deskpro/deskpro-ui";
 import {
   Cards,
   Button,
+  Divider,
   Container,
   InputSearch,
   SingleSelect,
   LoadingSpinner,
   TwoButtonGroup,
-  HorizontalDivider,
 } from "../common";
 import type { FC, ChangeEvent } from "react";
 import type { Option } from "../../types";
@@ -91,7 +91,7 @@ const LinkCard: FC<Props> = ({
                 />
             </Stack>
 
-            <HorizontalDivider style={{ marginBottom: "10px" }} />
+            <Divider style={{ marginBottom: "10px" }} />
 
             {loading
                 ? (<LoadingSpinner/>)

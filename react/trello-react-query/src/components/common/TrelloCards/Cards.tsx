@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { NoFound } from "../NoFound";
-import { Card } from "./Card";
+import { Card } from "../Card";
 import type { CardType, Organization } from "../../../services/trello/types";
 
 type Props = {

@@ -26,24 +26,6 @@ const HomePage: FC = () => {
 
     useSetBadgeCount(cards);
 
-    // useDeskproElements(({ clearElements, registerElement }) => {
-    //     clearElements();
-    //     registerElement("trelloRefreshButton", { type: "refresh_button" });
-    //     registerElement("trelloPlusButton", {
-    //         type: "plus_button",
-    //         payload: { type: "changePage", path: "/link_card" },
-    //     });
-    //     registerElement("trelloMenu", {
-    //         type: "menu",
-    //         items: [{
-    //             title: "Log Out",
-    //             payload: {
-    //                 type: "logout",
-    //             },
-    //         }],
-    //     });
-    // });
-
     const onNavigateToViewCard = useCallback((cardId: CardType["id"]) => {
         navigate(`/view_card/${cardId}`);
     }, [navigate]);

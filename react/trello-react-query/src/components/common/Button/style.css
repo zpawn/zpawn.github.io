@@ -1,0 +1,38 @@
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center align-middle select-none font-sans font-medium text-center text-sm py-2 rounded-md transition-all ease-in duration-150
+  }
+  button.btn {
+    @apply cursor-pointer disabled:cursor-not-allowed
+  }
+  a.btn { @apply cursor-pointer }
+  a.btn.disabled { @apply cursor-not-allowed }
+
+  .btn.btn-primary {
+    @apply min-w-22 px-4 border bg-stone-800 text-stone-50 shadow-sm hover:bg-stone-700
+  }
+  button.btn.btn-primary {
+    @apply disabled:bg-stone-700
+  }
+  a.btn.btn-primary { @apply bg-stone-800 }
+  a.btn.btn-primary.disabled { @apply bg-stone-700 }
+
+  .btn.btn-secondary {
+    @apply min-w-22 px-4 text-stone-500 border border-stone-300 hover:text-stone-700 hover:bg-stone-200 hover:border-stone-700
+  }
+  button.btn.btn-secondary {
+    @apply bg-transparent disabled:bg-stone-200
+  }
+  a.btn.btn-secondary { @apply bg-transparent }
+  a.btn.btn-secondary.disabled { @apply bg-stone-200 }
+
+  .btn.btn-minimal {
+    @apply px-0 mx-4 rounded-none border-b bg-transparent text-stone-800 hover:border-b hover:border-stone-900
+  }
+
+  .btn.btn-underline {
+    @apply px-0 mx-4 rounded-none border-b border-b-transparent bg-transparent text-stone-800 hover:border-b hover:border-stone-900
+  }
+
+  .btn.btn-underline.active { @apply border-stone-900 }
+}
