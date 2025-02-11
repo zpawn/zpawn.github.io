@@ -1,1 +1,2 @@
-export { Button, AnchorButton } from "./Button";
+export { Button } from "./Button";
+export { AnchorButton } from "./AnchorButton";

@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import type { TrelloError } from "../services/trello";
+import type { TrelloError } from "../utils";
 
 const useAsyncError = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

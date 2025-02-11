@@ -2,7 +2,7 @@ import { API_KEY, BASE_URL } from "../../constants";
 import { baseRequest } from "../../utils";
 import { getTokenService } from "../local";
 import { Member } from "./types";
-import { TrelloError } from "./TrelloError";
+import { TrelloError } from "../../utils";
 
 const getCurrentMemberService = () => {
   return baseRequest<Member & TrelloError>({

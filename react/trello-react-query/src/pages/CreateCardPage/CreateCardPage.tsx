@@ -1,4 +1,4 @@
-import { FC, useMemo, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import { get, has, noop, concat, isEmpty } from "lodash";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -353,6 +353,8 @@ const CreateCardPage: FC = () => {
                     id="dueDateSdk"
                     label="Due date"
                     error={!!(touched.dueDate && errors.dueDate)}
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
                     onChange={(date: [Date]) => setFieldValue("dueDate", date[0])}
                 />
 
@@ -457,7 +459,7 @@ const CreateCardPage: FC = () => {
                     />
                     <Button
                         text="Cancel"
-                        intent="tertiary"
+                        intent="secondary"
                         onClick={() => navigate("/home")}
                     />
                 </Stack>
