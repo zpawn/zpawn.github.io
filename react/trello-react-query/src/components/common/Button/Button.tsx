@@ -1,18 +1,30 @@
-import { FC } from "react";
-import {
-    Button as ButtonUI,
-    ButtonProps,
-    AnchorButton as AnchorButtonUI,
-    AnchorButtonProps,
-} from "@deskpro/deskpro-ui";
-import styled from "styled-components";
+import type { FC, ComponentProps } from "react";
+import type { ButtonCommonProps } from "./types";
 
-export const Button: FC<ButtonProps> = styled(ButtonUI)`
-    min-width: 72px;
-    justify-content: center;
-`;
+type ButtonProps =
+  & ComponentProps<"button">
+  & ButtonCommonProps;
 
-export const AnchorButton: FC<AnchorButtonProps> = styled(AnchorButtonUI)`
-    min-width: 72px;
-    justify-content: center;
-`;
+const Button: FC<ButtonProps> = ({
+  text,
+  type = "button",
+  intent = "primary",
+  disabled = false,
+  loading = false,
+  ...props
+}) => {
+  return (
+    <>
+      <button
+        className={`btn btn-${intent}`}
+        type={type}
+        disabled={disabled || loading}
+        {...props}
+        >
+        {!loading ? text : "Loading..."}
+      </button>
+    </>
+  );
+};
+
+export { Button };
