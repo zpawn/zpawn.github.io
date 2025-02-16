@@ -1,8 +1,8 @@
 import { Icons } from "./icons";
 import type { FC } from "react";
 
-type IconProps = {
-  icon: string;
+export type IconProps = {
+  icon: keyof typeof Icons;
 };
 
 const Icon: FC<IconProps> = ({ icon, ...props }) => {
@@ -15,7 +15,7 @@ const Icon: FC<IconProps> = ({ icon, ...props }) => {
   }
 
   return (
-    <IconComponent {...props}/>
+    <IconComponent className="w-[20px] h-[20px]" {...props}/>
   );
 };
 

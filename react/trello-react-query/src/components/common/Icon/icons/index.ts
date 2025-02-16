@@ -1,7 +1,8 @@
-import type { FC } from "react";
+import { XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-const Icons: Record<string, FC> = {
-  //..
+const Icons = {
+  xmark: XMarkIcon,
+  "magnifying-glass": MagnifyingGlassIcon,
 };
 
 export { Icons };

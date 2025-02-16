@@ -1,4 +1,4 @@
 @import "tailwindcss";
 
 @import "./components/common/Button/style.css";
-
+@import "./components/common/Input/style.css";

@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import size from "lodash/size";
 import { CardInfo, NoFound, InputSearch, Container, Divider } from "../common";
 import type { FC } from "react";
-import type { Props as SearchProps } from "../common/InputSearch";
+import type { Props as SearchProps } from "../common/Input";
 import type { CardType, Organization } from "../../services/trello/types";
 
 type Props = {

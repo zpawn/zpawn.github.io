@@ -23,3 +23,4 @@ export { DateInput } from "./DateInput";
 export { AppNavigation } from "./AppNavigation";
 export { CardInfo, Cards, Members } from "./TrelloCards";
 export { Divider } from "./Divider";
+export * from "./Typography";

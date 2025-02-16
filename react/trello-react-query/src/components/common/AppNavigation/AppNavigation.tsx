@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import { AnchorButton } from "../Button";
 import { Divider } from "../Divider";
 import type { FC } from "react";
 
@@ -14,18 +13,16 @@ export type AppNavigationProps = {
 
 const AppNavigation: FC<AppNavigationProps> = ({ nav }) => {
   return (
-    <div className="relative">
+    <nav className="relative">
       <Divider className="absolute bottom-0 w-full"/>
-      <div className="flex justify-evenly relative">
+      <ul className="flex justify-evenly relative">
         {nav.map(({ route, name }) => (
-          <NavLink key={route} to={route}>
-            {({ isActive }) => (
-              <AnchorButton text={name} intent="underline" active={isActive} />
-            )}
-        </NavLink>
+          <li key={route}>
+            <NavLink to={route} className="btn btn-underline">{name}</NavLink>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </nav>
   );
 };
 
