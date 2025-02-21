@@ -1,2 +1,3 @@
 export { Cards } from "./Cards";
-export { CardInfo, Members } from "./CardInfo";
+export { CardInfo } from "./CardInfo";
+export { TrelloCard } from "./TrelloCard";

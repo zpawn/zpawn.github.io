@@ -1,14 +1,11 @@
-import { noop } from "lodash";
-import { faPlus, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { Stack } from "@deskpro/deskpro-ui";
 import {
   Cards,
   Button,
   Divider,
+  Spinner,
   Container,
-  InputSearch,
-  SingleSelect,
-  LoadingSpinner,
+  SearchField,
+  // SingleSelect,
   TwoButtonGroup,
 } from "../common";
 import type { FC, ChangeEvent } from "react";
@@ -21,7 +18,6 @@ import type {
 
 type Props = {
     searchCard: string,
-    onClearSearch: () => void,
     onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void,
     onNavigateToCreateCard: () => void,
     cards: CardType[],
@@ -39,12 +35,11 @@ type Props = {
 const LinkCard: FC<Props> = ({
     cards,
     searchCard,
-    onClearSearch,
     onChangeSearch,
-    onNavigateToCreateCard,
-    selectedBoard,
-    onSelectBoard,
-    boardOptions,
+    // onNavigateToCreateCard,
+    // selectedBoard,
+    // onSelectBoard,
+    // boardOptions,
     onNavigateToHome,
     selectedCards,
     onLinkCard,
@@ -55,30 +50,26 @@ const LinkCard: FC<Props> = ({
     return (
         <Container>
             <TwoButtonGroup
-                selected="one"
-                oneIcon={faSearch}
-                oneLabel="Find Card"
-                oneOnClick={noop}
-                twoIcon={faPlus}
-                twoLabel="Create Card"
-                twoOnClick={onNavigateToCreateCard}
+                oneTitle="Find Card"
+                onePath="/link_card"
+                twoTitle="Create Card"
+                twoPath="/create_card"
             />
-            <InputSearch
+            <SearchField
                 value={searchCard}
-                onClear={onClearSearch}
                 onChange={onChangeSearch}
             />
 
-            {(cards && cards.length > 0) && (
+            {/* {(cards && cards.length > 0) && (
                 <SingleSelect
                     label="Board"
                     value={selectedBoard}
                     onChange={onSelectBoard}
                     options={Object.values(boardOptions)}
                 />
-            )}
+            )} */}
 
-            <Stack justify="space-between" style={{ paddingBottom: "4px" }}>
+            <div className="flex justify-between">
                 <Button
                     disabled={selectedCards.length === 0}
                     text="Link Cards"
@@ -89,12 +80,12 @@ const LinkCard: FC<Props> = ({
                     onClick={onNavigateToHome}
                     intent="secondary"
                 />
-            </Stack>
+            </div>
 
             <Divider style={{ marginBottom: "10px" }} />
 
             {loading
-                ? (<LoadingSpinner/>)
+                ? (<Spinner/>)
                 : (
                     <Cards
                         cards={cards}

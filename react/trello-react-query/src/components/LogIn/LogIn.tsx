@@ -1,4 +1,3 @@
-import { H3 } from "@deskpro/deskpro-ui";
 import { Title, Container, AnchorButton } from "../common";
 import type { FC } from "react";
 
@@ -11,7 +10,7 @@ type Props = {
 const LogIn: FC<Props> = ({ onLogin, authUrl, isLoading }) => {
     return (
         <Container>
-            <Title as={H3} title="Log into your Trello Account" />
+            <Title title="Log into your Trello Account" />
             <AnchorButton
                 text="Sign In"
                 href={authUrl}

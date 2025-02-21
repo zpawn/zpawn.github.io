@@ -4,11 +4,11 @@ import type { FC } from "react";
 import type { PropertyProps } from "./Property";
 
 export type Props = {
-  marginBottom?: number,
-  leftLabel?: PropertyProps["label"],
-  leftText?: PropertyProps["text"],
-  rightLabel?: PropertyProps["label"],
-  rightText?: PropertyProps["text"],
+  mb?: boolean;
+  leftLabel?: PropertyProps["label"];
+  leftText?: PropertyProps["text"];
+  rightLabel?: PropertyProps["label"];
+  rightText?: PropertyProps["text"];
 };
 
 const TwoProperties: FC<Props> = ({
@@ -16,16 +16,16 @@ const TwoProperties: FC<Props> = ({
   leftText,
   rightLabel,
   rightText,
-  marginBottom = 10,
+  mb = true,
 }) => (
-  <PropertyRow marginBottom={marginBottom}>
+  <PropertyRow mb={mb}>
     <Property
-      marginBottom={0}
+      mb={false}
       label={leftLabel}
       text={leftText}
     />
     <Property
-      marginBottom={0}
+      mb={false}
       label={rightLabel}
       text={rightText}
     />

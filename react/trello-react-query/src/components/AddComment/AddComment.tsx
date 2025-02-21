@@ -1,7 +1,6 @@
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { Stack } from "@deskpro/deskpro-ui";
-import { Button, Label, TextArea, Attach, Container } from "../common";
+import { Button, Label, /*TextArea,*/ Attach, Container } from "../common";
 import type { FC } from "react";
 import type { Values } from "./types";
 
@@ -24,18 +23,18 @@ const AddComment: FC<Props> = ({ onSubmit, onCancel }) => {
         handleSubmit,
         isSubmitting,
         setFieldValue,
-        getFieldProps,
+        // getFieldProps,
     } = useFormik<Values>({ validationSchema, initialValues, onSubmit });
 
     return (
         <Container>
             <form onSubmit={handleSubmit}>
-                <Label htmlFor="comment" label="New comment" marginBottom={17}>
-                    <TextArea
+                <Label htmlFor="comment" label="New comment">
+                    {/* <TextArea
                         minWidth="auto"
                         placeholder="Enter comment"
                         {...getFieldProps("comment")}
-                    />
+                    /> */}
                 </Label>
 
                 <Label label="Attachments">
@@ -46,7 +45,7 @@ const AddComment: FC<Props> = ({ onSubmit, onCancel }) => {
                     />
                 </Label>
 
-                <Stack justify="space-between">
+                <div className="flex justify-between">
                     <Button
                         type="submit"
                         text="Save"
@@ -58,7 +57,7 @@ const AddComment: FC<Props> = ({ onSubmit, onCancel }) => {
                         intent="minimal"
                         onClick={onCancel}
                     />
-                </Stack>
+                </div>
             </form>
         </Container>
     );

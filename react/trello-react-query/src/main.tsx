@@ -8,17 +8,7 @@ import en from "javascript-time-ago/locale/en.json";
 import { queryClient } from "./query";
 import { App } from "./App";
 import { ErrorFallback } from "./components";
-
-import { ThemeProvider } from "styled-components";
-import { Scrollbar, lightTheme } from "@deskpro/deskpro-ui";
-import "flatpickr/dist/themes/light.css";
-import "modern-normalize/modern-normalize.css";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/dist/border.css";
-import "simplebar/dist/simplebar.min.css";
-import "@deskpro/deskpro-ui/dist/deskpro-ui.css";
-import "@deskpro/deskpro-ui/dist/deskpro-custom-icons.css";
-import "simplebar/dist/simplebar.min.css";
+import { Spinner } from "./components/common";
 
 TimeAgo.addDefaultLocale(en);
 
@@ -27,13 +17,11 @@ root.render(
   <React.StrictMode>
     <HashRouter>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={lightTheme}>
-          <Suspense fallback={"Loading..."}>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <App />
-            </ErrorBoundary>
-          </Suspense>
-          </ThemeProvider>
+        <Suspense fallback={<Spinner/>}>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <App />
+          </ErrorBoundary>
+        </Suspense>
       </QueryClientProvider>
     </HashRouter>
   </React.StrictMode>

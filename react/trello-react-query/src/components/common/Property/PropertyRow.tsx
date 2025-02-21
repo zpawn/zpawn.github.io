@@ -1,57 +1,62 @@
-import styled from "styled-components";
-import type { CSSProperties } from "react";
+import { match } from "ts-pattern";
 import type { FC, PropsWithChildren } from "react";
+import type { PropsWithStylish } from "../../../types";
 
-export type Props = PropsWithChildren<{
-  marginBottom?: number,
-  style?: CSSProperties;
-}>;
+export type PropertyProps = PropsWithStylish<PropsWithChildren>;
 
-type RowProps = Pick<Props, "marginBottom"> & {
+type RowProps = PropertyProps & {
   count: number,
+  mb?: boolean;
 };
 
-const Row = styled.div<RowProps>`
-  display: grid;
-  grid-template-columns: repeat(${({ count }) => count}, ${({ count }) => 100/count}%);
-  width: 100%;
-  margin-bottom: ${({ marginBottom }) => `${marginBottom}px`};
-`;
+const Row: FC<RowProps> = ({ mb, count, ...props }) => {
+  const clsGrid = match(count)
+    .with(2, () => "grid-cols-2")
+    .with(3, () => "grid-cols-3")
+    .with(4, () => "grid-cols-4")
+    .with(5, () => "grid-cols-5")
+    .with(6, () => "grid-cols-6")
+    .otherwise(() => "auto-cols-auto");
 
-const ItemContainer = styled.div`
-  padding: 0 6px;
+  const cls = [
+    "grid",
+    "w-full",
+    (mb ? "mb-2" : "mb-0"),
+    clsGrid,
+  ];
+  return (
+    <div
+      className={cls.join(" ")}
+      {...props}
+    />
+  );
+};
 
-  &:first-child {
-    padding-left: 0;
-  }
+const ItemContainer: FC<PropertyProps> = (props) => (
+  <div
+    className="px-2 first:pl-0 last:pr-0 not-first:border-l not-first:border-l-stone-200"
+    {...props}
+  />
+);
 
-  &:last-child {
-    padding-right: 0;
-  }
+const Item: FC<PropertyProps> = (props) => (
+  <div
+    className="overflow-hidden whitespace-pre-wrap overflow-ellipsis break-words"
+    {...props}
+  />
+);
 
-  &:not(:first-child) {
-    border-left: 1px solid ${({ theme }) => theme.colors.grey20};
-  }
-`;
-
-const Item = styled.div`
-  overflow: hidden;
-  white-space: pre-wrap;
-  text-overflow: ellipsis;
-  word-wrap: break-word;
-`;
-
-export const PropertyRow: FC<Props> = ({
+export const PropertyRow: FC<PropertyProps & { mb?: boolean }> = ({
   style,
   children,
-  marginBottom = 10,
+  mb = true,
 }) => {
   const filteredChildren = !Array.isArray(children) ? children : children.filter(Boolean);
 
   return (!Array.isArray(filteredChildren))
     ? (<div style={style}>{filteredChildren}</div>)
     : (
-      <Row count={filteredChildren.length} marginBottom={marginBottom} style={style}>
+      <Row count={filteredChildren.length} mb={mb} style={style}>
         {filteredChildren.map((child, idx) => (
           <ItemContainer key={idx}>
             <Item>{child}</Item>

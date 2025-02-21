@@ -1,1 +1,0 @@
-export { TextBlockWithLabel } from "./TextBlockWithLabel";

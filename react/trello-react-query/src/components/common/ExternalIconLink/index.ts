@@ -1,1 +1,0 @@
-export { ExternalIconLink } from "./ExternalIconLink";

@@ -1,0 +1,25 @@
+@layer components {
+  .two-button-group {
+    @apply inline-flex w-full
+  }
+
+  .two-button-group .btn {
+    @apply py-2 px-4 border border-stone-200 relative grow flex gap-1
+  }
+
+  .two-button-group .btn.active {
+    @apply text-stone-500 bg-stone-100 border-stone-400
+  }
+
+  .two-button-group .btn:first-child {
+    @apply rounded-r-none
+  }
+
+  .two-button-group .btn:last-child {
+    @apply rounded-l-none -left-px border-l-transparent hover:border-l-stone-400
+  }
+
+  .two-button-group .btn:last-child.active {
+    @apply border-l-stone-400
+  }
+}

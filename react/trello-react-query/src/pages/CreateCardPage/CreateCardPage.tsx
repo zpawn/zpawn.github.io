@@ -1,51 +1,43 @@
 import { FC, useState, useEffect } from "react";
-import { get, has, noop, concat, isEmpty } from "lodash";
+import { get, has, concat, isEmpty } from "lodash";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from 'yup';
-import {
-    faUser,
-    faPlus,
-    faCheck,
-    faSearch,
-    faExternalLinkAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-    P5,
-    Pill,
-    Stack,
-    TSpan,
-    Avatar,
-    Dropdown,
-    lightTheme,
-    InputWithDisplay,
-    Label as LabelUI,
-    Button as ButtonUI,
-    DropdownTargetProps,
-    DivAsInputWithDisplay,
-} from "@deskpro/deskpro-ui";
+// import {
+//     P5,
+//     Pill,
+//     Stack,
+//     TSpan,
+//     Avatar,
+//     Dropdown,
+//     lightTheme,
+//     InputWithDisplay,
+//     Label as LabelUI,
+//     Button as ButtonUI,
+//     DropdownTargetProps,
+//     DivAsInputWithDisplay,
+// } from "@deskpro/deskpro-ui";
 import { useAsyncError } from "../../hooks";
 import {
     createCardService,
     getCurrentMemberService,
-    getLabelsOnBoardService,
-    getMembersOfOrganizationService,
+    // getLabelsOnBoardService,
+    // getMembersOfOrganizationService,
 } from "../../services/trello";
 import { setLinkedCardService } from "../../services/local";
 import {
     Label,
     Button,
-    TextArea,
+    Spinner,
+    // TextArea,
     Container,
-    DateInput,
-    SingleSelect,
-    LoadingSpinner,
+    // DateInput,
+    // SingleSelect,
     TwoButtonGroup,
-    TextBlockWithLabel,
 } from "../../components/common";
 import {
     getOption,
-    getLabelColor,
+    // getLabelColor,
 } from "../../utils";
 import { useSetTitle } from "../../hooks";
 import type { Option } from "../../types";
@@ -110,10 +102,10 @@ const CreateCardPage: FC = () => {
 
     const {
         values,
-        errors,
-        touched,
+        // errors,
+        // touched,
         handleSubmit,
-        getFieldProps,
+        // getFieldProps,
         setFieldValue,
         isSubmitting,
     } = useFormik({
@@ -124,10 +116,7 @@ const CreateCardPage: FC = () => {
                 name: values.title,
                 desc: values.description,
                 idList: values.list.value,
-                // @todo: change to the formatting via date-fns
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                due: !values.dueDate ? "" : values.dueDate.toISOString(),
+                due: !values.dueDate ? "" : values.dueDate,
                 idLabels: values.labels,
                 idMembers: values.members,
             };
@@ -175,19 +164,19 @@ const CreateCardPage: FC = () => {
             return;
         }
 
-        getMembersOfOrganizationService(values.workspace.value)
-            .then((members) => {
-                setMembers(members.map(({ id, fullName }) => ({
-                    selected: false,
-                    metadata: { id, fullName },
-                    ...getOption(id, (
-                        <Stack gap={6}>
-                            <Avatar size={18} name={fullName} backupIcon={faUser} />
-                            <P5>{fullName}</P5>
-                        </Stack>
-                    )),
-                })));
-            });
+        // getMembersOfOrganizationService(values.workspace.value)
+        //     .then((members) => {
+        //         setMembers(members.map(({ id, fullName }) => ({
+        //             selected: false,
+        //             metadata: { id, fullName },
+        //             ...getOption(id, (
+        //                 <Stack gap={6}>
+        //                     <Avatar size={18} name={fullName} backupIcon={faUser} />
+        //                     <P5>{fullName}</P5>
+        //                 </Stack>
+        //             )),
+        //         })));
+        //     });
     }, [values.workspace.value]);
 
     useEffect(() => {
@@ -260,19 +249,18 @@ const CreateCardPage: FC = () => {
             })) as Array<Option<List["id"]>>
         );
 
-        getLabelsOnBoardService(values.board.value)
-            .then((labels) => {
-                if (!isEmpty(labels)) {
-                    setLabels(labels.map(({ id, name, color }) => getOption(id, (
-                        <Pill
-                            label={name ? name : "-"}
-                            {...getLabelColor(lightTheme, color)}
-                        />
-                    ))));
-                }
-            })
-            .catch(() => {});
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // getLabelsOnBoardService(values.board.value)
+        //     .then((labels) => {
+        //         if (!isEmpty(labels)) {
+        //             setLabels(labels.map(({ id, name, color }) => getOption(id, (
+        //                 <Pill
+        //                     label={name ? name : "-"}
+        //                     {...getLabelColor(lightTheme, color)}
+        //                 />
+        //             ))));
+        //         }
+        //     })
+        //     .catch(() => {});
     }, [values.board.value]);
 
     useEffect(() => {
@@ -284,33 +272,31 @@ const CreateCardPage: FC = () => {
     }, [values.labels]);
 
     if (loading) {
-        return <LoadingSpinner/>
+        return <Spinner/>
     }
 
     return (
         <Container>
             <TwoButtonGroup
-                selected="two"
-                oneIcon={faSearch}
-                oneLabel="Find Card"
-                oneOnClick={() => navigate("/link_card")}
-                twoIcon={faPlus}
-                twoLabel="Create Card"
-                twoOnClick={noop}
+                oneTitle="Find Card"
+                onePath="/link_card"
+                twoTitle="Create Card"
+                twoPath="/create_card"
             />
             <form onSubmit={handleSubmit}>
                 <Label htmlFor="title" label="Title" required>
-                    <InputWithDisplay
+                    {/* <InputWithDisplay
                         type="text"
                         id="title"
                         {...getFieldProps("title")}
                         error={!!(touched.title && errors.title)}
                         placeholder="Enter title"
                         inputsize="small"
-                    />
+                    /> */}
                 </Label>
 
-                <SingleSelect
+                <Label label="Workspace" htmlFor="workspace">
+                  {/* <SingleSelect
                     required
                     label="Workspace"
                     options={organizations}
@@ -318,9 +304,11 @@ const CreateCardPage: FC = () => {
                     searchPlaceholder="Select value"
                     error={!!(touched.workspace && errors.workspace)}
                     onChange={(value: Option) => setFieldValue("workspace", value)}
-                />
+                  /> */}
+                </Label>
 
-                <SingleSelect
+                <Label label="Board" htmlFor="board">
+                  {/* <SingleSelect
                     required
                     label="Board"
                     options={boards}
@@ -328,9 +316,11 @@ const CreateCardPage: FC = () => {
                     searchPlaceholder="Select value"
                     error={!!(touched.board && errors.board)}
                     onChange={(value: Option) => setFieldValue("board", value)}
-                />
+                  /> */}
+                </Label>
 
-                <SingleSelect
+                <Label label="List" htmlFor="list">
+                  {/* <SingleSelect
                     required
                     label="List"
                     options={lists}
@@ -338,68 +328,69 @@ const CreateCardPage: FC = () => {
                     searchPlaceholder="Select value"
                     error={!!(touched.list && errors.list)}
                     onChange={(value: Option) => setFieldValue("list", value)}
-                />
+                  /> */}
+                </Label>
 
                 <Label htmlFor="description" label="Description">
-                    <TextArea
+                    {/* <TextArea
                         minWidth="auto"
                         placeholder="Enter description"
                         {...getFieldProps("description")}
-                    />
+                    /> */}
                 </Label>
 
-                <DateInput
+                <Label label="Due date" htmlFor="due_date">
+                  {/* <DateInput
                     id="dueDateSdk"
                     label="Due date"
                     error={!!(touched.dueDate && errors.dueDate)}
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     onChange={(date: [Date]) => setFieldValue("dueDate", date[0])}
-                />
+                  /> */}
+                </Label>
 
                 {values.board.value && (
-                    <>
-                        <LabelUI htmlFor="labels" label="Labels"/>
-                        <Dropdown
-                            fetchMoreText={"Fetch more"}
-                            autoscrollText={"Autoscroll"}
-                            selectedIcon={faCheck}
-                            externalLinkIcon={faExternalLinkAlt}
-                            placement="bottom-start"
-                            options={labels}
-                            onSelectOption={(option) => {
-                                if (option.value) {
-                                    const newValue = values.labels.includes(option.value as never)
-                                        ? values.labels.filter((labelId) => labelId !== option.value)
-                                        : [...values.labels, option.value]
+                  <Label htmlFor="labels" label="Labels">
+                    {/* <Dropdown
+                        fetchMoreText={"Fetch more"}
+                        autoscrollText={"Autoscroll"}
+                        selectedIcon={faCheck}
+                        externalLinkIcon={faExternalLinkAlt}
+                        placement="bottom-start"
+                        options={labels}
+                        onSelectOption={(option) => {
+                            if (option.value) {
+                                const newValue = values.labels.includes(option.value as never)
+                                    ? values.labels.filter((labelId) => labelId !== option.value)
+                                    : [...values.labels, option.value]
 
-                                    setFieldValue("labels", newValue);
-                                }
-                            }}
-                            closeOnSelect={false}
-                        >
-                            {({ active, targetProps, targetRef }) => (
-                                <Stack gap={6} wrap="wrap" align="baseline" style={{ marginBottom: 10 }}>
-                                    {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-                                    {/* @ts-ignore */}
-                                    <ButtonUI
-                                        id="labels"
-                                        ref={targetRef}
-                                        {...targetProps}
-                                        active={active}
-                                        text="Add"
-                                        icon={faPlus}
-                                        minimal
-                                    />
-                                    {labels.filter(({ selected }) => selected).map(({ label }) => label)}
-                                </Stack>
-                            )}
-                        </Dropdown>
-                    </>
+                                setFieldValue("labels", newValue);
+                            }
+                        }}
+                        closeOnSelect={false}
+                    >
+                        {({ active, targetProps, targetRef }) => (
+                            <Stack gap={6} wrap="wrap" align="baseline" style={{ marginBottom: 10 }}>
+                                <ButtonUI
+                                    id="labels"
+                                    ref={targetRef}
+                                    {...targetProps}
+                                    active={active}
+                                    text="Add"
+                                    icon={faPlus}
+                                    minimal
+                                />
+                                {labels.filter(({ selected }) => selected).map(({ label }) => label)}
+                            </Stack>
+                        )}
+                    </Dropdown> */}
+                  </Label>
                 )}
 
                 {values.workspace.value && (
-                    <Dropdown
+                  <Label label="Members">
+                    {/* <Dropdown
                         fetchMoreText="Fetch more"
                         autoscrollText="Autoscroll"
                         selectedIcon={faCheck}
@@ -419,7 +410,7 @@ const CreateCardPage: FC = () => {
                         closeOnSelect={false}
                     >
                         {({ targetProps, targetRef }: DropdownTargetProps<HTMLDivElement>) => (
-                            <TextBlockWithLabel
+                            <Property
                                 label="Members"
                                 text={(
                                     <DivAsInputWithDisplay
@@ -446,10 +437,11 @@ const CreateCardPage: FC = () => {
                                 )}
                             />
                         )}
-                    </Dropdown>
+                    </Dropdown> */}
+                  </Label>
                 )}
 
-                <Stack justify="space-between">
+                <div className="flex justify-between">
                     <Button
                         type="submit"
                         text="Create"
@@ -461,7 +453,7 @@ const CreateCardPage: FC = () => {
                         intent="secondary"
                         onClick={() => navigate("/home")}
                     />
-                </Stack>
+                </div>
             </form>
         </Container>
     );

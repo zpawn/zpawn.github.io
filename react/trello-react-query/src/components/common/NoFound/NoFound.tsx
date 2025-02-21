@@ -1,12 +1,12 @@
 import { FC } from "react";
-import { P1 } from "@deskpro/deskpro-ui";
+import { P } from "../Typography";
 
 type Props = {
     text?: string,
 };
 
 const NoFound: FC<Props> = ({ text = "No found" } = {}) => (
-    <P1>{text}</P1>
+    <P>{text}</P>
 );
 
 export { NoFound };

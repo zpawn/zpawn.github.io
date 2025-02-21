@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSetTitle } from "../../hooks";
 import { useCard } from "./hooks";
 import { ViewCard } from "../../components";
-import { LoadingSpinner } from "../../components/common";
+import { Spinner } from "../../components/common";
 import type { FC } from "react";
 
 const ViewCardPage: FC = () => {
@@ -50,7 +50,7 @@ const ViewCardPage: FC = () => {
 
     if (loading) {
         return (
-            <LoadingSpinner/>
+            <Spinner/>
         );
     }
 

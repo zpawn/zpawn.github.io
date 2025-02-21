@@ -1,5 +1,9 @@
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en.json";
 import type { Preview } from "@storybook/react";
 import "../src/styles.css";
+
+TimeAgo.addDefaultLocale(en);
 
 const preview: Preview = {
   parameters: {
@@ -10,6 +14,8 @@ const preview: Preview = {
       },
     },
   },
+
+  tags: ["autodocs"]
 };
 
 export default preview;

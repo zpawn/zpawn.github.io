@@ -12,7 +12,6 @@ const esModules = [
   "react-dnd-html5-backend",
   "react-merge-refs",
   "uuid",
-  "@deskpro/deskpro-ui",
   "node-fetch",
   "data-uri-to-buffer",
   "fetch-blob",
