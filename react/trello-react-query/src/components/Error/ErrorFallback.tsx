@@ -17,7 +17,7 @@ const ErrorFallback: FC<Props> = ({ error }) => {
   console.error(error);
 
   if (error instanceof TrelloError) {
-    if (error?.status === status.UNAUTH) {
+    if (error?.status === status.UNAUTH || error?.status === status.BAD_REQUEST) {
       navigate(routes.LOGIN);
       return;
     }

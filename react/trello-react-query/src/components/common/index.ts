@@ -27,3 +27,11 @@ export * from "./Link";
 // export { SingleSelect } from "./SingleSelect";
 // export { TextArea } from "./TextArea";
 // export { DateInput } from "./DateInput";
+
+/**
+ * @see components https://layoutsfortailwind.lalokalabs.dev/ui/chat-box/
+ * @see components https://www.creative-tim.com/david-ui/docs/html/textarea
+ * @see components https://github.com/chakra-ui/chakra-ui
+ * @see fontawesome https://fontawesome.com/search?q=calendar-days&o=r
+ * @see icons https://heroicons.com/
+ */

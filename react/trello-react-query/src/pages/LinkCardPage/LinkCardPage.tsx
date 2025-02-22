@@ -50,24 +50,6 @@ const LinkCardPage: FC = () => {
 
     useSetTitle("Link Cards");
 
-    // useDeskproElements(({ clearElements, registerElement }) => {
-    //     clearElements();
-    //     registerElement("trelloRefreshButton", { type: "refresh_button" });
-    //     registerElement("trelloHomeButton", {
-    //         type: "home_button",
-    //         payload: { type: "changePage", path: "/home" }
-    //     });
-    //     registerElement("trelloMenu", {
-    //         type: "menu",
-    //         items: [{
-    //             title: "Log Out",
-    //             payload: {
-    //                 type: "logout",
-    //             },
-    //         }],
-    //     });
-    // });
-
     return (
         <LinkCard
             organizations={organizations}

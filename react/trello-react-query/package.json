@@ -1,5 +1,5 @@
 {
-  "name": "@zpawn/trello",
+  "name": "@zpawn/trello-query",
   "private": true,
   "version": "0.0.0",
   "type": "module",

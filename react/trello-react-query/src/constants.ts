@@ -6,7 +6,8 @@ export const APP_PREFIX = "trello";
 export const TRELLO_ENTITY = 'linkedTrelloCards';
 
 export const status = {
-  UNAUTH: 401
+  BAD_REQUEST: 400,
+  UNAUTH: 401,
 } as const;
 
 /** Proxy */
