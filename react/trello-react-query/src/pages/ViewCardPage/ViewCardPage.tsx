@@ -1,68 +1,46 @@
 import { useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { routes } from "../../constants";
 import { useSetTitle } from "../../hooks";
 import { useCard } from "./hooks";
 import { ViewCard } from "../../components";
-import { Spinner } from "../../components/common";
+import { PageLoading } from "../../components/common";
 import type { FC } from "react";
 
+/** @todo: implement unlink */
+/** @todo: implement edit */
 const ViewCardPage: FC = () => {
-    const navigate = useNavigate();
-    const { cardId } = useParams();
-    const {
-        card,
-        loading,
-        comments,
-        organizations,
-        onChangeChecklistItem,
-    } = useCard(cardId);
+  const navigate = useNavigate();
+  const { cardId } = useParams();
+  const {
+    card,
+    loading,
+    comments,
+    organizations,
+    onChangeChecklistItem,
+  } = useCard(cardId);
 
-    useSetTitle("View Card");
+  useSetTitle("View Card");
 
-    // useDeskproElements(({ clearElements, registerElement }) => {
-    //     clearElements();
-    //     registerElement("trelloRefreshButton", { type: "refresh_button" });
-    //     registerElement("trelloHomeButton", {
-    //         type: "home_button",
-    //         payload: { type: "changePage", path: "/home" }
-    //     });
+  const onNavigateToAddNewComment = useCallback(() => {
+    navigate(`${routes.CARD}/${cardId}/comment/create`);
+  }, [cardId, navigate]);
 
-    //     if (cardId) {
-    //         registerElement("trelloEditButton", {
-    //             type: "edit_button",
-    //             payload: { type: "changePage", path: `/edit_card/${cardId}` },
-    //         });
-    //     }
-    //     if (cardId && ticketId) {
-    //         registerElement("trelloMenu", {
-    //             type: "menu",
-    //             items: [{
-    //                 title: "Unlink Ticket",
-    //                 payload: { type: "unlink", card },
-    //             }],
-    //         });
-    //     }
-    // }, [cardId, ticketId, card]);
-
-    const onNavigateToAddNewComment = useCallback(() => {
-        navigate(`/add_comment/${cardId}`);
-    }, [cardId, navigate]);
-
-    if (loading) {
-        return (
-            <Spinner/>
-        );
-    }
-
+  if (loading) {
     return (
-        <ViewCard
-            card={card}
-            comments={comments}
-            organizations={organizations}
-            onNavigateToAddNewComment={onNavigateToAddNewComment}
-            onChangeChecklistItem={onChangeChecklistItem}
-        />
+      <PageLoading />
     );
+  }
+
+  return (
+    <ViewCard
+      card={card}
+      comments={comments}
+      organizations={organizations}
+      onNavigateToAddNewComment={onNavigateToAddNewComment}
+      onChangeChecklistItem={onChangeChecklistItem}
+    />
+  );
 };
 
 export { ViewCardPage };

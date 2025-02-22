@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
+import { routes } from "../../constants";
 import { checkIsAliveService } from "../../services/trello";
 import { setTokenService } from "../../services/local";
 import { getTokenInProxyService } from "../../services/proxy";
@@ -40,7 +41,7 @@ const useLogIn: UseLogIn = () => {
       getTokenInProxyService(state)
         .then(({ token }) => setTokenService(token))
         .then(() => checkIsAliveService)
-        .then(() => navigate("/home"))
+        .then(() => navigate(routes.HOME))
         .catch(asyncErrorHandler)
         .finally(() => setIsLoading(false));
     }, [navigate, asyncErrorHandler, state]);

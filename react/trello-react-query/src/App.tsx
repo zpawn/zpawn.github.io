@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { nav } from "./constants";
+import { nav, routes } from "./constants";
 import {
     AddCommentPage,
     CreateCardPage,
@@ -11,24 +11,24 @@ import {
     ViewCardPage,
     LogoutPage,
 } from "./pages";
-import { AppNavigation } from "./components/common";
+import { AppNavigation, AppContainer } from "./components/common";
 
 const App = () => {
   return (
-    <>
+    <AppContainer>
       <AppNavigation nav={nav}/>
       <Routes>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/log_in" element={<LogInPage />} />
-        <Route path="/logout" element={<LogoutPage />} />
-        <Route path="/link_card" element={<LinkCardPage />} />
-        <Route path="/create_card" element={<CreateCardPage />} />
-        <Route path="/view_card/:cardId" element={<ViewCardPage />} />
-        <Route path="/edit_card/:cardId" element={<EditCardPage />} />
-        <Route path="/add_comment/:cardId" element={<AddCommentPage />} />
+        <Route path={routes.HOME} element={<HomePage />} />
+        <Route path={routes.LOGIN} element={<LogInPage />} />
+        <Route path={routes.LOGOUT} element={<LogoutPage />} />
+        <Route path={routes.LINK_CARD} element={<LinkCardPage />} />
+        <Route path={routes.CREATE_CARD} element={<CreateCardPage />} />
+        <Route path={routes.VIEW_CARD} element={<ViewCardPage />} />
+        <Route path={routes.EDIT_CARD} element={<EditCardPage />} />
+        <Route path={routes.ADD_COMMENT} element={<AddCommentPage />} />
         <Route index element={<LoadingAppPage />} />
       </Routes>
-    </>
+    </AppContainer>
   );
 };
 

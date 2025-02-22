@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { TrelloError } from "../../utils";
-import { UNKNOWN_ERROR, status } from "../../constants";
-import { Container, ErrorBlock } from "../common";
+import { UNKNOWN_ERROR, status, routes } from "../../constants";
+import { ErrorBlock } from "../common";
 import type { FC } from "react";
 import type { FallbackProps } from "react-error-boundary";
 
@@ -18,16 +18,14 @@ const ErrorFallback: FC<Props> = ({ error }) => {
 
   if (error instanceof TrelloError) {
     if (error?.status === status.UNAUTH) {
-      navigate("/log_in");
+      navigate(routes.LOGIN);
       return;
     }
     //..
   }
 
   return (
-    <Container>
-      <ErrorBlock errors={[message]}/>
-    </Container>
+    <ErrorBlock errors={[message]}/>
   );
 };
 

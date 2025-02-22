@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { noop } from "lodash";
 import { useNavigate } from "react-router-dom";
+import { routes } from "../constants";
 import { removeTokenService } from "../services/local";
 import { revokeTokenService } from "../services/trello";
 
@@ -23,7 +24,7 @@ const useLogout: UseLogout = () => {
             .catch(noop)
             .finally(() => {
                 setIsLoading(false);
-                navigate("/log_in");
+                navigate(routes.LOGIN);
             });
     }, [navigate]);
 

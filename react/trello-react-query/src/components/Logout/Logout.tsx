@@ -1,8 +1,8 @@
-import { Spinner } from "../common";
+import { PageLoading } from "../common";
 import type { FC } from "react";
 
 const Logout: FC = () => (
-  <Spinner/>
+  <PageLoading/>
 );
 
 export { Logout };

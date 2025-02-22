@@ -1,5 +1,5 @@
 import size from "lodash/size";
-import { Title, Comment, Container } from "../common";
+import { Title, Comment } from "../common";
 import type { FC } from "react";
 import type { Comment as CommentType } from "../../services/trello/types";
 import type { Maybe } from "../../types";
@@ -9,7 +9,7 @@ const Comments: FC<{
     onClickTitleAction: () => void,
 }> = ({ comments, onClickTitleAction }) => {
     return (
-        <Container>
+        <>
             <Title
                 title={`Comments  (${size(comments)})`}
                 onClick={onClickTitleAction}
@@ -22,7 +22,7 @@ const Comments: FC<{
                     date={new Date(date)}
                 />
             ))}
-        </Container>
+        </>
     );
 }
 

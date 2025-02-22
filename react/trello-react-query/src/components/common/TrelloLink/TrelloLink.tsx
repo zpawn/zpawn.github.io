@@ -7,7 +7,7 @@ type TrelloLinkProps = Omit<ComponentProps<"a">, "href"> & {
 
 const TrelloLink: FC<TrelloLinkProps> = (props) => {
   return (
-    <a className="trello-link" {...props}>
+    <a className="trello-link" target="_blank" {...props}>
         <Icon className="logo bg-white rounded-xs" size={12} icon="trello"/>
         <Icon className="external-icon" size={14} icon="arrow-top-right-on-square" />
     </a>

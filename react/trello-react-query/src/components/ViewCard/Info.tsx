@@ -9,7 +9,6 @@ import {
   Property,
   LinkIcon,
   Markdown,
-  Container,
 } from "../common";
 import { Members } from "../common/Member";
 import type { FC } from "react";
@@ -28,7 +27,7 @@ const Info: FC<Props> = ({ card, organizations }) => {
     });
 
     return (
-      <Container>
+      <>
         <Title
           title={get(card, ["name"], "-")}
           externalLink={get(card, ["shortUrl"], "#")}
@@ -36,21 +35,21 @@ const Info: FC<Props> = ({ card, organizations }) => {
         <Property
           label="Board"
           text={(
-            <>
-              <P style={{ marginRight: 4 }}>{get(workspace, ["displayName"], "-")}</P>
+            <P style={{ marginRight: 4 }}>
+              {get(workspace, ["displayName"], "-")}
               {get(workspace, ["url"]) && (
                   <LinkIcon href={get(workspace, ["url"], "#")}/>
               )}
-            </>
+            </P>
           )}
         />
         <Property
           label="Board"
           text={(
-            <>
-              <P style={{ marginRight: 4 }}>{get(card, ["board", "name"], "-")}</P>
+            <P style={{ marginRight: 4 }}>
+              {get(card, ["board", "name"], "-")}
               <LinkIcon href={get(card, ["board", "url"], "-")}/>
-            </>
+            </P>
           )}
         />
         <Property
@@ -86,7 +85,7 @@ const Info: FC<Props> = ({ card, organizations }) => {
           )}
         />
       <Members members={get(card, ["members"])} />
-    </Container>
+    </>
   );
 };
 

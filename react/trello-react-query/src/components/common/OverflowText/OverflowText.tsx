@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from "react"
 
-const OverflowText: FC<PropsWithChildren> = () => (
-  <div className="whitespace-nowrap overflow-hidden overflow-ellipsis"/>
+const OverflowText: FC<PropsWithChildren> = (props) => (
+  <div className="whitespace-nowrap overflow-hidden overflow-ellipsis" {...props}/>
 );
 
 export { OverflowText };

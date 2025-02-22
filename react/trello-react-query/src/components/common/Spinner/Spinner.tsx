@@ -4,6 +4,7 @@ import type { Size } from "../../../types";
 
 const Spinner: FC<{ size?: Size }> = ({ size }) => {
   const clsSize = match(size)
+    .with("2xs", () => "w-2 h-2")
     .with("xs", () => "w-4 h-4")
     .with("sm", () => "w-6 h-6")
     .with("md", () => "w-10 h-10")

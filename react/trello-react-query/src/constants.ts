@@ -18,9 +18,22 @@ export const BASE_URL = "https://api.trello.com/1";
 export const API_KEY = import.meta.env.VITE_API_KEY;
 
 /** App */
+export const ROUTE_CARD = "/card";
+
+export const routes = {
+  HOME: "/home",
+  LOGIN: "/login",
+  LOGOUT: "/logout",
+  CARD: ROUTE_CARD,
+  LINK_CARD: `${ROUTE_CARD}/link`,
+  CREATE_CARD: `${ROUTE_CARD}/create`,
+  VIEW_CARD: `${ROUTE_CARD}/:cardId`,
+  EDIT_CARD: `${ROUTE_CARD}/:cardId/edit`,
+  ADD_COMMENT: `${ROUTE_CARD}/:cardId/comment/create`,
+} as const;
+
 export const nav = [
-  { route: "/home", name: "Home" },
-  { route: "/link_card", name: "Link Card" },
-  { route: "/unlink", name: "Unlink Card" },
-  { route: "/logout", name: "Logout" },
-];
+  { route: routes.HOME, name: "Home" },
+  { route: routes.LINK_CARD, name: "Link Card" },
+  { route: routes.LOGOUT, name: "Logout" },
+] as const;

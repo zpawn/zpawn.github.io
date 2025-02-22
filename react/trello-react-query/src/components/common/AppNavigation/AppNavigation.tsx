@@ -1,19 +1,21 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { routes, nav } from "../../../constants";
 import { Divider } from "../Divider";
 import type { FC } from "react";
 
-type NavItem = {
-  route: string;
-  name: string;
-};
-
 export type AppNavigationProps = {
-  nav: NavItem[];
+  nav: typeof nav;
 };
 
 const AppNavigation: FC<AppNavigationProps> = ({ nav }) => {
+  const { pathname } = useLocation();
+
+  if (pathname === routes.LOGIN) {
+    return null;
+  }
+
   return (
-    <nav className="relative">
+    <nav className="relative mb-2">
       <Divider className="absolute bottom-0 w-full"/>
       <ul className="flex justify-evenly relative">
         {nav.map(({ route, name }) => (

@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import isEmpty from "lodash/isEmpty";
 import { useNavigate, useParams } from "react-router-dom";
+import { routes } from "../../constants";
 import { useSetTitle, useAsyncError } from "../../hooks";
 import {
     createAttachService,
@@ -16,7 +17,7 @@ const AddCommentPage: FC = () => {
     const { asyncErrorHandler } = useAsyncError();
 
     const onCancel = useCallback(() => {
-        navigate(`/view_card/${cardId}`)
+        navigate(`${routes.CARD}/${cardId}`);
     }, [navigate, cardId]);
 
     const  onSubmit = useCallback((values: Values) => {
@@ -40,7 +41,7 @@ const AddCommentPage: FC = () => {
         }
 
         return Promise.all(promises)
-            .then(() => navigate(`/view_card/${cardId}`))
+            .then(() => navigate(`${routes.CARD}/${cardId}`))
             .catch(asyncErrorHandler);
     }, [cardId, asyncErrorHandler, navigate]);
 

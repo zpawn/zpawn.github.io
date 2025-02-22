@@ -1,4 +1,4 @@
-import { Title, Container, AnchorButton } from "../common";
+import { Title, AnchorButton } from "../common";
 import type { FC } from "react";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 const LogIn: FC<Props> = ({ onLogin, authUrl, isLoading }) => {
     return (
-        <Container>
+        <>
             <Title title="Log into your Trello Account" />
             <AnchorButton
                 text="Sign In"
@@ -20,7 +20,7 @@ const LogIn: FC<Props> = ({ onLogin, authUrl, isLoading }) => {
                 loading={isLoading}
                 disabled={!authUrl || isLoading}
             />
-        </Container>
+        </>
     );
 }
 

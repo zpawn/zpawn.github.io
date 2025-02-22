@@ -13,11 +13,18 @@ const Title: FC<Props> = ({
   onClick,
   externalLink,
   mb = true,
-}) => (
-  <div className={`flex items-start flex-nowrap gap-2 ${mb ? "mb-2" : "mb-0"}`}>
-    <h1 onClick={onClick} className="grow">{title}</h1>
-    {externalLink && <TrelloLink href={externalLink} />}
-  </div>
-);
+}) => {
+  const titleCls = [
+    "grow",
+    ...(onClick ? ["cursor-pointer", "hover:underline"] : [""]),
+  ];
+
+  return (
+    <div className={`flex items-start flex-nowrap gap-2 ${mb ? "mb-2" : "mb-0"}`}>
+      <h1 onClick={onClick} className={titleCls.join(" ")}>{title}</h1>
+      {externalLink && <TrelloLink href={externalLink} />}
+    </div>
+  );
+};
 
 export { Title };

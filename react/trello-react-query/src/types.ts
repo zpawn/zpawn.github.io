@@ -30,6 +30,6 @@ export type PropsWithStylish<P extends object = {}> = P & {
  */
 export type DateTime = string;
 
-export type Size = "xs"|"sm"|"md"|"lg"|"xl"|"2xl";
+export type Size = "2xs"|"xs"|"sm"|"md"|"lg"|"xl"|"2xl";
 
 export type IconSize = 14 | 15 | 16 | 18 | 20 | 22 | 24 | 26 | 28 | 32 | 34 | 40 | 48 | 56 | 72 | 100 | 120;

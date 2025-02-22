@@ -7,8 +7,13 @@ type LinkIconProps = ComponentProps<"a"> & {
   size?: IconSize;
 };
 
-const LinkIcon: FC<LinkIconProps> = ({ size = 16, target = "_blank", ...props }) => (
-  <a target={target} {...props}>
+const LinkIcon: FC<LinkIconProps> = ({
+  size = 16,
+  target = "_blank",
+  className = "",
+  ...props
+}) => (
+  <a className={`px-1 ${className}`} target={target} {...props}>
     <Span intent="secondary">
       <Icon size={size} icon="arrow-top-right-on-square" />
     </Span>

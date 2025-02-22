@@ -24,6 +24,7 @@ import { useNavigate, useParams } from "react-router-dom";
 //     DropdownTargetProps,
 //     DivAsInputWithDisplay,
 // } from "@deskpro/deskpro-ui";
+import { routes } from "../../constants";
 import {
     // getCardService,
     updateCardService,
@@ -36,11 +37,10 @@ import { useAsyncError } from "../../hooks";
 import {
     Label,
     Button,
-    Spinner,
+    PageLoading,
     // Property,
     // TextArea,
     // DateInput,
-    Container,
     ErrorBlock,
     // SingleSelect,
 } from "../../components/common";
@@ -129,7 +129,7 @@ const EditCardPage: FC = () => {
             };
 
             await updateCardService(card.id, newCard)
-                .then(() => navigate(`/view_card/${card.id}`))
+                .then(() => navigate(`${routes.CARD}/${card.id}`))
                 .catch(asyncErrorHandler);
         },
     });
@@ -323,7 +323,7 @@ const EditCardPage: FC = () => {
     }, [values.members])
 
     if (loading) {
-        return <Spinner/>
+        return <PageLoading/>
     }
 
     if (error) {
@@ -331,169 +331,167 @@ const EditCardPage: FC = () => {
     }
 
     return (
-        <Container>
-            <form onSubmit={handleSubmit}>
-                <Label htmlFor="title" label="Title" required>
-                    {/* <InputWithDisplay
-                        type="text"
-                        id="title"
-                        {...getFieldProps("title")}
-                        error={!!(touched.title && errors.title)}
-                        placeholder="Enter title"
-                        inputsize="small"
-                    /> */}
-                </Label>
+          <form onSubmit={handleSubmit}>
+              <Label htmlFor="title" label="Title" required>
+                  {/* <InputWithDisplay
+                      type="text"
+                      id="title"
+                      {...getFieldProps("title")}
+                      error={!!(touched.title && errors.title)}
+                      placeholder="Enter title"
+                      inputsize="small"
+                  /> */}
+              </Label>
 
-                <Label label="Board" htmlFor="border" required>
-                  {/* <SingleSelect
+              <Label label="Board" htmlFor="border" required>
+                {/* <SingleSelect
+                  required
+                  label="Board"
+                  options={boards}
+                  value={values.board}
+                  searchPlaceholder="Select value"
+                  error={!!(touched.board && errors.board)}
+                  onChange={(value: Option) => setFieldValue("board", value)}
+                /> */}
+              </Label>
+
+              <Label label="Board" htmlFor="border" required>
+                {/* <SingleSelect
                     required
-                    label="Board"
-                    options={boards}
-                    value={values.board}
+                    label="List"
+                    options={lists}
+                    value={values.list}
                     searchPlaceholder="Select value"
-                    error={!!(touched.board && errors.board)}
-                    onChange={(value: Option) => setFieldValue("board", value)}
+                    error={!!(touched.list && errors.list)}
+                    onChange={(value: Option) => setFieldValue("list", value)}
+                /> */}
+              </Label>
+
+              <Label htmlFor="description" label="Description">
+                  {/* <TextArea
+                      placeholder="Enter description"
+                      {...getFieldProps("description")}
                   /> */}
-                </Label>
+              </Label>
 
-                <Label label="Board" htmlFor="border" required>
-                  {/* <SingleSelect
-                      required
-                      label="List"
-                      options={lists}
-                      value={values.list}
-                      searchPlaceholder="Select value"
-                      error={!!(touched.list && errors.list)}
-                      onChange={(value: Option) => setFieldValue("list", value)}
+              <Label htmlFor="dueDate" label="Due Date">
+                  {/* <DateInput
+                      id="dueDate"
+                      label="Due date"
+                      error={!!(touched.dueDate && errors.dueDate)}
+                      {...getFieldProps("dueDate")}
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                      // @ts-ignore
+                      onChange={(date: [Date]) => setFieldValue("dueDate", date[0])}
                   /> */}
-                </Label>
+              </Label>
 
-                <Label htmlFor="description" label="Description">
-                    {/* <TextArea
-                        placeholder="Enter description"
-                        {...getFieldProps("description")}
-                    /> */}
-                </Label>
-
-                <Label htmlFor="dueDate" label="Due Date">
-                    {/* <DateInput
-                        id="dueDate"
-                        label="Due date"
-                        error={!!(touched.dueDate && errors.dueDate)}
-                        {...getFieldProps("dueDate")}
-                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                        // @ts-ignore
-                        onChange={(date: [Date]) => setFieldValue("dueDate", date[0])}
-                    /> */}
-                </Label>
-
-                {values.board.value && (
-                  <Label htmlFor="labels" label="Labels">
-                    {/* <Dropdown
-                        fetchMoreText={"Fetch more"}
-                        autoscrollText={"Autoscroll"}
-                        selectedIcon={faCheck}
-                        externalLinkIcon={faExternalLinkAlt}
-                        placement="bottom-start"
-                        options={labels}
-                        onSelectOption={(option) => {
-                            if (option.value) {
-                                const newValue = values.labels.includes(option.value as never)
-                                    ? values.labels.filter((labelId) => labelId !== option.value)
-                                    : [...values.labels, option.value]
-
-                                setFieldValue("labels", newValue);
-                            }
-                        }}
-                        closeOnSelect={false}
-                    >
-                        {({ active, targetProps, targetRef }) => (
-                            <Stack gap={6} wrap="wrap" align="baseline" style={{ marginBottom: 10 }}>
-                                <ButtonUI
-                                    id="labels"
-                                    ref={targetRef}
-                                    {...targetProps}
-                                    active={active}
-                                    text="Add"
-                                    icon={faPlus}
-                                    minimal
-                                />
-                                {labels.filter(({ selected }) => selected).map(({ label }) => label)}
-                            </Stack>
-                        )}
-                    </Dropdown> */}
-                  </Label>
-                )}
-
-                <Label label="Members">
+              {values.board.value && (
+                <Label htmlFor="labels" label="Labels">
                   {/* <Dropdown
-                      fetchMoreText="Fetch more"
-                      autoscrollText="Autoscroll"
+                      fetchMoreText={"Fetch more"}
+                      autoscrollText={"Autoscroll"}
                       selectedIcon={faCheck}
                       externalLinkIcon={faExternalLinkAlt}
                       placement="bottom-start"
-                      searchPlaceholder="Select value"
-                      options={members}
+                      options={labels}
                       onSelectOption={(option) => {
                           if (option.value) {
-                              const newValue = values.members.includes(option.value as never)
-                                  ? values.members.filter((labelId) => labelId !== option.value)
-                                  : [...values.members, option.value]
+                              const newValue = values.labels.includes(option.value as never)
+                                  ? values.labels.filter((labelId) => labelId !== option.value)
+                                  : [...values.labels, option.value]
 
-                              setFieldValue("members", newValue);
+                              setFieldValue("labels", newValue);
                           }
                       }}
                       closeOnSelect={false}
                   >
-                      {({ targetProps, targetRef }: DropdownTargetProps<HTMLDivElement>) => (
-                          <Property
-                              label="Members"
-                              text={(
-                                  <DivAsInputWithDisplay
-                                      ref={targetRef}
-                                      {...targetProps}
-                                      value={!values.members.length
-                                          ? (
-                                              <TSpan
-                                                  overflow={"ellipsis"}
-                                                  type={"p1"}
-                                                  style={{ color: lightTheme.colors.grey40 }}
-                                              >
-                                                  Select value
-                                              </TSpan>
-                                          )
-                                          : (
-                                              <Stack gap={6} wrap="wrap">
-                                                  {members
-                                                      .filter(({ selected }) => selected)
-                                                      .map(({ label }) => label)
-                                                  }
-                                              </Stack>
-                                          )}
-                                      placeholder="Select value"
-                                      variant="inline"
-                                  />
-                              )}
-                          />
+                      {({ active, targetProps, targetRef }) => (
+                          <Stack gap={6} wrap="wrap" align="baseline" style={{ marginBottom: 10 }}>
+                              <ButtonUI
+                                  id="labels"
+                                  ref={targetRef}
+                                  {...targetProps}
+                                  active={active}
+                                  text="Add"
+                                  icon={faPlus}
+                                  minimal
+                              />
+                              {labels.filter(({ selected }) => selected).map(({ label }) => label)}
+                          </Stack>
                       )}
                   </Dropdown> */}
                 </Label>
+              )}
 
-                <div className="flex justify-between">
-                    <Button
-                        type="submit"
-                        text="Save"
-                        disabled={isSubmitting}
-                        loading={isSubmitting}
-                    />
-                    <Button
-                        text="Cancel"
-                        intent="secondary"
-                        onClick={() => navigate(`/view_card/${card?.id}`)}
-                    />
-                </div>
-            </form>
-        </Container>
+              <Label label="Members">
+                {/* <Dropdown
+                    fetchMoreText="Fetch more"
+                    autoscrollText="Autoscroll"
+                    selectedIcon={faCheck}
+                    externalLinkIcon={faExternalLinkAlt}
+                    placement="bottom-start"
+                    searchPlaceholder="Select value"
+                    options={members}
+                    onSelectOption={(option) => {
+                        if (option.value) {
+                            const newValue = values.members.includes(option.value as never)
+                                ? values.members.filter((labelId) => labelId !== option.value)
+                                : [...values.members, option.value]
+
+                            setFieldValue("members", newValue);
+                        }
+                    }}
+                    closeOnSelect={false}
+                >
+                    {({ targetProps, targetRef }: DropdownTargetProps<HTMLDivElement>) => (
+                        <Property
+                            label="Members"
+                            text={(
+                                <DivAsInputWithDisplay
+                                    ref={targetRef}
+                                    {...targetProps}
+                                    value={!values.members.length
+                                        ? (
+                                            <TSpan
+                                                overflow={"ellipsis"}
+                                                type={"p1"}
+                                                style={{ color: lightTheme.colors.grey40 }}
+                                            >
+                                                Select value
+                                            </TSpan>
+                                        )
+                                        : (
+                                            <Stack gap={6} wrap="wrap">
+                                                {members
+                                                    .filter(({ selected }) => selected)
+                                                    .map(({ label }) => label)
+                                                }
+                                            </Stack>
+                                        )}
+                                    placeholder="Select value"
+                                    variant="inline"
+                                />
+                            )}
+                        />
+                    )}
+                </Dropdown> */}
+              </Label>
+
+              <div className="flex justify-between">
+                  <Button
+                      type="submit"
+                      text="Save"
+                      disabled={isSubmitting}
+                      loading={isSubmitting}
+                  />
+                  <Button
+                      text="Cancel"
+                      intent="secondary"
+                      onClick={() => navigate(`${routes.CARD}/${card?.id}`)}
+                  />
+              </div>
+          </form>
     );
 };
 

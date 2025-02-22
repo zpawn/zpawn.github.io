@@ -1,24 +1,29 @@
-import { get } from "lodash";
 import { useQuery } from "@tanstack/react-query";
+import { useLinkedCards } from "../../hooks";
 import { getOrganizationsService } from "../../services/trello";
 import { QueryKey } from "../../query";
-import type { Organization } from "../../services/trello/types";
+import { getFilteredCards } from "../../utils";
+import type { CardType, Organization } from "../../services/trello/types";
 
-type UseHomeDeps = () => {
-    isLoading: boolean,
-    organizations: Organization[],
+type UseHomeDeps = (q: string) => {
+  isLoading: boolean,
+  cards: CardType[],
+  organizations: Organization[],
 };
 
-const useHomeDeps: UseHomeDeps = () => {
-    const organizations = useQuery({
-        queryKey: [QueryKey.ORGANIZATIONS],
-        queryFn: getOrganizationsService,
-    });
+const useHome: UseHomeDeps = (searchQuery) => {
+  const cards = useLinkedCards();
 
-    return {
-        isLoading: [organizations].some(({ isLoading }) => isLoading),
-        organizations: get(organizations, ["data"], []) || [],
-    };
+  const organizations = useQuery({
+    queryKey: [QueryKey.ORGANIZATIONS],
+    queryFn: getOrganizationsService,
+  });
+
+  return {
+    isLoading: [cards, organizations].some(({ isLoading }) => isLoading),
+    cards: getFilteredCards(cards.cards, { query: searchQuery }),
+    organizations: organizations.data || [],
+  };
 };
 
-export { useHomeDeps };
+export { useHome };

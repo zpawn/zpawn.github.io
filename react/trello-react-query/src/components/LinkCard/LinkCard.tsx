@@ -2,14 +2,12 @@ import {
   Cards,
   Button,
   Divider,
-  Spinner,
-  Container,
   SearchField,
+  PageLoading,
   // SingleSelect,
   TwoButtonGroup,
 } from "../common";
 import type { FC, ChangeEvent } from "react";
-import type { Option } from "../../types";
 import type {
     Board,
     CardType,
@@ -21,9 +19,9 @@ type Props = {
     onChangeSearch: (e: ChangeEvent<HTMLInputElement>) => void,
     onNavigateToCreateCard: () => void,
     cards: CardType[],
-    selectedBoard: Option<"any"|Board["id"]>,
-    onSelectBoard: (o: Option<"any"|Board["id"]>) => void,
-    boardOptions: Record<"any"|Board["id"], Option>,
+    selectedBoard: [], // Option<"any"|Board["id"]>,
+    onSelectBoard: (o: string/*Option<"any"|Board["id"]>*/) => void,
+    boardOptions: Record<"any"|Board["id"], string/*Option*/>,
     onNavigateToHome: () => void,
     selectedCards: Array<CardType["id"]>,
     onLinkCard: () => void,
@@ -48,7 +46,7 @@ const LinkCard: FC<Props> = ({
     organizations,
 }) => {
     return (
-        <Container>
+        <>
             <TwoButtonGroup
                 oneTitle="Find Card"
                 onePath="/link_card"
@@ -85,7 +83,7 @@ const LinkCard: FC<Props> = ({
             <Divider style={{ marginBottom: "10px" }} />
 
             {loading
-                ? (<Spinner/>)
+                ? (<PageLoading/>)
                 : (
                     <Cards
                         cards={cards}
@@ -94,7 +92,7 @@ const LinkCard: FC<Props> = ({
                         onChange={onChangeSelectedCard}
                     />
                 )}
-        </Container>
+        </>
     );
 };
 

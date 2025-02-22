@@ -25,7 +25,7 @@ type UseCard = (cardId?: CardType["id"]) => {
     onChangeChecklistItem: (
         itemId: ChecklistItem["id"],
         state: ChecklistItem["state"],
-    ) => void,
+    ) => Promise<void>,
 };
 
 const useCard: UseCard = (cardId) => {
@@ -50,10 +50,10 @@ const useCard: UseCard = (cardId) => {
 
     const onChangeChecklistItem = useCallback((itemId: ChecklistItem["id"], state: ChecklistItem["state"]) => {
         if (!cardId) {
-            return;
+            return Promise.resolve();
         }
 
-        updateChecklistItemService(cardId, itemId, { state })
+        return updateChecklistItemService(cardId, itemId, { state })
             .then(() => queryClient.invalidateQueries())
             .catch(asyncErrorHandler);
     }, [cardId, asyncErrorHandler]);

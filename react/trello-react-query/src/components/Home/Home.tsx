@@ -1,6 +1,5 @@
-import { Fragment } from "react";
 import { size } from "lodash";
-import { NoFound, Container, Divider, SearchField, CardInfo } from "../common";
+import { NoFound, SearchField, CardInfo } from "../common";
 import type { FC } from "react";
 import type { InputProps } from "../common/Input";
 import type { CardType, Organization } from "../../services/trello/types";
@@ -21,26 +20,27 @@ const Home: FC<Props> = ({
   onNavigateToViewCard,
 }) => {
   return (
-    <Container>
+    <>
       <SearchField
         value={searchCard}
         onChange={onChangeSearchCard}
       />
-      <Divider className="mb-4"/>
       {!size(cards)
         ? (<NoFound text="No Trello cards found" />)
-        : cards.map((card) => (
-          <Fragment key={card.id}>
-            <CardInfo
-              card={card}
-              organizations={organizations}
-              onTitleClick={() => onNavigateToViewCard(card.id)}
-            />
-            <Divider style={{ marginBottom: 9 }}/>
-          </Fragment>
-        ))
+        : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+            {cards.map((card) => (
+              <CardInfo
+                key={card.id}
+                card={card}
+                organizations={organizations}
+                onTitleClick={() => onNavigateToViewCard(card.id)}
+              />
+            ))}
+          </div>
+        )
       }
-    </Container>
+    </>
   );
 };
 
